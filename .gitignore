@@ -1,4 +1,6 @@
 .DS_Store
+*.log
+__pycache__
 node_modules
 /dist
 
@@ -19,3 +21,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Scrapy
+*.csv

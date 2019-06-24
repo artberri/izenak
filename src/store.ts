@@ -1,16 +1,16 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { StoreOptions } from 'vuex';
+import { IRootState, filter } from './state';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store: StoreOptions<IRootState> = {
   state: {
-
+      version: '1.0.0',
   },
-  mutations: {
-
+  modules: {
+    filter,
   },
-  actions: {
+};
 
-  },
-});
+export default new Vuex.Store<IRootState>(store);

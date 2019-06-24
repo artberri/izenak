@@ -1,31 +1,43 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div class="app flex flex--v">
+    <header class="header nav flex">
+      <div class="title font--yanone"><router-link :to="{ name: 'home'}">Izenak</router-link></div>
+      <nav>
+        <router-link to="/">Home</router-link> |
+        <router-link to="/about">About</router-link>
+      </nav>
+    </header>
+    <router-view />
+    <footer class="footer">
+      Footer
+    </footer>
   </div>
 </template>
 
 <style>
-#app {
+.app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+  height: 100%;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.title {
+  font-size: 2em;
+
+  & a {
+    text-decoration: none;
+    color: var(--mainColor);
+  }
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.header {
+  padding: 1em 2em;
+}
+
+.footer {
+  padding: 1em 2em;
 }
 </style>

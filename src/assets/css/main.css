@@ -1,0 +1,86 @@
+:root {
+    --mainColor: #444;
+    --whiteColor: #fff;
+    --girlColor: #FF976B;
+    --boyColor: #96ec8b;
+    --allColor: #B9CDDA;
+}
+
+a {
+    cursor: pointer;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    color: var(--mainColor);
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 16px;
+}
+
+.section {
+    flex: 1;
+    overflow: auto;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex--v {
+    flex-direction: column;
+}
+
+.flex--grow {
+    flex: 1;
+}
+
+.flex--center {
+    justify-content: center;
+    align-items: center;
+}
+
+.font--yanone {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.font--slabo {
+    font-family: 'Slabo 27px', serif;
+}
+
+.font--opensans {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.color--girl {
+    color: var(--girlColor);
+}
+
+.color--boy {
+    color: var(--boyColor);
+}
+
+.color--all {
+    color: var(--allColor);
+}
+
+.background--girl {
+    background: var(--girlColor);
+    color: var(--whiteColor);
+}
+
+.background--boy {
+    background: var(--boyColor);
+    color: var(--whiteColor);
+}
+
+.background--all {
+    background: var(--allColor);
+    color: var(--whiteColor);
+}
