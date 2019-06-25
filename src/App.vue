@@ -14,9 +14,8 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -35,9 +34,11 @@
 
 .header {
   padding: 1em 2em;
+  border-bottom: 1px solid #efefef;
 }
 
 .footer {
   padding: 1em 2em;
+  border-top: 1px solid #efefef;
 }
 </style>

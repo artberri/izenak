@@ -1,1 +1,2 @@
-export * from './izenak.presenter';
+export * from './views';
+export * from './components';

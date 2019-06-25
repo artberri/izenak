@@ -1,5 +1,5 @@
-import { Gender } from './enums';
 import { INameDto } from './types';
+import { Gender } from './enums';
 
 export class Name {
   public readonly text: string;

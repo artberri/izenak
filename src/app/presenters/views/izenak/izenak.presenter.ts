@@ -1,7 +1,7 @@
-import { BasePresenter } from './base.presenter';
-import { IIzenakView } from '../views';
-import { Name, INameDto } from '../model';
-import { getRandomElementsFromArray } from '../utils';
+import { BasePresenter } from '../../base.presenter';
+import { IIzenakView } from './index';
+import { Name, INameDto, Gender } from '../../../model';
+import { getRandomElementsFromArray } from '../../../utils';
 
 const MAX_NAMES = 10;
 
@@ -22,7 +22,11 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
     const filter = this.view.filter;
 
     return this.names.filter((n) => {
-      if (filter.gender !== undefined && filter.gender !== n.gender) {
+      if (filter.gender === 'male' && n.gender === Gender.Female) {
+        return false;
+      }
+
+      if (filter.gender === 'female' && n.gender === Gender.Male) {
         return false;
       }
 

@@ -1,9 +1,14 @@
 :root {
     --mainColor: #444;
     --whiteColor: #fff;
+    --backgroundColor: #f8f8f8;
     --girlColor: #FF976B;
     --boyColor: #96ec8b;
-    --allColor: #B9CDDA;
+    --allColor: #c3c0f9;
+}
+
+*:focus {
+    outline: none;
 }
 
 a {
@@ -19,13 +24,14 @@ body {
     display: block;
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 16px;
 }
 
 .section {
     flex: 1;
     overflow: auto;
+    background: var(--backgroundColor);
 }
 
 .flex {

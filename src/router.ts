@@ -18,19 +18,19 @@ export default new Router({
       path: '/neskak',
       name: 'neskak',
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
-      props: { genderFilter: Gender.Female },
+      props: { gender: 'female' },
     },
     {
       path: '/mutilak',
       name: 'mutilak',
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
-      props: { genderFilter: Gender.Male },
+      props: { gender: 'male' },
     },
     {
       path: '/guztiak',
       name: 'guztiak',
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
-      props: { genderFilter: undefined },
+      props: { gender: 'all' },
     },
   ],
 });

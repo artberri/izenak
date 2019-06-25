@@ -1,5 +1,6 @@
-import { Gender } from '../enums';
+import { GenderFilter } from '../types';
 
 export interface IFilter {
-    gender?: Gender;
+    gender: GenderFilter;
+    searchTerm: string;
 }
