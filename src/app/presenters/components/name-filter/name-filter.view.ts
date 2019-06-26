@@ -1,12 +1,10 @@
+import { IFilterStore } from '../../../services';
+
 export interface INameFilterUserActions {
   onSearchInputChanged(): void;
 }
 
-export interface INameFilterMutations {
-  applyResetFiltersMutation(): void;
-  applyFilterByTermMutation(searchTerm: string): void;
-}
-
-export interface INameFilterView extends INameFilterMutations, INameFilterUserActions {
+export interface INameFilterView extends INameFilterUserActions {
+  filterStore: IFilterStore;
   searchTerm: string;
 }

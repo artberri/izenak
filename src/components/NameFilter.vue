@@ -11,34 +11,30 @@
 <script lang="ts">
 // tslint:disable:max-classes-per-file
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Mutation } from 'vuex-class';
 import Icon from './Icon.vue';
-import { IFilter, INameFilterView, NameFilterPresenter, NameFilterMixin, diContainer, DI } from '@/app';
+import { IFilter, INameFilterView, NameFilterPresenter, DI, IFilterStore } from '@/app';
+import { diContainer } from '../main';
+import { filterStore } from '../infrastructure';
 
 const namespace: string = 'filter';
 
-@Component
-export class VueNameFilterMixin extends NameFilterMixin(Vue) {}
-
 @Component({
-  mixins: [VueNameFilterMixin],
   components: {
     Icon,
   },
 })
-export default class NameFilter extends VueNameFilterMixin implements INameFilterView {
+export default class NameFilter extends Vue implements INameFilterView {
   public searchTerm: string = '';
-
-  @Mutation('filterByTerm', { namespace })
-  public applyFilterByTermMutation!: (searchTerm: string) => void;
-
-  @Mutation('resetFilters', { namespace })
-  public applyResetFiltersMutation!: () => void;
+  public filterStore: IFilterStore = filterStore;
 
   private presenter: NameFilterPresenter = diContainer.get<NameFilterPresenter>(DI.NameFilterPresenter);
 
   public created(): void {
     this.presenter.attach(this);
+  }
+
+  public onSearchInputChanged(): void {
+    this.presenter.search();
   }
 }
 </script>

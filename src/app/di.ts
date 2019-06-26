@@ -1,11 +1,5 @@
-import { Container } from 'inversify';
-import { NameFilterPresenter } from './presenters';
-
 export const DI = {
-  NameFilterPresenter : Symbol.for('NameFilterPresenter'),
+  IzenakPresenter: Symbol.for('IzenakPresenter'),
+  NameFilterPresenter: Symbol.for('NameFilterPresenter'),
+  INameRepository: Symbol.for('INameRepository'),
 };
-
-const dic = new Container({ skipBaseClassChecks: true });
-dic.bind<NameFilterPresenter>(DI.NameFilterPresenter).to(NameFilterPresenter);
-
-export const diContainer = dic;

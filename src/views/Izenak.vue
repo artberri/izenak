@@ -12,12 +12,12 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { Mutation, State } from 'vuex-class';
-import izenak from '../assets/data/izenak.json';
 import NameTag from '../components/NameTag.vue';
 import NameFilter from '../components/NameFilter.vue';
 import GoBack from '../components/GoBack.vue';
-import { Gender, IFilter, IzenakPresenter, INameDto, Name, IIzenakView, GenderFilter } from '@/app';
+import { diContainer } from '../main';
+import { Gender, IFilter, IzenakPresenter, Name, IIzenakView, GenderFilter, DI, IFilterStore } from '@/app';
+import { filterStore } from '../infrastructure';
 
 const namespace: string = 'filter';
 
@@ -29,18 +29,16 @@ const namespace: string = 'filter';
   },
 })
 export default class Izenak extends Vue implements IIzenakView {
-  public names: Name[] = [];
+  public filterStore: IFilterStore = filterStore;
 
   @Prop()
   public gender!: string;
 
-  @State(namespace)
-  public filter!: IFilter;
+  private presenter: IzenakPresenter = diContainer.get<IzenakPresenter>(DI.IzenakPresenter);
 
-  @Mutation('initializeFilter', { namespace })
-  public initializeFilter!: (gender: GenderFilter) => void;
-
-  private presenter: IzenakPresenter = new IzenakPresenter(izenak as INameDto[]);
+  public get names(): Name[] {
+    return this.presenter.names;
+  }
 
   public get genderFilter(): GenderFilter {
     if (this.gender === 'male' || this.gender === 'female') {
@@ -63,10 +61,6 @@ export default class Izenak extends Vue implements IIzenakView {
 
   public created(): void {
     this.presenter.attach(this);
-  }
-
-  public setNames(names: Name[]): void {
-    this.names = names;
   }
 }
 </script>

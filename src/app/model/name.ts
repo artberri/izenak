@@ -1,14 +1,18 @@
-import { INameDto } from './types';
 import { Gender } from './enums';
+
+export interface INameOptions {
+  name: string;
+  gender: Gender;
+}
 
 export class Name {
   public readonly text: string;
   public readonly gender: Gender;
 
   constructor(
-    name: INameDto,
+    options: INameOptions,
   ) {
-    this.text = name.name;
-    this.gender = name.gender === 'emakumezkoa' ? Gender.Female : Gender.Male;
+    this.text = options.name;
+    this.gender = options.gender;
   }
 }

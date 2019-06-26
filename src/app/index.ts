@@ -1,4 +1,4 @@
 export * from './model';
 export * from './presenters';
-export * from './state';
 export * from './di';
+export * from './services';

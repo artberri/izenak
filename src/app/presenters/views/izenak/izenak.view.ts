@@ -1,8 +1,8 @@
 import { GenderFilter, IFilter, Name } from '../../../model';
+import { IFilterStore } from '../../../services';
 
 export interface IIzenakView {
+  names: Name[];
   genderFilter: GenderFilter;
-  filter: IFilter;
-  initializeFilter: (gender: GenderFilter) => void;
-  setNames: (names: Name[]) => void;
+  filterStore: IFilterStore;
 }

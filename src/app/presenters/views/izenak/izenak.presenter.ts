@@ -1,27 +1,35 @@
 import { BasePresenter } from '../../base.presenter';
+import { DI } from '../../../di';
 import { IIzenakView } from './index';
-import { Name, INameDto, Gender } from '../../../model';
+import { Name, Gender, IFilter } from '../../../model';
+import { INameRepository } from '../../../services';
 import { getRandomElementsFromArray } from '../../../utils';
+import { injectable, inject } from 'inversify';
 
 const MAX_NAMES = 10;
 
+@injectable()
 export class IzenakPresenter extends BasePresenter<IIzenakView> {
-  private readonly names: Name[];
+  private readonly allnames: Name[];
 
-  constructor(allnames: INameDto[]) {
+  constructor(
+    @inject(DI.INameRepository) nameRepository: INameRepository,
+  ) {
     super();
-    this.names = allnames.map((n) => new Name(n));
+    this.allnames = nameRepository.getAllNames();
+  }
+
+  public get names(): Name[] {
+    const filter = this.view.filterStore.filter;
+    return this.getFiltered(filter);
   }
 
   protected init(): void {
-    this.view.initializeFilter(this.view.genderFilter);
-    this.setRandomNames();
+    this.view.filterStore.initializeFilter(this.view.genderFilter);
   }
 
-  private getFiltered(): Name[] {
-    const filter = this.view.filter;
-
-    return this.names.filter((n) => {
+  private getFiltered(filter: IFilter): Name[] {
+    const names = this.allnames.filter((n) => {
       if (filter.gender === 'male' && n.gender === Gender.Female) {
         return false;
       }
@@ -30,12 +38,15 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
         return false;
       }
 
+      const name = n.text.toLowerCase();
+      const searchTerm = filter.searchTerm.toLowerCase();
+      if (searchTerm !== '' && name.indexOf(searchTerm) === -1) {
+        return false;
+      }
+
       return true;
     });
-  }
 
-  private setRandomNames(): void {
-    const names = getRandomElementsFromArray(this.getFiltered(), MAX_NAMES);
-    this.view.setNames(names);
+    return getRandomElementsFromArray(names, MAX_NAMES);
   }
 }
