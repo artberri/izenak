@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -19,11 +19,13 @@
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
+    "vue-slider-component": "^3.0.33",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",
     "@types/mocha": "^5.2.4",
+    "@types/sinon": "^7.0.13",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-pwa": "^3.8.0",
     "@vue/cli-plugin-typescript": "^3.8.0",
@@ -32,6 +34,7 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "chai": "^4.1.2",
     "prerender-spa-plugin": "^3.4.0",
+    "sinon": "^7.3.2",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10",
     "vuex-module-decorators": "^0.9.9"

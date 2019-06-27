@@ -13,6 +13,8 @@ export class NameLocalRepository implements INameRepository {
     this.names = allnames.map((n) => new Name({
       name: n.name,
       gender: n.gender === 'emakumezkoa' ? Gender.Female : Gender.Male,
+      meaning: n.meaning,
+      translations: n.translations,
     }));
   }
 

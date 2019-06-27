@@ -6,26 +6,28 @@ import { INameRepository } from '../../../services';
 import { getRandomElementsFromArray } from '../../../utils';
 import { injectable, inject } from 'inversify';
 
-const MAX_NAMES = 10;
+const MAX_NAMES = 100;
 
 @injectable()
 export class IzenakPresenter extends BasePresenter<IIzenakView> {
-  private readonly allnames: Name[];
+  private allnames!: Name[];
 
   constructor(
-    @inject(DI.INameRepository) nameRepository: INameRepository,
+    @inject(DI.INameRepository) private readonly nameRepository: INameRepository,
   ) {
     super();
-    this.allnames = nameRepository.getAllNames();
   }
 
   public get names(): Name[] {
+    if (this.allnames === undefined) {
+      this.allnames = this.nameRepository.getAllNames();
+    }
     const filter = this.view.filterStore.filter;
     return this.getFiltered(filter);
   }
 
   protected init(): void {
-    this.view.filterStore.initializeFilter(this.view.genderFilter);
+    this.view.filterStore.filterByGender(this.view.genderFilter);
   }
 
   private getFiltered(filter: IFilter): Name[] {
@@ -35,6 +37,22 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
       }
 
       if (filter.gender === 'female' && n.gender === Gender.Male) {
+        return false;
+      }
+
+      if (!filter.hasTranslations && n.translations !== '') {
+        return false;
+      }
+
+      const nameLength = n.text.length;
+      if (filter.minChars > 0 && nameLength < filter.minChars) {
+        return false;
+      }
+      if (filter.maxChars > 0 && nameLength > filter.maxChars) {
+        return false;
+      }
+
+      if (!filter.hasTranslations && n.translations !== '') {
         return false;
       }
 
