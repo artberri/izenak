@@ -3,14 +3,23 @@
     <div class="flex">
       <Icon icon="icon-search" class="icon" />
       <label for="search">Iragazi</label>
-      <input id="search" name="search" type="text" v-model="searchTerm" @change="onSearchInputChanged" />
+      <input id="search" name="search" type="text" autocomplete="off"
+        v-model="searchTerm"
+        @change="onSearchInputChanged"
+        @keyup="onKeyPressedOnInput" />
     </div>
     <div>
       <label for="slider">Letra kopurua</label>
       <vue-slider
         id="slider"
-        v-model="range"
-        :min-range="20"></vue-slider>
+        v-model="charLengthRange"
+        @change="onCharLengthSliderChanged"
+        :min="2"
+        :max="22"></vue-slider>
+    </div>
+    <div>
+      <input id="onlybasque" name="onlybasque" type="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" />
+      <label for="onlybasque">Euskal jatorrizko izenak </label>
     </div>
   </section>
 </template>
@@ -35,8 +44,8 @@ const namespace: string = 'filter';
 })
 export default class NameFilter extends Vue implements INameFilterView {
   public searchTerm: string = '';
-  public charLengthRange: [number, number] = [0, 99];
-  public hasTranslationsChecked: boolean = true;
+  public charLengthRange: [number, number] = [2, 22];
+  public onlyBasque: boolean = false;
   public filterStore: IFilterStore = filterStore;
 
   private presenter: NameFilterPresenter = diContainer.get<NameFilterPresenter>(DI.NameFilterPresenter);
@@ -54,11 +63,11 @@ export default class NameFilter extends Vue implements INameFilterView {
   }
 
   public onCharLengthSliderChanged(): void {
-    this.presenter.onKeyPressedOnInput();
+    this.presenter.onCharLengthSliderChanged();
   }
 
-  public onHasTranslationsToggled(): void {
-    this.presenter.onKeyPressedOnInput();
+  public onOnlyBasqueToggled(): void {
+    this.presenter.onOnlyBasqueToggled();
   }
 }
 </script>

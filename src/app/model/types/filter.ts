@@ -5,5 +5,5 @@ export interface IFilter {
     searchTerm: string;
     minChars: number;
     maxChars: number;
-    hasTranslations: boolean;
+    onlyBasque: boolean;
 }

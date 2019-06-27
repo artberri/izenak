@@ -22,7 +22,7 @@ describe('NameFilterPresenter', () => {
       filterStore.searchTerm = 'thisshouldbedeleted';
       filterStore.minChars = 2;
       filterStore.maxChars = 5;
-      filterStore.hasTranslations = false;
+      filterStore.onlyBasque = true;
 
       nameFilterPresenter.attach(nameFilterViewMock);
 
@@ -30,7 +30,7 @@ describe('NameFilterPresenter', () => {
       expect(filterStore.filter.searchTerm).to.equal('');
       expect(filterStore.filter.minChars).to.equal(0);
       expect(filterStore.filter.maxChars).to.equal(0);
-      expect(filterStore.filter.hasTranslations).to.equal(true);
+      expect(filterStore.filter.onlyBasque).to.equal(false);
     });
   });
 
@@ -74,19 +74,19 @@ describe('NameFilterPresenter', () => {
     });
   });
 
-  describe('On has translations checkbox toggled', () => {
+  describe('On only basque checkbox toggled', () => {
     beforeEach(() => {
       nameFilterPresenter.attach(nameFilterViewMock);
     });
 
-    it('sets the has translations filter', () => {
-      nameFilterViewMock.hasTranslationsChecked = false;
-      nameFilterPresenter.onHasTranslationsToggled();
-      expect(filterStore.filter.hasTranslations).to.equal(false);
+    it('sets the only basque filter', () => {
+      nameFilterViewMock.onlyBasque = true;
+      nameFilterPresenter.onOnlyBasqueToggled();
+      expect(filterStore.filter.onlyBasque).to.equal(true);
 
-      nameFilterViewMock.hasTranslationsChecked = true;
-      nameFilterPresenter.onHasTranslationsToggled();
-      expect(filterStore.filter.hasTranslations).to.equal(true);
+      nameFilterViewMock.onlyBasque = false;
+      nameFilterPresenter.onOnlyBasqueToggled();
+      expect(filterStore.filter.onlyBasque).to.equal(false);
     });
   });
 });

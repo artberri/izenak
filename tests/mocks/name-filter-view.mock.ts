@@ -5,9 +5,9 @@ export class NameFilterViewMock implements INameFilterView {
     public filterStore!: IFilterStore;
     public searchTerm!: string;
     public charLengthRange!: [number, number];
-    public hasTranslationsChecked!: boolean;
+    public onlyBasque!: boolean;
     public onSearchInputChanged: () => void = sinon.fake();
     public onKeyPressedOnInput: () => void = sinon.fake();
     public onCharLengthSliderChanged: () => void = sinon.fake();
-    public onHasTranslationsToggled: () => void = sinon.fake();
+    public onOnlyBasqueToggled: () => void = sinon.fake();
 }

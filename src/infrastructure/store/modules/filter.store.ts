@@ -10,7 +10,7 @@ export default class FilterStore extends VuexModule implements IFilterStore {
   public searchTerm: string = '';
   public minChars: number = 0;
   public maxChars: number = 0;
-  public hasTranslations: boolean = true;
+  public onlyBasque: boolean = false;
 
   public get filter(): IFilter {
     return {
@@ -18,7 +18,7 @@ export default class FilterStore extends VuexModule implements IFilterStore {
       searchTerm: this.searchTerm,
       minChars: this.minChars,
       maxChars: this.maxChars,
-      hasTranslations: this.hasTranslations,
+      onlyBasque: this.onlyBasque,
     };
   }
 
@@ -32,7 +32,7 @@ export default class FilterStore extends VuexModule implements IFilterStore {
     this.searchTerm = '';
     this.minChars = 0;
     this.maxChars = 0;
-    this.hasTranslations = true;
+    this.onlyBasque = false;
   }
 
   @Mutation
@@ -47,7 +47,7 @@ export default class FilterStore extends VuexModule implements IFilterStore {
   }
 
   @Mutation
-  public filterByTranslations(hasTranslations: boolean) {
-    this.hasTranslations = hasTranslations;
+  public filterByOnlyBasque(onlyBasque: boolean) {
+    this.onlyBasque = onlyBasque;
   }
 }

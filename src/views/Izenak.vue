@@ -5,7 +5,7 @@
       <NameFilter />
     </div>
     <div class="flex cloud">
-      <NameTag v-for="name in names" v-bind:key="name.text" :name="name" />
+      <NameTag v-for="name in names" v-bind:key="name.key" :name="name" />
     </div>
   </div>
 </template>

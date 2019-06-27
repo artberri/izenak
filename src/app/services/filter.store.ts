@@ -6,5 +6,5 @@ export interface IFilterStore {
   resetFilters(): void;
   filterByTerm(searchTerm: string): void;
   filterByCharRange(charRange: [number, number]): void;
-  filterByTranslations(hasTranslations: boolean): void;
+  filterByOnlyBasque(onlyBasque: boolean): void;
 }

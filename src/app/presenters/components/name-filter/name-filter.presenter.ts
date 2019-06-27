@@ -16,8 +16,8 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
     this.view.filterStore.filterByCharRange(this.view.charLengthRange);
   }
 
-  public onHasTranslationsToggled(): void {
-    this.view.filterStore.filterByTranslations(this.view.hasTranslationsChecked);
+  public onOnlyBasqueToggled(): void {
+    this.view.filterStore.filterByOnlyBasque(this.view.onlyBasque);
   }
 
   protected init(): void {

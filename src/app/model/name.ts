@@ -8,6 +8,7 @@ export interface INameOptions {
 }
 
 export class Name {
+  public readonly key: string;
   public readonly text: string;
   public readonly gender: Gender;
   public readonly translations: string;
@@ -16,6 +17,7 @@ export class Name {
   constructor(
     options: INameOptions,
   ) {
+    this.key = options.name + options.gender.toString();
     this.text = options.name;
     this.gender = options.gender;
     this.translations = options.translations;

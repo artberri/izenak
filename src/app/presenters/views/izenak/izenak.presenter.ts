@@ -40,7 +40,7 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
         return false;
       }
 
-      if (!filter.hasTranslations && n.translations !== '') {
+      if (filter.onlyBasque && n.translations !== '') {
         return false;
       }
 
@@ -49,10 +49,6 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
         return false;
       }
       if (filter.maxChars > 0 && nameLength > filter.maxChars) {
-        return false;
-      }
-
-      if (!filter.hasTranslations && n.translations !== '') {
         return false;
       }
 

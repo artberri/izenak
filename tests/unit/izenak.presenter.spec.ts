@@ -25,7 +25,7 @@ describe('IzenakPresenter', () => {
       filterStore.searchTerm = 'keep';
       filterStore.minChars = 2;
       filterStore.maxChars = 5;
-      filterStore.hasTranslations = false;
+      filterStore.onlyBasque = true;
 
       izenakViewMock.genderFilter = 'male';
       izenakPresenter.attach(izenakViewMock);
@@ -34,7 +34,7 @@ describe('IzenakPresenter', () => {
       expect(filterStore.filter.searchTerm).to.equal('keep');
       expect(filterStore.filter.minChars).to.equal(2);
       expect(filterStore.filter.maxChars).to.equal(5);
-      expect(filterStore.filter.hasTranslations).to.equal(false);
+      expect(filterStore.filter.onlyBasque).to.equal(true);
     });
   });
 
@@ -45,46 +45,46 @@ describe('IzenakPresenter', () => {
     });
 
     const theories: Array<[GenderFilter, string, number, number, boolean, string[]]> = [
-      ['all', '', 0, 0, true, ['Albertta', 'Amets', 'Onintza', 'Itxaso', 'Albertto', 'Markel', 'Adur']],
-      ['female', '', 0, 0, true, ['Albertta', 'Amets', 'Onintza', 'Itxaso']],
-      ['male', '', 0, 0, true, ['Albertto', 'Markel', 'Adur']],
-      ['all', 'tt', 0, 0, true, ['Albertta', 'Albertto']],
-      ['female', 'tt', 0, 0, true, ['Albertta']],
-      ['male', 'tt', 0, 0, true, ['Albertto']],
-      ['all', 'o', 0, 0, true, ['Onintza', 'Itxaso', 'Albertto']],
-      ['female', 'o', 0, 0, true, ['Onintza', 'Itxaso']],
-      ['male', 'o', 0, 0, true, ['Albertto']],
-      ['all', 'x', 0, 0, true, ['Itxaso']],
-      ['female', 'x', 0, 0, true, ['Itxaso']],
-      ['male', 'x', 0, 0, true, []],
-
-      ['all', '', 0, 0, false, ['Albertta', 'Itxaso', 'Markel']],
-      ['female', '', 0, 0, false, ['Albertta', 'Itxaso']],
-      ['male', '', 0, 0, false, ['Markel']],
-      ['all', 'tt', 0, 0, false, ['Albertta']],
+      ['all', '', 0, 0, false, ['Albertta', 'Amets', 'Onintza', 'Itxaso', 'Albertto', 'Markel', 'Adur']],
+      ['female', '', 0, 0, false, ['Albertta', 'Amets', 'Onintza', 'Itxaso']],
+      ['male', '', 0, 0, false, ['Albertto', 'Markel', 'Adur']],
+      ['all', 'tt', 0, 0, false, ['Albertta', 'Albertto']],
       ['female', 'tt', 0, 0, false, ['Albertta']],
-      ['male', 'tt', 0, 0, false, []],
-      ['all', 'o', 0, 0, false, ['Itxaso']],
-      ['female', 'o', 0, 0, false, ['Itxaso']],
-      ['male', 'o', 0, 0, false, []],
+      ['male', 'tt', 0, 0, false, ['Albertto']],
+      ['all', 'o', 0, 0, false, ['Onintza', 'Itxaso', 'Albertto']],
+      ['female', 'o', 0, 0, false, ['Onintza', 'Itxaso']],
+      ['male', 'o', 0, 0, false, ['Albertto']],
       ['all', 'x', 0, 0, false, ['Itxaso']],
       ['female', 'x', 0, 0, false, ['Itxaso']],
+      ['male', 'x', 0, 0, false, []],
 
-      ['all', '', 5, 7, true, ['Amets', 'Onintza', 'Itxaso', 'Markel']],
-      ['female', '', 5, 7, true, ['Amets', 'Onintza', 'Itxaso']],
-      ['male', '', 7, 0, true, ['Albertto']],
-      ['all', 'tt', 9, 0, true, []],
-      ['female', 'tt', 3, 9, true, ['Albertta']],
-      ['male', 'tt', 3, 9, false, []],
-      ['all', 'o', 0, 7, false, ['Itxaso']],
-      ['female', 'o', 0, 6, true, ['Itxaso']],
+      ['all', '', 0, 0, true, ['Albertta', 'Itxaso', 'Markel']],
+      ['female', '', 0, 0, true, ['Albertta', 'Itxaso']],
+      ['male', '', 0, 0, true, ['Markel']],
+      ['all', 'tt', 0, 0, true, ['Albertta']],
+      ['female', 'tt', 0, 0, true, ['Albertta']],
+      ['male', 'tt', 0, 0, true, []],
+      ['all', 'o', 0, 0, true, ['Itxaso']],
+      ['female', 'o', 0, 0, true, ['Itxaso']],
+      ['male', 'o', 0, 0, true, []],
+      ['all', 'x', 0, 0, true, ['Itxaso']],
+      ['female', 'x', 0, 0, true, ['Itxaso']],
+
+      ['all', '', 5, 7, false, ['Amets', 'Onintza', 'Itxaso', 'Markel']],
+      ['female', '', 5, 7, false, ['Amets', 'Onintza', 'Itxaso']],
+      ['male', '', 7, 0, false, ['Albertto']],
+      ['all', 'tt', 9, 0, false, []],
+      ['female', 'tt', 3, 9, false, ['Albertta']],
+      ['male', 'tt', 3, 9, true, []],
+      ['all', 'o', 0, 7, true, ['Itxaso']],
+      ['female', 'o', 0, 6, false, ['Itxaso']],
     ];
 
-    theories.forEach(([gender, searchTerm, minChars, maxChars, hasTranslations, expectedNames]) => {
+    theories.forEach(([gender, searchTerm, minChars, maxChars, onlyBasque, expectedNames]) => {
       it(`returns ${expectedNames.length ? expectedNames.join(', ') : 'no'} names
           when filter gender is '${gender}'
           and the search term is '${searchTerm}'
-          and ${hasTranslations ? 'has' : 'does not have' } translations
+          and ${onlyBasque ? 'has' : 'does not have' } only basque names
           and name length greater or equal to ${minChars} ${maxChars > 0
             ? 'and smaller or equal to ' + maxChars
             : '' }`,
@@ -94,7 +94,7 @@ describe('IzenakPresenter', () => {
         filterStore.searchTerm = searchTerm;
         filterStore.minChars = minChars;
         filterStore.maxChars = maxChars;
-        filterStore.hasTranslations = hasTranslations;
+        filterStore.onlyBasque = onlyBasque;
 
         expect(izenakPresenter.names.map((n) => n.text).sort()).to.eql(expectedNames.sort());
       });
