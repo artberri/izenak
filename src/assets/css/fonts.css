@@ -1,0 +1,20 @@
+.font--title {
+    font-family: 'Barriecito', sans-serif;
+}
+
+.font--slabo {
+    font-family: 'Slabo 27px', serif;
+}
+
+.font-montserrat {
+    font-family: Montserrat, serif;
+    font-style: normal;
+}
+
+.font--smaller {
+    font-size: smaller;
+}
+
+.font--small {
+    font-size: small;
+}

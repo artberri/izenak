@@ -11,6 +11,8 @@ import { initialiseStores, FilterStore } from './infrastructure';
 import 'reset-css';
 import './assets/css/main.css';
 import './assets/css/icomoon/style.css';
+import './assets/css/fonts.css';
+import './assets/css/transitions.css';
 import { NameFilterPresenter, INameRepository, IzenakPresenter } from './app';
 import { NameLocalRepository } from './infrastructure';
 

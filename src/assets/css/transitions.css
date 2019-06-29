@@ -1,0 +1,4 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: .5s;
+}

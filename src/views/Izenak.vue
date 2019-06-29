@@ -1,5 +1,5 @@
 <template>
-  <div class="izenak section flex flex--v">
+  <div class="section flex flex--v izenak">
     <div class="flex flex--v">
       <GoBack routeName="home">{{ title }}</GoBack>
       <NameFilter />
@@ -7,6 +7,7 @@
     <div class="flex cloud">
       <NameTag v-for="name in names" v-bind:key="name.key" :name="name" />
     </div>
+    <div class="izenak__shadow"></div>
   </div>
 </template>
 
@@ -66,6 +67,17 @@ export default class Izenak extends Vue implements IIzenakView {
 </script>
 
 <style scoped>
+
+.izenak__shadow {
+  position: fixed;
+  width: 100%;
+  height: 30px;
+  content: "";
+  bottom: 50px;
+  background: rgb(255,255,255);
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
 .cloud {
   padding: 1em 2em;
   justify-content: center;

@@ -14,7 +14,7 @@ export default class NameTag extends Vue {
   public get nameClass() {
     const classObject: any = {
       'name': true,
-      'font--yanone': true,
+      'font--slabo': true,
     };
     classObject['gender--' + this.name.gender] = true;
     return classObject;
@@ -27,8 +27,10 @@ export default class NameTag extends Vue {
   display: block;
   margin: .2em;
   padding: .5em .8em .3em;
-  font-size: 1.2em;
+  font-size: 1.3em;
   color: var(--whiteColor);
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px 0px rgba(214,214,214,1);
 }
 
 .gender--male {

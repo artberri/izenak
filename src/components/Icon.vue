@@ -5,7 +5,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
-type IconType = 'icon-search' | 'icon-arrow-left2';
+type IconType = 'icon-search' | 'icon-arrow-left2' | 'icon-info';
 
 @Component
 export default class Icon extends Vue {

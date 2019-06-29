@@ -3,7 +3,7 @@
     <div class="link">
       <router-link :to="{ name: routeName }"><Icon class="icon" icon="icon-arrow-left2" /> Atzera</router-link>
     </div>
-    <div class="text"><slot></slot></div>
+    <div class="font-montserrat text"><slot></slot></div>
   </div>
 </template>
 
@@ -25,9 +25,9 @@ export default class GoBack extends Vue {
 
 <style scoped>
 .back {
-  background: #efefef;
   text-align: left;
   padding: 1em 2em 1em 0;
+  background: #f8f8f8;
 }
 
 .link {
@@ -51,5 +51,6 @@ export default class GoBack extends Vue {
 .text {
   font-size: 1.2em;
   text-transform: uppercase;
+  font-weight: 800;
 }
 </style>
