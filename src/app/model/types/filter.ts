@@ -6,4 +6,6 @@ export interface IFilter {
     minChars: number;
     maxChars: number;
     onlyBasque: boolean;
+    startsWith: string;
+    endsWith: string;
 }

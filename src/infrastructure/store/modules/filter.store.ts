@@ -11,6 +11,8 @@ export default class FilterStore extends VuexModule implements IFilterStore {
   public minChars: number = 0;
   public maxChars: number = 0;
   public onlyBasque: boolean = false;
+  public startsWith: string = '';
+  public endsWith: string = '';
 
   public get filter(): IFilter {
     return {
@@ -19,6 +21,8 @@ export default class FilterStore extends VuexModule implements IFilterStore {
       minChars: this.minChars,
       maxChars: this.maxChars,
       onlyBasque: this.onlyBasque,
+      startsWith: this.startsWith,
+      endsWith: this.endsWith,
     };
   }
 
@@ -33,6 +37,8 @@ export default class FilterStore extends VuexModule implements IFilterStore {
     this.minChars = 0;
     this.maxChars = 0;
     this.onlyBasque = false;
+    this.startsWith = '';
+    this.endsWith = '';
   }
 
   @Mutation
@@ -49,5 +55,15 @@ export default class FilterStore extends VuexModule implements IFilterStore {
   @Mutation
   public filterByOnlyBasque(onlyBasque: boolean) {
     this.onlyBasque = onlyBasque;
+  }
+
+  @Mutation
+  public filterByStartingChars(chars: string): void {
+    this.startsWith = chars;
+  }
+
+  @Mutation
+  public filterByEndingChars(chars: string): void {
+    this.endsWith = chars;
   }
 }

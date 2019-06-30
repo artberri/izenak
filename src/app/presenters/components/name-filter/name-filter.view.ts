@@ -5,6 +5,8 @@ export interface INameFilterUserActions {
   onKeyPressedOnInput(): void;
   onCharLengthSliderChanged(): void;
   onOnlyBasqueToggled(): void;
+  onStartsWithInputChanged(): void;
+  onEndsWithInputChanged(): void;
 }
 
 export interface INameFilterView extends INameFilterUserActions {
@@ -12,4 +14,6 @@ export interface INameFilterView extends INameFilterUserActions {
   searchTerm: string;
   charLengthRange: [number, number];
   onlyBasque: boolean;
+  startsWith: string;
+  endsWith: string;
 }

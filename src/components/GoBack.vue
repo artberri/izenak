@@ -33,19 +33,19 @@ export default class GoBack extends Vue {
 .link {
   padding: .1em 1em;
   font-size: .9em;
+}
 
-  & .icon {
-    font-size: .7em;
-  }
+.link .icon {
+  font-size: .7em;
+}
 
-  & a {
-    color: #888;
-    text-decoration: none;
-    border-radius: .5em;
-    padding: .3em .6em;
-    background: transparent;
-    border: 1px solid #888;
-  }
+.link a {
+  color: #888;
+  text-decoration: none;
+  border-radius: .5em;
+  padding: .3em .6em;
+  background: transparent;
+  border: 1px solid #888;
 }
 
 .text {

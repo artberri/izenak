@@ -1,5 +1,7 @@
 <template>
-  <div :class="nameClass">{{ name.text }}</div>
+  <div :class="nameClass">
+    <span>{{ name.text }}</span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -10,6 +12,10 @@ import { Name, Gender } from '@/app';
 export default class NameTag extends Vue {
   @Prop()
   public name!: Name;
+
+  public get isMale(): boolean {
+    return this.name.gender === 'male';
+  }
 
   public get nameClass() {
     const classObject: any = {
@@ -30,14 +36,21 @@ export default class NameTag extends Vue {
   font-size: 1.3em;
   color: var(--whiteColor);
   border-radius: 5px;
-  box-shadow: 0px 2px 5px 0px rgba(214,214,214,1);
+}
+
+.gendersymbol {
+  font-family: Raley;
 }
 
 .gender--male {
-  background: var(--boyColor);
+  /* background: var(--boyColor); */
+  border: 1px solid var(--boyColor);
+  color: var(--boyColor);
 }
 
 .gender--female {
-  background: var(--girlColor);
+  /* background: var(--girlColor); */
+  border: 1px solid var(--girlColor);
+  color: var(--girlColor);
 }
 </style>

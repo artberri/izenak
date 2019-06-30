@@ -7,4 +7,6 @@ export interface IFilterStore {
   filterByTerm(searchTerm: string): void;
   filterByCharRange(charRange: [number, number]): void;
   filterByOnlyBasque(onlyBasque: boolean): void;
+  filterByStartingChars(chars: string): void;
+  filterByEndingChars(chars: string): void;
 }

@@ -4,10 +4,13 @@
       <GoBack routeName="home">{{ title }}</GoBack>
       <NameFilter />
     </div>
-    <div class="flex cloud">
-      <NameTag v-for="name in names" v-bind:key="name.key" :name="name" />
+    <div class="cloud__container">
+      <div class="izenak__shadowtop"></div>
+      <div class="flex cloud">
+        <NameTag v-for="name in names" v-bind:key="name.key" :name="name" />
+      </div>
+      <div class="izenak__shadowbottom"></div>
     </div>
-    <div class="izenak__shadow"></div>
   </div>
 </template>
 
@@ -67,15 +70,35 @@ export default class Izenak extends Vue implements IIzenakView {
 </script>
 
 <style scoped>
+.izenak {
+  height: 100%;
+}
 
-.izenak__shadow {
+.izenak__shadowtop {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: transparent;
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+  z-index: 1;
+}
+
+.izenak__shadowbottom {
   position: fixed;
   width: 100%;
   height: 30px;
-  content: "";
   bottom: 50px;
-  background: rgb(255,255,255);
+  left: 0;
+  background: transparent;
   background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+  z-index: 1;
+}
+
+.cloud__container {
+  position: relative;
+  height: 100%;
+  overflow: auto;
 }
 
 .cloud {

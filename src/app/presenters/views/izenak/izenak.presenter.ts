@@ -57,6 +57,14 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
       if (searchTerm !== '' && name.indexOf(searchTerm) === -1) {
         return false;
       }
+      const startsWith = filter.startsWith.toLowerCase();
+      if (startsWith !== '' && name.indexOf(startsWith) !== 0) {
+        return false;
+      }
+      const endsWith = filter.endsWith.toLowerCase();
+      if (endsWith !== '' && (name.lastIndexOf(endsWith) + endsWith.length) !== name.length) {
+        return false;
+      }
 
       return true;
     });

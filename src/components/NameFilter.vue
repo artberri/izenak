@@ -3,11 +3,31 @@
     <div class="field search__field">
       <label class="label search__label" for="search">Iragazi</label>
       <div class="search__container">
-        <Icon icon="icon-search" class="icon" />
-        <input id="search" name="search" class="search" type="text" autocomplete="off"
+        <Icon icon="icon-search" class="filter-icon" />
+        <input id="search" name="search" class="inputtext search" type="text" autocomplete="off"
           v-model="searchTerm"
           @change="onSearchInputChanged"
           @keyup="onKeyPressedOnInput" />
+      </div>
+    </div>
+    <div class="field search__field flex">
+      <div class="start-container">
+        <label class="label search__label" for="start-words">Hasten da</label>
+        <div class="">
+          <input id="start-words" name="start-words" class="inputtext start-words" type="text" autocomplete="off"
+            v-model="startsWith"
+            @change="onStartsWithInputChanged"
+            @keyup="onStartsWithInputChanged" />
+        </div>
+      </div>
+      <div class="end-container">
+        <label class="label search__label" for="end-words">Amaitzen da</label>
+        <div class="">
+          <input id="end-words" name="end-words" class="inputtext end-words" type="text" autocomplete="off"
+            v-model="endsWith"
+            @change="onEndsWithInputChanged"
+            @keyup="onEndsWithInputChanged" />
+        </div>
       </div>
     </div>
     <div class="field">
@@ -17,13 +37,17 @@
         class="slider"
         v-model="charLengthRange"
         @change="onCharLengthSliderChanged"
+        :contained="true"
         :min="2"
-        :max="22"></vue-slider>
+        :max="22"
+        :dotSize="20"
+        tooltipPlacement="bottom"
+        tooltip="always"></vue-slider>
     </div>
     <div class="field">
-      <label for="onlybasque" class="label checkbox__label"> 
-        <input id="onlybasque" name="onlybasque" type="checkbox" class="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" /><span class="checkmark"></span> 
-        Soilik euskal jatorrizko izenak 
+      <label for="onlybasque" class="label checkbox__label">
+        <input id="onlybasque" name="onlybasque" type="checkbox" class="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" /><span class="checkmark"></span>
+        Euskal jatorrizko izenak soilik
       </label>
     </div>
   </section>
@@ -52,6 +76,8 @@ export default class NameFilter extends Vue implements INameFilterView {
   public charLengthRange: [number, number] = [2, 22];
   public onlyBasque: boolean = false;
   public filterStore: IFilterStore = filterStore;
+  public startsWith: string = '';
+  public endsWith: string = '';
 
   private presenter: NameFilterPresenter = diContainer.get<NameFilterPresenter>(DI.NameFilterPresenter);
 
@@ -74,10 +100,18 @@ export default class NameFilter extends Vue implements INameFilterView {
   public onOnlyBasqueToggled(): void {
     this.presenter.onOnlyBasqueToggled();
   }
+
+  public onStartsWithInputChanged(): void {
+    this.presenter.onStartsWithInputChanged();
+  }
+
+  public onEndsWithInputChanged(): void {
+    this.presenter.onEndsWithInputChanged();
+  }
 }
 </script>
 
-<style scoped>
+<style >
 .filter {
   margin: 1em;
   background: #fff;
@@ -97,11 +131,24 @@ export default class NameFilter extends Vue implements INameFilterView {
   font-size: 0.8em;
 }
 
+.slider {
+  margin-bottom: 30px;
+}
+
+.slider .vue-slider-dot-tooltip-inner {
+  border-color: var(--allColor);
+  background-color: var(--allColor);
+}
+
+.slider .vue-slider-process{
+  background: var(--allColor);
+}
+
 .search__container {
   position: relative;
 }
 
-.icon {
+.filter-icon {
   position: absolute;
   top: 2px;
   color: #888;
@@ -113,21 +160,29 @@ export default class NameFilter extends Vue implements INameFilterView {
   margin-bottom: 15px;
 }
 
-.search {
+.inputtext {
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1em;
-  padding: 5px 5px 5px 35px;
+  padding: 5px 5px 5px 5px;
   width: 100%;
+}
+
+.search {
+  padding: 5px 5px 5px 35px;
+}
+
+.start-container {
+  margin-right: 5px;
+}
+
+.end-container {
+  margin-left: 5px;
 }
 
 .search__label {
   border: 0;
   padding-bottom: 0;
-}
-
-.slider {
-  margin: 0 .5em;
 }
 
 .checkbox__label {
@@ -147,7 +202,7 @@ export default class NameFilter extends Vue implements INameFilterView {
   background-color: #eee;
 }
 .checkbox:checked ~ .checkmark {
-  background-color: #2196F3;
+  background-color: var(--allColor);
 }
 .checkmark:after {
   content: "";

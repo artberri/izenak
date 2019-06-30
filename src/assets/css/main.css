@@ -2,9 +2,12 @@
     --mainColor: #444;
     --whiteColor: #fff;
     --backgroundColor: #f8f8f8;
-    --girlColor: #FF976B;
-    --boyColor: #96ec8b;
-    --allColor: #c3c0f9;
+    --girlColorSoft: #FF976B;
+    --boyColorSoft: #96ec8b;
+    --allColorSoft: #c3c0f9;
+    --girlColor: #ff6d2f;
+    --boyColor: #8cdb4f;
+    --allColor: #a39eff;
 }
 
 *:focus {
@@ -39,6 +42,10 @@ input[type="text"] {
     overflow: auto;
 }
 
+.height100 {
+    height: 100%;
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
@@ -70,16 +77,16 @@ input[type="text"] {
 }
 
 .background--girl {
-    background: var(--girlColor);
+    background: var(--girlColorSoft);
     color: var(--whiteColor);
 }
 
 .background--boy {
-    background: var(--boyColor);
+    background: var(--boyColorSoft);
     color: var(--whiteColor);
 }
 
 .background--all {
-    background: var(--allColor);
+    background: var(--allColorSoft);
     color: var(--whiteColor);
 }

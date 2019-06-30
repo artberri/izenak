@@ -12,6 +12,22 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
     this.filterByTerm();
   }
 
+  public onKeyPressedOnStartsWithInput(): void {
+    this.filterByStartingChars();
+  }
+
+  public onStartsWithInputChanged(): void {
+    this.filterByStartingChars();
+  }
+
+  public onKeyPressedOnEndsWithInput(): void {
+    this.filterByEndingChars();
+  }
+
+  public onEndsWithInputChanged(): void {
+    this.filterByEndingChars();
+  }
+
   public onCharLengthSliderChanged(): void {
     this.view.filterStore.filterByCharRange(this.view.charLengthRange);
   }
@@ -26,5 +42,13 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
 
   private filterByTerm(): void {
     this.view.filterStore.filterByTerm(this.view.searchTerm);
+  }
+
+  private filterByStartingChars(): void {
+    this.view.filterStore.filterByStartingChars(this.view.startsWith);
+  }
+
+  private filterByEndingChars(): void {
+    this.view.filterStore.filterByEndingChars(this.view.endsWith);
   }
 }

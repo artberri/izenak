@@ -23,6 +23,8 @@ describe('NameFilterPresenter', () => {
       filterStore.minChars = 2;
       filterStore.maxChars = 5;
       filterStore.onlyBasque = true;
+      filterStore.startsWith = 'starts';
+      filterStore.endsWith = 'ends';
 
       nameFilterPresenter.attach(nameFilterViewMock);
 
@@ -31,6 +33,8 @@ describe('NameFilterPresenter', () => {
       expect(filterStore.filter.minChars).to.equal(0);
       expect(filterStore.filter.maxChars).to.equal(0);
       expect(filterStore.filter.onlyBasque).to.equal(false);
+      expect(filterStore.filter.startsWith).to.equal('');
+      expect(filterStore.filter.endsWith).to.equal('');
     });
   });
 
@@ -87,6 +91,58 @@ describe('NameFilterPresenter', () => {
       nameFilterViewMock.onlyBasque = false;
       nameFilterPresenter.onOnlyBasqueToggled();
       expect(filterStore.filter.onlyBasque).to.equal(false);
+    });
+  });
+
+  describe('On starts with input changed', () => {
+    beforeEach(() => {
+      nameFilterPresenter.attach(nameFilterViewMock);
+    });
+
+    it('sets the starts with term in the filter', () => {
+      nameFilterViewMock.startsWith = 'starts';
+      nameFilterPresenter.onStartsWithInputChanged();
+
+      expect(filterStore.filter.startsWith).to.equal('starts');
+    });
+  });
+
+  describe('On keypressed on starts with input', () => {
+    beforeEach(() => {
+      nameFilterPresenter.attach(nameFilterViewMock);
+    });
+
+    it('sets the starts with term in the filter', () => {
+      nameFilterViewMock.startsWith = 'starts2';
+      nameFilterPresenter.onKeyPressedOnStartsWithInput();
+
+      expect(filterStore.filter.startsWith).to.equal('starts2');
+    });
+  });
+
+  describe('On ends with input changed', () => {
+    beforeEach(() => {
+      nameFilterPresenter.attach(nameFilterViewMock);
+    });
+
+    it('sets the ends with term in the filter', () => {
+      nameFilterViewMock.endsWith = 'ends';
+      nameFilterPresenter.onEndsWithInputChanged();
+
+      expect(filterStore.filter.endsWith).to.equal('ends');
+    });
+  });
+
+  describe('On keypressed on ends with input', () => {
+    beforeEach(() => {
+      nameFilterPresenter.attach(nameFilterViewMock);
+    });
+
+    it('sets the ends with term in the filter', () => {
+      nameFilterViewMock.endsWith = 'ends2';
+      nameFilterPresenter.onKeyPressedOnEndsWithInput();
+
+      expect(filterStore.filter.endsWith).to.equal('ends2');
     });
   });
 });
