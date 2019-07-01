@@ -156,11 +156,15 @@ export default class NameFilter extends Vue implements INameFilterView {
 .filter {
   padding: 1.3em 1.3em 0em;
   position: fixed;
-  height: 280px;
   width: 100%;
 }
 
+.minimize.filter {
+  width: auto;
+}
+
 .filter__box {
+  height: 280px;
   background: #fff;
   border-radius: 5px;
   padding: 1.3em 1.3em 0em;
