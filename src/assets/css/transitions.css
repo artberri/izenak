@@ -1,4 +1,4 @@
-.fade-enter-active,
-.fade-leave-active {
+.navigation-enter-active,
+.navigation-leave-active {
   transition-duration: .5s;
 }

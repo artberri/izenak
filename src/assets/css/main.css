@@ -10,6 +10,10 @@
     --allColor: #a39eff;
 }
 
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 *:focus {
     outline: none;
 }

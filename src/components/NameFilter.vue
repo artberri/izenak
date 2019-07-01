@@ -1,61 +1,70 @@
 <template>
-  <section class="flex flex--v filter">
-    <div class="field search__field">
-      <label class="label search__label" for="search">Iragazi</label>
-      <div class="search__container">
-        <Icon icon="icon-search" class="filter-icon" />
-        <input id="search" name="search" class="inputtext search" type="text" autocomplete="off"
-          v-model="searchTerm"
-          @change="onSearchInputChanged"
-          @keyup="onKeyPressedOnInput" />
-      </div>
-    </div>
-    <div class="field search__field flex">
-      <div class="start-container">
-        <label class="label search__label" for="start-words">Hasten da</label>
-        <div class="">
-          <input id="start-words" name="start-words" class="inputtext start-words" type="text" autocomplete="off"
-            v-model="startsWith"
-            @change="onStartsWithInputChanged"
-            @keyup="onStartsWithInputChanged" />
+  <section ref="filter" :class="filterClass">
+    <div class="filter__box">
+      <transition name="fade">
+        <div v-if="minimize" @click="openFilters" class="iragazkiak"><Icon icon="icon-filter" class="filter-icon" /></div>
+      </transition>
+      <transition name="fade">
+        <div v-if="!minimize">
+          <div class="field search__field">
+            <label class="label search__label" for="search">Iragazi</label>
+            <div class="search__container">
+              <Icon icon="icon-search" class="search-icon" />
+              <input id="search" name="search" class="inputtext search" type="text" autocomplete="off"
+                v-model="searchTerm"
+                @change="onSearchInputChanged"
+                @keyup="onKeyPressedOnInput" />
+            </div>
+          </div>
+          <div class="field search__field flex">
+            <div class="start-container">
+              <label class="label search__label" for="start-words">Hasten da</label>
+              <div class="">
+                <input id="start-words" name="start-words" class="inputtext start-words" type="text" autocomplete="off"
+                  v-model="startsWith"
+                  @change="onStartsWithInputChanged"
+                  @keyup="onStartsWithInputChanged" />
+              </div>
+            </div>
+            <div class="end-container">
+              <label class="label search__label" for="end-words">Amaitzen da</label>
+              <div class="">
+                <input id="end-words" name="end-words" class="inputtext end-words" type="text" autocomplete="off"
+                  v-model="endsWith"
+                  @change="onEndsWithInputChanged"
+                  @keyup="onEndsWithInputChanged" />
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="slider">Letra kopurua</label>
+            <vue-slider
+              id="slider"
+              class="slider"
+              v-model="charLengthRange"
+              @change="onCharLengthSliderChanged"
+              :contained="true"
+              :min="2"
+              :max="22"
+              :dotSize="20"
+              tooltipPlacement="bottom"
+              tooltip="always"></vue-slider>
+          </div>
+          <div class="field">
+            <label for="onlybasque" class="label checkbox__label">
+              <input id="onlybasque" name="onlybasque" type="checkbox" class="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" /><span class="checkmark"></span>
+              Euskal jatorrizko izenak soilik
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="end-container">
-        <label class="label search__label" for="end-words">Amaitzen da</label>
-        <div class="">
-          <input id="end-words" name="end-words" class="inputtext end-words" type="text" autocomplete="off"
-            v-model="endsWith"
-            @change="onEndsWithInputChanged"
-            @keyup="onEndsWithInputChanged" />
-        </div>
-      </div>
-    </div>
-    <div class="field">
-      <label class="label" for="slider">Letra kopurua</label>
-      <vue-slider
-        id="slider"
-        class="slider"
-        v-model="charLengthRange"
-        @change="onCharLengthSliderChanged"
-        :contained="true"
-        :min="2"
-        :max="22"
-        :dotSize="20"
-        tooltipPlacement="bottom"
-        tooltip="always"></vue-slider>
-    </div>
-    <div class="field">
-      <label for="onlybasque" class="label checkbox__label">
-        <input id="onlybasque" name="onlybasque" type="checkbox" class="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" /><span class="checkmark"></span>
-        Euskal jatorrizko izenak soilik
-      </label>
+      </transition>
     </div>
   </section>
 </template>
 
 <script lang="ts">
 // tslint:disable:max-classes-per-file
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit, Ref, Watch } from 'vue-property-decorator';
 import Icon from './Icon.vue';
 import { IFilter, INameFilterView, NameFilterPresenter, DI, IFilterStore } from '@/app';
 import { diContainer } from '../main';
@@ -72,14 +81,46 @@ const namespace: string = 'filter';
   },
 })
 export default class NameFilter extends Vue implements INameFilterView {
-  public searchTerm: string = '';
-  public charLengthRange: [number, number] = [2, 22];
-  public onlyBasque: boolean = false;
+  @Prop()
+  public scrollPosition!: number;
   public filterStore: IFilterStore = filterStore;
-  public startsWith: string = '';
-  public endsWith: string = '';
+  public searchTerm: string = filterStore.filter.searchTerm;
+  public charLengthRange: [number, number] = [filterStore.filter.minChars, filterStore.filter.maxChars];
+  public onlyBasque: boolean = filterStore.filter.onlyBasque;
+  public startsWith: string = filterStore.filter.startsWith;
+  public endsWith: string = filterStore.filter.endsWith;
+  public forceOpenFilters: boolean = false;
+  @Ref('filter')
+  public filterElement!: HTMLDivElement;
 
   private presenter: NameFilterPresenter = diContainer.get<NameFilterPresenter>(DI.NameFilterPresenter);
+
+  public get filterClass() {
+    const classObj = {
+      'flex': true,
+      'flex--v': true,
+      'filter': true,
+      'minimize': this.minimize,
+    };
+
+    return classObj;
+  }
+
+  public get minimize(): boolean {
+    return !this.forceOpenFilters && this.scrollPosition > 100;
+  }
+
+  @Watch('scrollPosition')
+  public onScrolled(): void {
+    const hasFocus: boolean = this.filterElement && this.filterElement.querySelectorAll(':focus').length > 0;
+    if (!hasFocus) {
+      this.forceOpenFilters = false;
+    }
+  }
+
+  public openFilters(): void {
+    this.forceOpenFilters = true;
+  }
 
   public created(): void {
     this.presenter.attach(this);
@@ -113,13 +154,31 @@ export default class NameFilter extends Vue implements INameFilterView {
 
 <style >
 .filter {
-  margin: 1em;
+  padding: 1.3em 1.3em 0em;
+  position: fixed;
+  height: 280px;
+  width: 100%;
+}
+
+.filter__box {
   background: #fff;
   border-radius: 5px;
   padding: 1.3em 1.3em 0em;
   position: relative;
   text-align: left;
   box-shadow: 0px 2px 5px 0px rgba(214,214,214,1);
+  height: 100%;
+  transition: all .3s;
+  overflow: hidden;
+  width: 100%;
+  overflow: hidden;
+}
+
+.minimize.filter .filter__box {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  padding: 0;
 }
 
 .label {
@@ -132,7 +191,7 @@ export default class NameFilter extends Vue implements INameFilterView {
 }
 
 .slider {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .slider .vue-slider-dot-tooltip-inner {
@@ -149,6 +208,16 @@ export default class NameFilter extends Vue implements INameFilterView {
 }
 
 .filter-icon {
+  display: block;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: var(--allColor);
+  font-size: 1.5em;
+}
+
+.search-icon {
   position: absolute;
   top: 2px;
   color: #888;
@@ -173,10 +242,12 @@ export default class NameFilter extends Vue implements INameFilterView {
 }
 
 .start-container {
+  flex: 1;
   margin-right: 5px;
 }
 
 .end-container {
+  flex: 1;
   margin-left: 5px;
 }
 

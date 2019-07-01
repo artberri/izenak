@@ -8,7 +8,7 @@
       </div>
     </header>
     <div class="app__container">
-      <transition name="fade">
+      <transition name="navigation">
         <router-view />
       </transition>
     </div>

@@ -2,9 +2,9 @@
   <div class="section flex flex--v izenak">
     <div class="flex flex--v">
       <GoBack routeName="home">{{ title }}</GoBack>
-      <NameFilter />
     </div>
-    <div class="cloud__container">
+    <div ref="cloud" class="cloud__container">
+      <NameFilter :scrollPosition="scrollPosition" />
       <div class="izenak__shadowtop"></div>
       <div class="flex cloud">
         <NameTag v-for="name in names" v-bind:key="name.key" :name="name" />
@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Ref } from 'vue-property-decorator';
 import NameTag from '../components/NameTag.vue';
 import NameFilter from '../components/NameFilter.vue';
 import GoBack from '../components/GoBack.vue';
@@ -34,6 +34,10 @@ const namespace: string = 'filter';
 })
 export default class Izenak extends Vue implements IIzenakView {
   public filterStore: IFilterStore = filterStore;
+  public scrollPosition: number = 0;
+
+  @Ref('cloud')
+  public cloudContainer!: HTMLDivElement;
 
   @Prop()
   public gender!: string;
@@ -65,6 +69,18 @@ export default class Izenak extends Vue implements IIzenakView {
 
   public created(): void {
     this.presenter.attach(this);
+  }
+
+  public mounted(): void {
+    this.cloudContainer.addEventListener('scroll', this.handleScroll);
+  }
+
+  public beforeDestroy(): void {
+    this.cloudContainer.removeEventListener('scroll', this.handleScroll);
+  }
+
+  private handleScroll() {
+    this.scrollPosition = this.cloudContainer.scrollTop;
   }
 }
 </script>
@@ -102,7 +118,7 @@ export default class Izenak extends Vue implements IIzenakView {
 }
 
 .cloud {
-  padding: 1em 2em;
+  padding: 300px 2em 1em;
   justify-content: center;
   flex-wrap: wrap;
 }
