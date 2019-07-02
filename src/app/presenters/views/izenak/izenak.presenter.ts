@@ -3,7 +3,7 @@ import { DI } from '../../../di';
 import { IIzenakView } from './index';
 import { Name, Gender, IFilter } from '../../../model';
 import { INameRepository } from '../../../services';
-import { getRandomElementsFromArray } from '../../../utils';
+import { shuffle } from '../../../utils';
 import { injectable, inject } from 'inversify';
 
 const MAX_NAMES = 100;
@@ -19,15 +19,51 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
   }
 
   public get names(): Name[] {
-    if (this.allnames === undefined) {
-      this.allnames = this.nameRepository.getAllNames();
-    }
     const filter = this.view.filterStore.filter;
     return this.getFiltered(filter);
   }
 
+  public onNameClicked(name: Name): void {
+    this.view.selectedName = name;
+  }
+
+  public onNameClosed(): void {
+    this.view.selectedName = undefined;
+  }
+
+  public onNextClicked(): void {
+    if (!this.view.selectedName) {
+      return;
+    }
+    const indexOfSelectedName = this.indexOfSelectedName;
+    if (indexOfSelectedName >= this.names.length - 1) {
+      this.view.selectedName = undefined;
+      return;
+    }
+
+    this.view.selectedName = this.names[indexOfSelectedName + 1];
+  }
+
+  public onPreviousClicked(): void {
+    if (!this.view.selectedName) {
+      return;
+    }
+    const indexOfSelectedName = this.indexOfSelectedName;
+    if (indexOfSelectedName <= 0) {
+      this.view.selectedName = undefined;
+      return;
+    }
+
+    this.view.selectedName = this.names[indexOfSelectedName - 1];
+  }
+
   protected init(): void {
+    this.allnames = shuffle(this.nameRepository.getAllNames());
     this.view.filterStore.filterByGender(this.view.genderFilter);
+  }
+
+  private get indexOfSelectedName(): number {
+    return this.view.selectedName ? this.names.indexOf(this.view.selectedName) : -1;
   }
 
   private getFiltered(filter: IFilter): Name[] {
@@ -69,6 +105,6 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
       return true;
     });
 
-    return getRandomElementsFromArray(names, MAX_NAMES);
+    return names.slice(0, MAX_NAMES);
   }
 }

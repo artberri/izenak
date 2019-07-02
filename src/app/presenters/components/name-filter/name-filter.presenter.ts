@@ -36,7 +36,6 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
     this.view.filterStore.filterByOnlyBasque(this.view.onlyBasque);
   }
 
-  // tslint:disable-next-line:no-empty
   protected init(): void {}
 
   private filterByTerm(): void {

@@ -39,6 +39,16 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
+button {
+    background: transparent;
+    border: 0;
+}
+
+.link {
+    color: var(--mainColor);
+    text-decoration: underline;
+}
+
 .section {
     position: absolute;
     width: 100%;
@@ -53,6 +63,10 @@ input[type="text"] {
 .flex {
     display: flex;
     justify-content: space-between;
+}
+
+.flex--around {
+    justify-content: space-around;
 }
 
 .flex--v {

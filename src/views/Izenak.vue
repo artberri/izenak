@@ -3,11 +3,24 @@
     <div class="flex flex--v">
       <GoBack routeName="home">{{ title }}</GoBack>
     </div>
-    <div ref="cloud" class="cloud__container">
+    <div ref="cloud" :class="cloudClass">
+      <transition :name="transitionName">
+        <NameCard
+          v-if="isNameSelected"
+          :key="nameKey"
+          :name="selectedName"
+          :style="{top: scrollPosition + 'px'}"
+          @closed="onNameClosed"
+          @next="onNextClicked"
+          @previous="onPreviousClicked" />
+      </transition>
       <NameFilter :scrollPosition="scrollPosition" />
       <div class="izenak__shadowtop"></div>
       <div class="flex cloud">
-        <NameTag v-for="name in names" v-bind:key="name.key" :name="name" />
+        <div v-if="names.length === 0">
+          Bilaketak ez du emaitzarik. Aldatu iragazkiak izenak ikusteko.
+        </div>
+        <NameTag v-for="name in names" :key="name.key" :name="name" @click="onNameClicked(name)" />
       </div>
       <div class="izenak__shadowbottom"></div>
     </div>
@@ -18,6 +31,7 @@
 import { Component, Vue, Prop, Ref } from 'vue-property-decorator';
 import NameTag from '../components/NameTag.vue';
 import NameFilter from '../components/NameFilter.vue';
+import NameCard from '../components/NameCard.vue';
 import GoBack from '../components/GoBack.vue';
 import { diContainer } from '../main';
 import { Gender, IFilter, IzenakPresenter, Name, IIzenakView, GenderFilter, DI, IFilterStore } from '@/app';
@@ -28,6 +42,7 @@ const namespace: string = 'filter';
 @Component({
   components: {
     NameTag,
+    NameCard,
     NameFilter,
     GoBack,
   },
@@ -35,6 +50,10 @@ const namespace: string = 'filter';
 export default class Izenak extends Vue implements IIzenakView {
   public filterStore: IFilterStore = filterStore;
   public scrollPosition: number = 0;
+  public selectedName?: Name = undefined;
+  public isNameSelected: boolean = false;
+  public nameKey: string = '';
+  public transitionName: 'slide-left' | 'slide-right' = 'slide-left';
 
   @Ref('cloud')
   public cloudContainer!: HTMLDivElement;
@@ -43,6 +62,13 @@ export default class Izenak extends Vue implements IIzenakView {
   public gender!: string;
 
   private presenter: IzenakPresenter = diContainer.get<IzenakPresenter>(DI.IzenakPresenter);
+
+  public get cloudClass() {
+    return {
+      'cloud__container': true,
+      'cloud__container--fixed': this.isNameSelected,
+    };
+  }
 
   public get names(): Name[] {
     return this.presenter.names;
@@ -67,6 +93,28 @@ export default class Izenak extends Vue implements IIzenakView {
     return 'Izen guztiak';
   }
 
+  public onNameClicked(name: Name): void {
+    this.presenter.onNameClicked(name);
+    this.setNameKey();
+  }
+
+  public onNameClosed(): void {
+    this.presenter.onNameClosed();
+    this.setNameKey();
+  }
+
+  public onNextClicked(): void {
+    this.transitionName = 'slide-left';
+    this.presenter.onNextClicked();
+    this.setNameKey();
+  }
+
+  public onPreviousClicked(): void {
+    this.transitionName = 'slide-right';
+    this.presenter.onPreviousClicked();
+    this.setNameKey();
+  }
+
   public created(): void {
     this.presenter.attach(this);
   }
@@ -81,6 +129,11 @@ export default class Izenak extends Vue implements IIzenakView {
 
   private handleScroll() {
     this.scrollPosition = this.cloudContainer.scrollTop;
+  }
+
+  private setNameKey(): void {
+    this.nameKey = this.selectedName ? this.selectedName.key : 'undefined';
+    this.isNameSelected = !!this.selectedName;
   }
 }
 </script>
@@ -117,9 +170,33 @@ export default class Izenak extends Vue implements IIzenakView {
   overflow: auto;
 }
 
+.cloud__container--fixed {
+  overflow: hidden;
+}
+
 .cloud {
   padding: 300px 2em 1em;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+  overflow: hidden;
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+  transform: translate(100vh, 0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+  transform: translate(-100vh, 0);
 }
 </style>

@@ -20,6 +20,12 @@ describe('IzenakPresenter', () => {
   });
 
   describe('As soon as the view is attached', () => {
+    it('has not a selected name', () => {
+      izenakPresenter.attach(izenakViewMock);
+
+      expect(izenakViewMock.selectedName).to.eql(undefined);
+    });
+
     it('sets the gender filter', () => {
       filterStore.gender = 'female';
       filterStore.searchTerm = 'keep';
@@ -110,6 +116,37 @@ describe('IzenakPresenter', () => {
 
         expect(izenakPresenter.names.map((n) => n.text).sort()).to.eql(expectedNames.sort());
       });
+    });
+  });
+
+  describe('On name clicked', () => {
+    let names: Name[];
+    beforeEach(() => {
+      names = nameSamples();
+      nameRepositoryMock.willReturnWhenGetAllNamesIsCalled(names);
+      izenakPresenter.attach(izenakViewMock);
+    });
+
+    it('sets the gender filter', () => {
+      izenakPresenter.onNameClicked(names[1]);
+
+      expect(izenakViewMock.selectedName).to.eql(names[1]);
+    });
+  });
+
+  describe('On name closed', () => {
+    let names: Name[];
+    beforeEach(() => {
+      names = nameSamples();
+      nameRepositoryMock.willReturnWhenGetAllNamesIsCalled(names);
+      izenakPresenter.attach(izenakViewMock);
+    });
+
+    it('sets the gender filter', () => {
+      izenakViewMock.selectedName = names[0];
+      izenakPresenter.onNameClosed();
+
+      expect(izenakViewMock.selectedName).to.eql(undefined);
     });
   });
 });

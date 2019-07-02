@@ -17,9 +17,9 @@ describe('NameFilterPresenter', () => {
   });
 
   describe('As soon as the view is attached', () => {
-    it('resets the filter except gender', () => {
+    it('keeps the filter', () => {
       filterStore.gender = 'female';
-      filterStore.searchTerm = 'thisshouldbedeleted';
+      filterStore.searchTerm = 'term';
       filterStore.minChars = 2;
       filterStore.maxChars = 5;
       filterStore.onlyBasque = true;
@@ -29,12 +29,12 @@ describe('NameFilterPresenter', () => {
       nameFilterPresenter.attach(nameFilterViewMock);
 
       expect(filterStore.filter.gender).to.equal('female');
-      expect(filterStore.filter.searchTerm).to.equal('');
-      expect(filterStore.filter.minChars).to.equal(0);
-      expect(filterStore.filter.maxChars).to.equal(0);
-      expect(filterStore.filter.onlyBasque).to.equal(false);
-      expect(filterStore.filter.startsWith).to.equal('');
-      expect(filterStore.filter.endsWith).to.equal('');
+      expect(filterStore.filter.searchTerm).to.equal('term');
+      expect(filterStore.filter.minChars).to.equal(2);
+      expect(filterStore.filter.maxChars).to.equal(5);
+      expect(filterStore.filter.onlyBasque).to.equal(true);
+      expect(filterStore.filter.startsWith).to.equal('starts');
+      expect(filterStore.filter.endsWith).to.equal('ends');
     });
   });
 

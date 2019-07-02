@@ -7,7 +7,7 @@
       <transition name="fade">
         <div v-if="!minimize">
           <div class="field search__field">
-            <label class="label search__label" for="search">Iragazi</label>
+            <label class="label search__label" for="search">Bilaketa-terminoa</label>
             <div class="search__container">
               <Icon icon="icon-search" class="search-icon" />
               <input id="search" name="search" class="inputtext search" type="text" autocomplete="off"
@@ -164,14 +164,13 @@ export default class NameFilter extends Vue implements INameFilterView {
 }
 
 .filter__box {
-  height: 280px;
+  height: 260px;
   background: #fff;
   border-radius: 5px;
   padding: 1.3em 1.3em 0em;
   position: relative;
   text-align: left;
   box-shadow: 0px 2px 5px 0px rgba(214,214,214,1);
-  height: 100%;
   transition: all .3s;
   overflow: hidden;
   width: 100%;

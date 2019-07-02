@@ -27,12 +27,12 @@ export default class GoBack extends Vue {
 .back {
   text-align: left;
   padding: 1em 2em 1em 0;
-  background: #f8f8f8;
 }
 
 .link {
   padding: .1em 1em;
   font-size: .9em;
+  text-decoration: none;
 }
 
 .link .icon {

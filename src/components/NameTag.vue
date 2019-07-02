@@ -1,11 +1,11 @@
 <template>
-  <div :class="nameClass">
+  <button :class="nameClass" @click="click">
     <span>{{ name.text }}</span>
-  </div>
+  </button>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import { Name, Gender } from '@/app';
 
 @Component
@@ -25,6 +25,9 @@ export default class NameTag extends Vue {
     classObject['gender--' + this.name.gender] = true;
     return classObject;
   }
+
+  @Emit()
+  public click(): void {}
 }
 </script>
 
@@ -36,20 +39,15 @@ export default class NameTag extends Vue {
   font-size: 1.3em;
   color: var(--whiteColor);
   border-radius: 5px;
-}
-
-.gendersymbol {
-  font-family: Raley;
+  background: transparent;
 }
 
 .gender--male {
-  /* background: var(--boyColor); */
   border: 1px solid var(--boyColor);
   color: var(--boyColor);
 }
 
 .gender--female {
-  /* background: var(--girlColor); */
   border: 1px solid var(--girlColor);
   color: var(--girlColor);
 }
