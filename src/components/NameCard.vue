@@ -2,16 +2,16 @@
   <section class="namecard">
     <div class="flex flex--v card">
       <div @click="closed"><Icon icon="icon-cross" class="close" /></div>
-      <h3 class="font--slabo title"><span :class="isMale ? 'color--boy' : 'color--girl'">{{ name.text }}</span></h3>
+      <h3 class="font--slabo title"><span :class="genderClass">{{ name.text }}</span></h3>
       <div class="flex flex--around controls">
         <div class="flex flex--v flex--around">
-          <button class="navigation" @click="previous"><Icon icon="icon-backward" class="" /></button>
+          <button class="navigation" @click="previous"><Icon icon="icon-backward" /></button>
         </div>
         <div class="flex flex--v flex--around">
-          <button class="favourite"><Icon icon="icon-heart" class="" /></button>
+          <button class="favourite" @click="onToggleFavourite"><Icon icon="icon-heart" :class="favouriteClass" /></button>
         </div>
         <div class="flex flex--v flex--around">
-          <button class="navigation" @click="next"><Icon icon="icon-forward2" class="" /></button>
+          <button class="navigation" @click="next"><Icon icon="icon-forward2" /></button>
         </div>
       </div>
       <div class="section_container">
@@ -30,7 +30,9 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import { Name, Gender } from '@/app';
+import { diContainer } from '../main';
+import { favouritesStore } from '../infrastructure';
+import { Name, Gender, INameCardView, IFavouritesStore, NameCardPresenter, DI } from '@/app';
 import Icon from './Icon.vue';
 
 @Component({
@@ -38,9 +40,12 @@ import Icon from './Icon.vue';
     Icon,
   },
 })
-export default class NameCard extends Vue {
+export default class NameCard extends Vue implements INameCardView {
   @Prop()
   public name!: Name;
+  public favouritesStore: IFavouritesStore = favouritesStore;
+
+  private presenter: NameCardPresenter = diContainer.get<NameCardPresenter>(DI.NameCardPresenter);
 
   @Emit()
   public closed(): void {}
@@ -53,6 +58,33 @@ export default class NameCard extends Vue {
 
   public get isMale(): boolean {
     return this.name && this.name.gender === Gender.Male;
+  }
+
+  public get genderClass(): string {
+    return this.isMale ? 'color--boy' : 'color--girl';
+  }
+
+  public get favouriteClass(): { [s: string]: boolean; } {
+    const favouriteClassObject: { [s: string]: boolean; } = {
+      favourite__icon: true,
+    };
+    if (this.isFavourite) {
+      favouriteClassObject['favourite__icon--selected'] = true,
+      favouriteClassObject[this.genderClass] = true;
+    }
+    return favouriteClassObject;
+  }
+
+  public get isFavourite(): boolean {
+    return this.presenter.isFavourite;
+  }
+
+  public created(): void {
+    this.presenter.attach(this);
+  }
+
+  public onToggleFavourite(): void {
+    this.presenter.onToggleFavourite();
   }
 }
 </script>
@@ -89,6 +121,15 @@ export default class NameCard extends Vue {
 .favourite {
   font-size: 4em;
   color: var(--mainColor);
+  width: 130px;
+}
+
+.favourite__icon {
+  transition: all .3s;
+}
+
+.favourite__icon--selected {
+  font-size: 1.2em;
 }
 
 .title {
@@ -124,4 +165,5 @@ export default class NameCard extends Vue {
   padding-bottom: 20px;
   line-height: 1.4em;
 }
+
 </style>
