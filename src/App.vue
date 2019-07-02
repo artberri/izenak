@@ -14,7 +14,11 @@
     </div>
     <footer class="footer flex">
       <div class="font--smaller"><span class="footer__dev"><a class="footer__link" href="http://www.berriart.com">berriart</a><span>ek garatua</span></span></div>
-      <div><a class="footer__info" href="http://www.berriart.com"><Icon icon="icon-info" /></a></div>
+      <div>
+        <router-link
+          class="footer__info"
+          :to="{ name: 'about'}"><Icon icon="icon-info" /></router-link>
+      </div>
     </footer>
   </div>
 </template>
@@ -47,11 +51,11 @@ export default class App extends Vue {}
 
 .title {
   font-size: 2em;
+}
 
-  & a {
-    text-decoration: none;
-    color: var(--mainColor);
-  }
+.title a {
+  text-decoration: none;
+  color: var(--mainColor);
 }
 
 .header {

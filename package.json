@@ -1,7 +1,17 @@
 {
   "name": "izenak",
-  "version": "0.1.0",
-  "private": true,
+  "description": "Izenak.eus webgunearen kodigoa",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "author": {
+    "name": "Alberto Varela",
+    "email": "alberto@berriart.com",
+    "url": "http://www.berriart.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/artberri/izenak.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

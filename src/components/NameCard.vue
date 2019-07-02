@@ -163,7 +163,6 @@ export default class NameCard extends Vue implements INameCardView {
 
 .section__content {
   padding-bottom: 20px;
-  line-height: 1.4em;
 }
 
 </style>

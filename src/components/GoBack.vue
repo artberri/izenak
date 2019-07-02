@@ -1,15 +1,14 @@
 <template>
   <div class="flex back">
     <div class="link">
-      <router-link :to="{ name: routeName }"><Icon class="icon" icon="icon-arrow-left2" /> Atzera</router-link>
+      <a @click="$router.go(-1)"><Icon class="icon" icon="icon-arrow-left2" /> Atzera</a>
     </div>
     <div class="font-montserrat text"><slot></slot></div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Name, GenderFilter } from '@/app';
+import { Component, Vue } from 'vue-property-decorator';
 import Icon from './Icon.vue';
 
 @Component({
@@ -17,10 +16,7 @@ import Icon from './Icon.vue';
     Icon,
   },
 })
-export default class GoBack extends Vue {
-  @Prop()
-  public routeName!: string;
-}
+export default class GoBack extends Vue {}
 </script>
 
 <style scoped>

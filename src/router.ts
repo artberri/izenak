@@ -32,5 +32,15 @@ export default new Router({
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
       props: { gender: 'all' },
     },
+    {
+      path: '/gogokoak',
+      name: 'favourites',
+      component: () => import(/* webpackChunkName: "favourites" */ './views/Favourites.vue'),
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
+    },
   ],
 });

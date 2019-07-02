@@ -20,6 +20,15 @@
 
 a {
     cursor: pointer;
+    color: var(--mainColor);
+}
+
+strong {
+    font-weight: bold;
+}
+
+p {
+    line-height: 1.4em;
 }
 
 html, body {

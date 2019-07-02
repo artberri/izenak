@@ -1,7 +1,7 @@
 <template>
   <div class="section flex flex--v izenak">
     <div class="flex flex--v">
-      <GoBack routeName="home">{{ title }}</GoBack>
+      <GoBack>{{ title }}</GoBack>
     </div>
     <div ref="cloud" :class="cloudClass">
       <transition :name="transitionName">

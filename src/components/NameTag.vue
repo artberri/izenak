@@ -33,7 +33,7 @@ export default class NameTag extends Vue implements INameTagView {
     };
     classObject['gender--' + this.name.gender] = true;
     if (this.isFavourite) {
-      classObject['active'] = true;
+      classObject.active = true;
     }
     return classObject;
   }
