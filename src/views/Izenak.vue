@@ -34,8 +34,10 @@ import NameFilter from '../components/NameFilter.vue';
 import NameCard from '../components/NameCard.vue';
 import GoBack from '../components/GoBack.vue';
 import { diContainer } from '../main';
-import { Gender, IFilter, IzenakPresenter, Name, IIzenakView, GenderFilter, DI, IFilterStore } from '@/app';
-import { filterStore } from '../infrastructure';
+import {
+  Gender, IFilter, IzenakPresenter, Name, IIzenakView, GenderFilter, DI, IFilterStore, IFavouritesStore,
+} from '@/app';
+import { filterStore, favouritesStore } from '../infrastructure';
 
 const namespace: string = 'filter';
 
@@ -49,6 +51,7 @@ const namespace: string = 'filter';
 })
 export default class Izenak extends Vue implements IIzenakView {
   public filterStore: IFilterStore = filterStore;
+  public favouritesStore: IFavouritesStore = favouritesStore;
   public scrollPosition: number = 0;
   public selectedName?: Name = undefined;
   public isNameSelected: boolean = false;
@@ -75,7 +78,7 @@ export default class Izenak extends Vue implements IIzenakView {
   }
 
   public get genderFilter(): GenderFilter {
-    if (this.gender === 'male' || this.gender === 'female') {
+    if (this.gender === 'male' || this.gender === 'female' || this.gender === 'favourites') {
       return this.gender;
     }
 
@@ -88,6 +91,9 @@ export default class Izenak extends Vue implements IIzenakView {
     }
     if (this.genderFilter === 'female') {
       return 'Nesken izenak';
+    }
+    if (this.genderFilter === 'favourites') {
+      return 'Gogokoak';
     }
 
     return 'Izen guztiak';

@@ -15,6 +15,8 @@
               <li @click="closeMenu"><router-link
                 :to="{ name: 'guztiak'}">Izen guztiak</router-link></li>
               <li @click="closeMenu"><router-link
+                :to="{ name: 'favourites'}">Gogokoak</router-link></li>
+              <li @click="closeMenu"><router-link
                 :to="{ name: 'about'}">Honi buruz</router-link></li>
             </ul>
           </nav>

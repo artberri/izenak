@@ -35,7 +35,8 @@ export default new Router({
     {
       path: '/gogokoak',
       name: 'favourites',
-      component: () => import(/* webpackChunkName: "favourites" */ './views/Favourites.vue'),
+      component: () => import(/* webpackChunkName: "favourites" */ './views/Izenak.vue'),
+      props: { gender: 'favourites' },
     },
     {
       path: '/about',

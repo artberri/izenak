@@ -71,12 +71,17 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
   }
 
   private getFiltered(filter: IFilter): Name[] {
+    const favourites = this.view.favouritesStore.favourites;
     const names = this.allnames.filter((n) => {
       if (filter.gender === 'male' && n.gender === Gender.Female) {
         return false;
       }
 
       if (filter.gender === 'female' && n.gender === Gender.Male) {
+        return false;
+      }
+
+      if (filter.gender === 'favourites' && favourites.indexOf(n.key) < 0) {
         return false;
       }
 
