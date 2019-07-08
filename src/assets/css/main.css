@@ -1,13 +1,13 @@
 :root {
-    --mainColor: #444;
-    --whiteColor: #fff;
+    --mainColor: #555;
+    --whiteColor: #ffffff;
     --backgroundColor: #f8f8f8;
-    --girlColorSoft: #FF976B;
-    --boyColorSoft: #96ec8b;
-    --allColorSoft: #c3c0f9;
-    --girlColor: #ff6d2f;
-    --boyColor: #51ae0a;
-    --allColor: #a39eff;
+    --girlColorSoft: #7a4579;
+    --boyColorSoft: #d56073;
+    --allColorSoft: #ec9e69;
+    --girlColor: #7a4579;
+    --boyColor: #d56073;
+    --allColor: #ec9e69;
 }
 
 *, *:before, *:after {
@@ -42,6 +42,7 @@ body {
     padding: 0;
     font-family: Raleway, sans-serif;
     font-size: 16px;
+    background: var(--whiteColor);
 }
 
 input[type="text"] {

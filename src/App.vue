@@ -3,7 +3,17 @@
     <header class="header nav flex">
       <div class="title font--title">
         <router-link :to="{ name: 'home'}">
-          izenak.<span class="color--girl font--smaller">e</span><span class="color--boy font--smaller">u</span><span class="color--all font--smaller">s</span>
+          <!--
+          --><span class="color--girl">i</span><!--
+          --><span class="color--boy">z</span><!--
+          --><span class="color--all">e</span><!--
+          --><span>n</span><!--
+          --><span>a</span><!--
+          --><span>k</span><!--
+          --><span>.</span><!--
+          --><span class=" font--small">e</span><!--
+          --><span class=" font--small">u</span><!--
+          --><span class=" font--small">s</span>
         </router-link>
       </div>
       <Menu />
@@ -43,7 +53,6 @@ export default class App extends Vue {}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   height: 100%;
 }
 

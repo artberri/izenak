@@ -3,20 +3,23 @@ import { expect } from 'chai';
 import { IzenakPresenter, IIzenakView, INameRepository, Name, Gender, GenderFilter } from '@/app';
 import { IzenakViewMock } from '../mocks/izenak-view.mock';
 import { NameRepositoryMock } from '../mocks/name-repository.mock';
-import { FilterStore } from '@/infrastructure';
+import { FilterStore, FavouritesStore } from '@/infrastructure';
 
 describe('IzenakPresenter', () => {
   let izenakPresenter: IzenakPresenter;
   let izenakViewMock: IIzenakView;
   let filterStore: FilterStore;
+  let favouritesStore: FavouritesStore;
   let nameRepositoryMock: NameRepositoryMock;
 
   beforeEach(() => {
     nameRepositoryMock = new NameRepositoryMock();
     filterStore = new FilterStore({});
+    favouritesStore = new FavouritesStore({});
     izenakPresenter = new IzenakPresenter(nameRepositoryMock);
     izenakViewMock = new IzenakViewMock();
     izenakViewMock.filterStore = filterStore;
+    izenakViewMock.favouritesStore = favouritesStore;
   });
 
   describe('As soon as the view is attached', () => {

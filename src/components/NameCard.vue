@@ -126,10 +126,12 @@ export default class NameCard extends Vue implements INameCardView {
 
 .favourite__icon {
   transition: all .3s;
+  opacity: 0.3;
 }
 
 .favourite__icon--selected {
   font-size: 1.2em;
+  opacity: 1;
 }
 
 .title {

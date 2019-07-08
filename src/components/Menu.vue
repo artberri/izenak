@@ -49,7 +49,7 @@ export default class Menu extends Vue {
 
 <style scoped>
 .menu-icon {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .menu-container {
