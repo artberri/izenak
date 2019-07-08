@@ -1,11 +1,12 @@
 <template>
   <div class="app flex flex--v">
-    <header class="header nav flex flex--center">
+    <header class="header nav flex">
       <div class="title font--title">
         <router-link :to="{ name: 'home'}">
           izenak.<span class="color--girl font--smaller">e</span><span class="color--boy font--smaller">u</span><span class="color--all font--smaller">s</span>
         </router-link>
       </div>
+      <Menu />
     </header>
     <div class="app__container">
       <transition name="navigation">
@@ -26,10 +27,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Icon from './components/Icon.vue';
+import Menu from './components/Menu.vue';
 
 @Component({
   components: {
     Icon,
+    Menu,
   },
 })
 export default class App extends Vue {}

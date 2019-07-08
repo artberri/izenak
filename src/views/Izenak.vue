@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Ref } from 'vue-property-decorator';
+import { Component, Vue, Prop, Ref, Watch } from 'vue-property-decorator';
 import NameTag from '../components/NameTag.vue';
 import NameFilter from '../components/NameFilter.vue';
 import NameCard from '../components/NameCard.vue';
@@ -91,6 +91,11 @@ export default class Izenak extends Vue implements IIzenakView {
     }
 
     return 'Izen guztiak';
+  }
+
+  @Watch('gender')
+  public onGenderFilterChange() {
+    this.presenter.onGenderFilterChange();
   }
 
   public onNameClicked(name: Name): void {

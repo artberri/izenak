@@ -57,6 +57,10 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
     this.view.selectedName = this.names[indexOfSelectedName - 1];
   }
 
+  public onGenderFilterChange(): void {
+    this.view.filterStore.filterByGender(this.view.genderFilter);
+  }
+
   protected init(): void {
     this.allnames = shuffle(this.nameRepository.getAllNames());
     this.view.filterStore.filterByGender(this.view.genderFilter);

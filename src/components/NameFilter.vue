@@ -1,63 +1,59 @@
 <template>
   <section ref="filter" :class="filterClass">
     <div class="filter__box">
-      <transition name="fade">
-        <div v-if="minimize" @click="openFilters" class="iragazkiak"><Icon icon="icon-filter" class="filter-icon" /></div>
-      </transition>
-      <transition name="fade">
-        <div v-if="!minimize">
-          <div class="field search__field">
-            <label class="label search__label" for="search">Bilaketa-terminoa</label>
-            <div class="search__container">
-              <Icon icon="icon-search" class="search-icon" />
-              <input id="search" name="search" class="inputtext search" type="text" autocomplete="off"
-                v-model="searchTerm"
-                @change="onSearchInputChanged"
-                @keyup="onKeyPressedOnInput" />
-            </div>
-          </div>
-          <div class="field search__field flex">
-            <div class="start-container">
-              <label class="label search__label" for="start-words">Hasten da</label>
-              <div class="">
-                <input id="start-words" name="start-words" class="inputtext start-words" type="text" autocomplete="off"
-                  v-model="startsWith"
-                  @change="onStartsWithInputChanged"
-                  @keyup="onStartsWithInputChanged" />
-              </div>
-            </div>
-            <div class="end-container">
-              <label class="label search__label" for="end-words">Amaitzen da</label>
-              <div class="">
-                <input id="end-words" name="end-words" class="inputtext end-words" type="text" autocomplete="off"
-                  v-model="endsWith"
-                  @change="onEndsWithInputChanged"
-                  @keyup="onEndsWithInputChanged" />
-              </div>
-            </div>
-          </div>
-          <div class="field">
-            <label class="label" for="slider">Letra kopurua</label>
-            <vue-slider
-              id="slider"
-              class="slider"
-              v-model="charLengthRange"
-              @change="onCharLengthSliderChanged"
-              :contained="true"
-              :min="2"
-              :max="22"
-              :dotSize="20"
-              tooltipPlacement="bottom"
-              tooltip="always"></vue-slider>
-          </div>
-          <div class="field">
-            <label for="onlybasque" class="label checkbox__label">
-              <input id="onlybasque" name="onlybasque" type="checkbox" class="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" /><span class="checkmark"></span>
-              Euskal jatorrizko izenak soilik
-            </label>
+      <div v-if="minimize" @click="openFilters" class="iragazkiak"><Icon icon="icon-filter" class="filter-icon" /></div>
+      <div v-if="!minimize">
+        <div class="field search__field">
+          <label class="label search__label" for="search">Bilaketa-terminoa</label>
+          <div class="search__container">
+            <Icon icon="icon-search" class="search-icon" />
+            <input id="search" name="search" class="inputtext search" type="text" autocomplete="off"
+              v-model="searchTerm"
+              @change="onSearchInputChanged"
+              @keyup="onKeyPressedOnInput" />
           </div>
         </div>
-      </transition>
+        <div class="field search__field flex">
+          <div class="start-container">
+            <label class="label search__label" for="start-words">Hasten da</label>
+            <div class="">
+              <input id="start-words" name="start-words" class="inputtext start-words" type="text" autocomplete="off"
+                v-model="startsWith"
+                @change="onStartsWithInputChanged"
+                @keyup="onStartsWithInputChanged" />
+            </div>
+          </div>
+          <div class="end-container">
+            <label class="label search__label" for="end-words">Amaitzen da</label>
+            <div class="">
+              <input id="end-words" name="end-words" class="inputtext end-words" type="text" autocomplete="off"
+                v-model="endsWith"
+                @change="onEndsWithInputChanged"
+                @keyup="onEndsWithInputChanged" />
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="slider">Letra kopurua</label>
+          <vue-slider
+            id="slider"
+            class="slider"
+            v-model="charLengthRange"
+            @change="onCharLengthSliderChanged"
+            :contained="true"
+            :min="2"
+            :max="22"
+            :dotSize="20"
+            tooltipPlacement="bottom"
+            tooltip="always"></vue-slider>
+        </div>
+        <div class="field">
+          <label for="onlybasque" class="label checkbox__label">
+            <input id="onlybasque" name="onlybasque" type="checkbox" class="checkbox" v-model="onlyBasque" @change="onOnlyBasqueToggled" /><span class="checkmark"></span>
+            Euskal jatorrizko izenak soilik
+          </label>
+        </div>
+      </div>
     </div>
   </section>
 </template>
