@@ -1,5 +1,5 @@
 <template>
-  <div class="app flex flex--v">
+  <div id="app" class="app flex flex--v">
     <header class="header nav flex">
       <div class="title font--title">
         <router-link :to="{ name: 'home'}">

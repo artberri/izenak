@@ -39,7 +39,7 @@ export default new Router({
       props: { gender: 'favourites' },
     },
     {
-      path: '/about',
+      path: '/honiburuz',
       name: 'about',
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
