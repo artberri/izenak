@@ -9,5 +9,6 @@ deploy:
   github_token: $GITHUB_TOKEN
   keep_history: true
   local_dir: ./dist
+  fqdn: izenak.eus
   on:
     branch: master
