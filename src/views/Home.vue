@@ -63,4 +63,10 @@ export default class Home extends Vue {}
 .navigation-leave-active .link__3 {
   transition-delay: 0.14s;
 }
+
+@media (min-width: 768px) {
+  .link {
+    font-size: 2.4em;
+  }
+}
 </style>

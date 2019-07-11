@@ -17,7 +17,7 @@
         lizentziarekin kaleratu da. Kodigoa, <a href="https://github.com/artberri/izenak">Github</a>en aurki daiteke.
       </p>
       <p>
-        Haurdun zaude(te)? Zorionak!
+        Webgune honetara haurdun zaude(te)lako heldu izatekotan... Zorionak! :D
       </p>
     </div>
   </div>

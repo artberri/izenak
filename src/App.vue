@@ -1,7 +1,8 @@
 <template>
   <div id="app" class="app flex flex--v">
     <header class="header nav flex">
-      <div class="title font--title">
+      <h1 class="title font--title">
+        <img src="/img/icons/favicon-16x16.png" alt="izenak.eus logotipoa" style="padding-right: 5px;">
         <router-link :to="{ name: 'home'}">
           <!--
           --><span class="color--girl">i</span><!--
@@ -15,7 +16,7 @@
           --><span class=" font--small">u</span><!--
           --><span class=" font--small">s</span>
         </router-link>
-      </div>
+      </h1>
       <Menu />
     </header>
     <div class="app__container">
@@ -71,7 +72,7 @@ export default class App extends Vue {}
 }
 
 .header {
-  padding: 1em 2em;
+  padding: 1em 1.5em;
   text-align: center;
 }
 

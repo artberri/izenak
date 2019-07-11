@@ -5,14 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Slabo+27px|Raleway|Montserrat&display=swap" rel="stylesheet">
-    <title>izenak.eus</title>
+    <title>izenak.eus - Euskal izenen bilatzailea</title>
+    <meta name="description" content="Bilatu euskal izenak zure seme-alabentzat. Hemen Euskaltzaindiaren izen zerrenda iragazteko eta gustoko dituzun izenak aurkitzeko aukera izango duzu." data-vue-router-controlled>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2004323-23"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
+
   </head>
   <body>
     <noscript>
       <strong>Ez dago Izenak.eus erabiltzerik Javascript gabeko nabigatzailean, barkatu eragozpenak.</strong>
     </noscript>
     <div id="app"></div>
+    <script>
+      WebFontConfig = {
+        google: {
+          families: ['Slabo 27px', 'Raleway', 'Montserrat']
+        }
+      };
+
+      (function(d) {
+        var wf = d.createElement('script'), s = d.scripts[0];
+        wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+        wf.async = true;
+        s.parentNode.insertBefore(wf, s);
+      })(document);
+    </script>
     <!-- built files will be auto injected -->
   </body>
 </html>

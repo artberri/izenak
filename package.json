@@ -19,6 +19,7 @@
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/gtag.js": "0.0.0",
     "core-js": "^2.6.5",
     "inversify": "^5.0.1",
     "postcss-preset-env": "^6.6.0",

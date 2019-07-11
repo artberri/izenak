@@ -3,7 +3,7 @@
     <div class="link">
       <a @click="$router.go(-1)"><Icon class="icon" icon="icon-arrow-left2" /> Atzera</a>
     </div>
-    <div class="font-montserrat text"><slot></slot></div>
+    <h2 class="font-montserrat text"><slot></slot></h2>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default class GoBack extends Vue {}
 }
 
 .link {
-  padding: .1em 1em;
+  padding: .3em 0 .3em 1.3em;
   font-size: .9em;
   text-decoration: none;
 }
@@ -39,7 +39,7 @@ export default class GoBack extends Vue {}
   color: #888;
   text-decoration: none;
   border-radius: .5em;
-  padding: .3em .6em;
+  padding: .4em 1em;
   background: transparent;
   border: 1px solid #888;
 }

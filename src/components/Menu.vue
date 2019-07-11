@@ -5,19 +5,19 @@
       <div class="menu" v-if="menuOpened">
         <div @click="closeMenu"><Icon icon="icon-cross" class="close" /></div>
           <nav class="expand">
-            <ul class="flex flex--v flex--center expand menu-container">
+            <ul class="flex flex--v flex--center expand font--slabo menu-container">
               <li @click="closeMenu"><router-link
-                :to="{ name: 'home'}">Hasiera</router-link></li>
+                :to="{ name: 'home'}">- Hasiera -</router-link></li>
               <li @click="closeMenu"><router-link
-                :to="{ name: 'neskak'}">Nesken izenak</router-link></li>
+                :to="{ name: 'neskak'}">- Nesken izenak -</router-link></li>
               <li @click="closeMenu"><router-link
-                :to="{ name: 'mutilak'}">Mutilen izenak</router-link></li>
+                :to="{ name: 'mutilak'}">- Mutilen izenak -</router-link></li>
               <li @click="closeMenu"><router-link
-                :to="{ name: 'guztiak'}">Izen guztiak</router-link></li>
+                :to="{ name: 'guztiak'}">- Izen guztiak -</router-link></li>
               <li @click="closeMenu"><router-link
-                :to="{ name: 'favourites'}">Gogokoak</router-link></li>
+                :to="{ name: 'favourites'}">- Gogokoak -</router-link></li>
               <li @click="closeMenu"><router-link
-                :to="{ name: 'about'}">Honi buruz</router-link></li>
+                :to="{ name: 'about'}">- Honi buruz -</router-link></li>
             </ul>
           </nav>
       </div>
@@ -65,6 +65,10 @@ export default class Menu extends Vue {
 
 .menu-container li:first-child {
   margin: 0;
+}
+
+.menu-container a {
+  text-decoration: none;
 }
 
 .close {
