@@ -14,4 +14,5 @@ export class NameFilterViewMock implements INameFilterView {
     public onOnlyBasqueToggled: () => void = sinon.fake();
     public onStartsWithInputChanged: () => void = sinon.fake();
     public onEndsWithInputChanged: () => void = sinon.fake();
+    public onResetFiltersClicked: () => void = sinon.fake();
 }

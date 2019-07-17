@@ -18,6 +18,15 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
 
   public get names(): Name[] {
     const filter = this.view.filterStore.filter;
+    return this.filteredNames.slice(0, filter.maxShown);
+  }
+
+  public get showMoreButton(): boolean {
+    return this.filteredNames.length > this.names.length;
+  }
+
+  private get filteredNames(): Name[] {
+    const filter = this.view.filterStore.filter;
     return this.getFiltered(filter);
   }
 
@@ -70,7 +79,7 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
 
   private getFiltered(filter: IFilter): Name[] {
     const favourites = this.view.favouritesStore.favourites;
-    const names = this.allnames.filter((n) => {
+    return this.allnames.filter((n) => {
       if (filter.page === 'male' && n.gender === Gender.Female) {
         return false;
       }
@@ -111,7 +120,5 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
 
       return true;
     });
-
-    return names.slice(0, filter.maxShown);
   }
 }

@@ -9,4 +9,5 @@ export interface IFilterStore {
   filterByOnlyBasque(onlyBasque: boolean): void;
   filterByStartingChars(chars: string): void;
   filterByEndingChars(chars: string): void;
+  showMore(): void;
 }

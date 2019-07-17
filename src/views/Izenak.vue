@@ -22,6 +22,7 @@
         </div>
         <NameTag v-for="name in names" :key="name.key" :name="name" @click="onNameClicked(name)" />
       </div>
+      <div><ShowMore v-if="showMoreButton" /></div>
       <div class="izenak__shadowbottom"></div>
     </div>
   </div>
@@ -33,6 +34,7 @@ import NameTag from '../components/NameTag.vue';
 import NameFilter from '../components/NameFilter.vue';
 import NameCard from '../components/NameCard.vue';
 import GoBack from '../components/GoBack.vue';
+import ShowMore from '../components/ShowMore.vue';
 import { diContainer } from '../main';
 import {
   Gender, IFilter, IzenakPresenter, Name, IIzenakView, PageFilter, DI, IFilterStore, IFavouritesStore,
@@ -47,6 +49,7 @@ const namespace: string = 'filter';
     NameCard,
     NameFilter,
     GoBack,
+    ShowMore,
   },
 })
 export default class Izenak extends Vue implements IIzenakView {
@@ -75,6 +78,10 @@ export default class Izenak extends Vue implements IIzenakView {
 
   public get names(): Name[] {
     return this.presenter.names;
+  }
+
+  public get showMoreButton(): boolean {
+    return this.presenter.showMoreButton;
   }
 
   public get pageFilter(): PageFilter {

@@ -36,6 +36,15 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
     this.view.filterStore.filterByOnlyBasque(this.view.onlyBasque);
   }
 
+  public onResetFiltersClicked(): void {
+    this.view.filterStore.resetFilters();
+    this.view.onlyBasque = this.view.filterStore.filter.onlyBasque;
+    this.view.searchTerm = this.view.filterStore.filter.searchTerm;
+    this.view.startsWith = this.view.filterStore.filter.startsWith;
+    this.view.endsWith = this.view.filterStore.filter.endsWith;
+    this.view.charLengthRange = [this.view.filterStore.filter.minChars, this.view.filterStore.filter.maxChars];
+  }
+
   protected init(): void {}
 
   private filterByTerm(): void {

@@ -7,6 +7,7 @@ export interface INameFilterUserActions {
   onOnlyBasqueToggled(): void;
   onStartsWithInputChanged(): void;
   onEndsWithInputChanged(): void;
+  onResetFiltersClicked(): void;
 }
 
 export interface INameFilterView extends INameFilterUserActions {

@@ -82,7 +82,14 @@ describe('IzenakPresenter', () => {
       izenakPresenter.attach(izenakViewMock);
     });
 
-    const theories: Array<[PageFilter, string, number, number, boolean, string, string, string[]]> = [
+    const favourites: { [s: string]: boolean; } = {
+      Alberttomale: true,
+      Alberttafemale: true,
+      Itxasomale: true,
+      Adurfemale: true,
+    };
+
+    const nameTheories: Array<[PageFilter, string, number, number, boolean, string, string, string[]]> = [
       ['all', '', 0, 0, false, '', '', ['Albertta', 'Amets', 'Onintza', 'Itxaso', 'Albertto', 'Markel', 'Adur']],
       ['female', '', 0, 0, false, '', '', ['Albertta', 'Amets', 'Onintza', 'Itxaso']],
       ['male', '', 0, 0, false, '', '', ['Albertto', 'Markel', 'Adur']],
@@ -130,14 +137,7 @@ describe('IzenakPresenter', () => {
       ['favourites', 'o', 3, 9, false, '', '', ['Albertto']],
     ];
 
-    const favourites: { [s: string]: boolean; } = {
-      Alberttomale: true,
-      Alberttafemale: true,
-      Itxasomale: true,
-      Adurfemale: true,
-    };
-
-    theories.forEach(
+    nameTheories.forEach(
       ([pageFilter, searchTerm, minChars, maxChars, onlyBasque, startsWith, endsWith, expectedNames]) => {
 
       it(`returns ${expectedNames.length ? expectedNames.join(', ') : 'no'} names
@@ -159,10 +159,57 @@ describe('IzenakPresenter', () => {
         filterStore.onlyBasque = onlyBasque;
         filterStore.startsWith = startsWith;
         filterStore.endsWith = endsWith;
+        filterStore.maxShown = 10;
 
         favouritesStore.favouritesObject = favourites;
 
         expect(izenakPresenter.names.map((n) => n.text).sort()).to.eql(expectedNames.sort());
+      });
+    });
+
+    const hasMoreNamesTheories:
+      Array<[PageFilter, string, number, number, boolean, string, string, number, boolean]> = [
+
+      ['all', '', 0, 0, false, '', '', 7, false],
+      ['all', '', 0, 0, false, '', '', 6, true],
+      ['female', '', 0, 0, false, '', '', 4, false],
+      ['female', '', 0, 0, false, '', '', 3, true],
+      ['all', '', 0, 0, true, '', '', 3, false],
+      ['all', '', 0, 0, true, '', '', 2, true],
+      ['all', '', 5, 7, false, '', '', 4, false],
+      ['all', '', 5, 7, false, '', '', 3, true],
+      ['favourites', 'tt', 0, 0, false, '', '', 2, false],
+      ['favourites', 'tt', 0, 0, false, '', '', 1, true],
+    ];
+
+    hasMoreNamesTheories.forEach(([pageFilter, searchTerm, minChars, maxChars,
+          onlyBasque, startsWith, endsWith, maxShown, expectedshowMoreButton]) => {
+
+      it(`shows more button: '${expectedshowMoreButton}'
+          when page filter is '${pageFilter}'
+          and the search term is '${searchTerm}'
+          and ${onlyBasque ? 'has' : 'does not have' } only basque names
+          and name length greater or equal to ${minChars} ${maxChars > 0
+            ? 'and smaller or equal to ' + maxChars
+            : '' }
+          and starts with '${startsWith}'
+          and ends with '${endsWith}'
+          and maxShown is '${maxShown}'
+          and favourites are '${Object.keys(favourites).join(', ')}'`,
+        () => {
+
+        filterStore.page = pageFilter;
+        filterStore.searchTerm = searchTerm;
+        filterStore.minChars = minChars;
+        filterStore.maxChars = maxChars;
+        filterStore.onlyBasque = onlyBasque;
+        filterStore.startsWith = startsWith;
+        filterStore.endsWith = endsWith;
+        filterStore.maxShown = maxShown;
+
+        favouritesStore.favouritesObject = favourites;
+
+        expect(izenakPresenter.showMoreButton).to.equal(expectedshowMoreButton);
       });
     });
   });

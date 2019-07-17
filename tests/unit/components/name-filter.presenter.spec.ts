@@ -145,4 +145,26 @@ describe('NameFilterPresenter', () => {
       expect(filterStore.filter.endsWith).to.equal('ends2');
     });
   });
+
+  describe('On reset filters clicked', () => {
+    beforeEach(() => {
+      nameFilterPresenter.attach(nameFilterViewMock);
+    });
+
+    it('resets all filters', () => {
+      nameFilterViewMock.searchTerm = 'search';
+      nameFilterViewMock.onlyBasque = true;
+      nameFilterViewMock.startsWith = 'startsWith';
+      nameFilterViewMock.endsWith = 'endsWith';
+      nameFilterViewMock.charLengthRange = [4, 8];
+      nameFilterPresenter.onResetFiltersClicked();
+
+      expect(filterStore.filter.searchTerm).to.equal('');
+      expect(filterStore.filter.onlyBasque).to.equal(false);
+      expect(filterStore.filter.startsWith).to.equal('');
+      expect(filterStore.filter.endsWith).to.equal('');
+      expect(filterStore.filter.minChars).to.equal(2);
+      expect(filterStore.filter.maxChars).to.equal(22);
+    });
+  });
 });

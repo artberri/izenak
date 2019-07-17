@@ -9,6 +9,7 @@ export interface IIzenakUserActions {
 
 export interface IIzenakView extends IIzenakUserActions {
   names: Name[];
+  showMoreButton: boolean;
   pageFilter: PageFilter;
   filterStore: IFilterStore;
   favouritesStore: IFavouritesStore;

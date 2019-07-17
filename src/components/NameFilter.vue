@@ -53,6 +53,11 @@
             Euskal jatorrizko izenak soilik
           </label>
         </div>
+        <div class="center">
+          <button class="reset" @click="onResetFiltersClicked">
+            <span>Kendu iragazkiak</span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -145,6 +150,10 @@ export default class NameFilter extends Vue implements INameFilterView {
   public onEndsWithInputChanged(): void {
     this.presenter.onEndsWithInputChanged();
   }
+
+  public onResetFiltersClicked(): void {
+    this.presenter.onResetFiltersClicked();
+  }
 }
 </script>
 
@@ -160,7 +169,7 @@ export default class NameFilter extends Vue implements INameFilterView {
 }
 
 .filter__box {
-  height: 260px;
+  height: 290px;
   background: #fff;
   border-radius: 5px;
   padding: 1.3em 1.3em 0em;
@@ -238,6 +247,11 @@ export default class NameFilter extends Vue implements INameFilterView {
 
 .search {
   padding: 5px 5px 5px 35px;
+}
+
+.reset {
+  color: var(--mainColor);
+  text-decoration: underline;
 }
 
 .start-container {
