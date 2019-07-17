@@ -11,14 +11,21 @@ import './assets/css/main.css';
 import './assets/css/icomoon/style.css';
 import './assets/css/fonts.css';
 import './assets/css/transitions.css';
+import izenak from './assets/data/izenak.json';
 import { NameFilterPresenter, INameRepository, IzenakPresenter, NameCardPresenter } from './app';
-import { store, NameLocalRepository } from './infrastructure';
+import { store, NameLocalRepository, INameDto } from './infrastructure';
+
+const allnames = izenak as INameDto[];
 
 const dic = new Container({ skipBaseClassChecks: true });
-dic.bind<NameFilterPresenter>(DI.NameFilterPresenter).to(NameFilterPresenter);
-dic.bind<NameCardPresenter>(DI.NameCardPresenter).to(NameCardPresenter);
-dic.bind<IzenakPresenter>(DI.IzenakPresenter).to(IzenakPresenter);
-dic.bind<INameRepository>(DI.INameRepository).to(NameLocalRepository).inSingletonScope();
+dic.bind<NameFilterPresenter>(DI.NameFilterPresenter)
+  .to(NameFilterPresenter);
+dic.bind<NameCardPresenter>(DI.NameCardPresenter)
+  .to(NameCardPresenter);
+dic.bind<IzenakPresenter>(DI.IzenakPresenter)
+  .to(IzenakPresenter);
+dic.bind<INameRepository>(DI.INameRepository)
+  .toConstantValue(new NameLocalRepository(allnames));
 
 export const diContainer = dic;
 

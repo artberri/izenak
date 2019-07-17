@@ -1,8 +1,8 @@
-import { GenderFilter } from '../types';
+import { PageFilter } from '../types';
 
 export interface IFilter {
     maxShown: number;
-    gender: GenderFilter;
+    page: PageFilter;
     searchTerm: string;
     minChars: number;
     maxChars: number;

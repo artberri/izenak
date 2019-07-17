@@ -33,7 +33,7 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
     if (!this.view.selectedName) {
       return;
     }
-    const indexOfSelectedName = this.indexOfSelectedName;
+    const indexOfSelectedName = this.getIndexOfSelectedName();
     if (indexOfSelectedName >= this.names.length - 1) {
       this.view.selectedName = undefined;
       return;
@@ -46,7 +46,7 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
     if (!this.view.selectedName) {
       return;
     }
-    const indexOfSelectedName = this.indexOfSelectedName;
+    const indexOfSelectedName = this.getIndexOfSelectedName();
     if (indexOfSelectedName <= 0) {
       this.view.selectedName = undefined;
       return;
@@ -55,31 +55,31 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
     this.view.selectedName = this.names[indexOfSelectedName - 1];
   }
 
-  public onGenderFilterChange(): void {
-    this.view.filterStore.filterByGender(this.view.genderFilter);
+  public onPageFilterChanged(): void {
+    this.view.filterStore.filterByPage(this.view.pageFilter);
   }
 
   protected init(): void {
     this.allnames = shuffle(this.nameRepository.getAllNames());
-    this.view.filterStore.filterByGender(this.view.genderFilter);
+    this.view.filterStore.filterByPage(this.view.pageFilter);
   }
 
-  private get indexOfSelectedName(): number {
+  private getIndexOfSelectedName(): number {
     return this.view.selectedName ? this.names.indexOf(this.view.selectedName) : -1;
   }
 
   private getFiltered(filter: IFilter): Name[] {
     const favourites = this.view.favouritesStore.favourites;
     const names = this.allnames.filter((n) => {
-      if (filter.gender === 'male' && n.gender === Gender.Female) {
+      if (filter.page === 'male' && n.gender === Gender.Female) {
         return false;
       }
 
-      if (filter.gender === 'female' && n.gender === Gender.Male) {
+      if (filter.page === 'female' && n.gender === Gender.Male) {
         return false;
       }
 
-      if (filter.gender === 'favourites' && favourites.indexOf(n.key) < 0) {
+      if (filter.page === 'favourites' && favourites.indexOf(n.key) < 0) {
         return false;
       }
 

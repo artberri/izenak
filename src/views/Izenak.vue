@@ -35,7 +35,7 @@ import NameCard from '../components/NameCard.vue';
 import GoBack from '../components/GoBack.vue';
 import { diContainer } from '../main';
 import {
-  Gender, IFilter, IzenakPresenter, Name, IIzenakView, GenderFilter, DI, IFilterStore, IFavouritesStore,
+  Gender, IFilter, IzenakPresenter, Name, IIzenakView, PageFilter, DI, IFilterStore, IFavouritesStore,
 } from '@/app';
 import { filterStore, favouritesStore } from '../infrastructure';
 
@@ -62,7 +62,7 @@ export default class Izenak extends Vue implements IIzenakView {
   public cloudContainer!: HTMLDivElement;
 
   @Prop()
-  public gender!: string;
+  public page!: string;
 
   private presenter: IzenakPresenter = diContainer.get<IzenakPresenter>(DI.IzenakPresenter);
 
@@ -77,22 +77,22 @@ export default class Izenak extends Vue implements IIzenakView {
     return this.presenter.names;
   }
 
-  public get genderFilter(): GenderFilter {
-    if (this.gender === 'male' || this.gender === 'female' || this.gender === 'favourites') {
-      return this.gender;
+  public get pageFilter(): PageFilter {
+    if (this.page === 'male' || this.page === 'female' || this.page === 'favourites') {
+      return this.page;
     }
 
     return 'all';
   }
 
   public get title(): string {
-    if (this.genderFilter === 'male') {
+    if (this.pageFilter === 'male') {
       return 'Mutilen izenak';
     }
-    if (this.genderFilter === 'female') {
+    if (this.pageFilter === 'female') {
       return 'Nesken izenak';
     }
-    if (this.genderFilter === 'favourites') {
+    if (this.pageFilter === 'favourites') {
       return 'Gogokoak';
     }
 
@@ -100,8 +100,8 @@ export default class Izenak extends Vue implements IIzenakView {
   }
 
   @Watch('gender')
-  public onGenderFilterChange() {
-    this.presenter.onGenderFilterChange();
+  public onPageChanged() {
+    this.presenter.onPageFilterChanged();
   }
 
   public onNameClicked(name: Name): void {

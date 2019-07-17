@@ -1,2 +1,2 @@
 export type Type<T = {}> = new(...args: any[]) => T;
-export type GenderFilter = 'male' | 'female' | 'all' | 'favourites';
+export type PageFilter = 'male' | 'female' | 'all' | 'favourites';

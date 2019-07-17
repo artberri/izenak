@@ -31,7 +31,7 @@ const router = new Router({
       path: '/neskak',
       name: 'neskak',
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
-      props: { gender: 'female' },
+      props: { page: 'female' },
       meta: {
         title: 'Euskal neska-izenen bilatzailea - izenak.eus',
         metaTags: [
@@ -50,7 +50,7 @@ const router = new Router({
       path: '/mutilak',
       name: 'mutilak',
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
-      props: { gender: 'male' },
+      props: { page: 'male' },
       meta: {
         title: 'Euskal mutil-izenen bilatzailea - izenak.eus',
         metaTags: [
@@ -69,7 +69,7 @@ const router = new Router({
       path: '/guztiak',
       name: 'guztiak',
       component: () => import(/* webpackChunkName: "izenak" */ './views/Izenak.vue'),
-      props: { gender: 'all' },
+      props: { page: 'all' },
       meta: {
         title: 'Euskal mutil eta neska izenen bilatzailea - izenak.eus',
         metaTags: [
@@ -88,7 +88,7 @@ const router = new Router({
       path: '/gogokoak',
       name: 'favourites',
       component: () => import(/* webpackChunkName: "favourites" */ './views/Izenak.vue'),
-      props: { gender: 'favourites' },
+      props: { page: 'favourites' },
       meta: {
         title: 'Izen gogokoak - izenak.eus',
         metaTags: [

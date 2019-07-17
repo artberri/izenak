@@ -1,8 +1,8 @@
-import { IFilter, GenderFilter } from '../model';
+import { IFilter, PageFilter } from '../model';
 
 export interface IFilterStore {
   filter: IFilter;
-  filterByGender(gender: GenderFilter): void;
+  filterByPage(gender: PageFilter): void;
   resetFilters(): void;
   filterByTerm(searchTerm: string): void;
   filterByCharRange(charRange: [number, number]): void;
