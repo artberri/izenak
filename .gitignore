@@ -24,3 +24,7 @@ yarn-error.log*
 
 # Scrapy
 *.csv
+
+# Coverage
+.nyc_output/
+coverage/

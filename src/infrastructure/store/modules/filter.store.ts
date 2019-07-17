@@ -1,6 +1,7 @@
 import { Module, VuexModule, Mutation } from 'vuex-module-decorators';
 import { GenderFilter, IFilter, IFilterStore } from '../../../app';
 
+const maxShown: number = 100;
 const minChars: number = 2;
 const maxChars: number = 22;
 
@@ -9,6 +10,7 @@ const maxChars: number = 22;
   namespaced: true,
 })
 export default class FilterStore extends VuexModule implements IFilterStore {
+  public maxShown: number = maxShown;
   public gender: GenderFilter = 'all';
   public searchTerm: string = '';
   public minChars: number = minChars;
@@ -19,6 +21,7 @@ export default class FilterStore extends VuexModule implements IFilterStore {
 
   public get filter(): IFilter {
     return {
+      maxShown: this.maxShown,
       gender: this.gender,
       searchTerm: this.searchTerm,
       minChars: this.minChars,
@@ -32,10 +35,12 @@ export default class FilterStore extends VuexModule implements IFilterStore {
   @Mutation
   public filterByGender(gender: GenderFilter) {
     this.gender = gender;
+    this.maxShown = maxShown;
   }
 
   @Mutation
   public resetFilters() {
+    this.maxShown = maxShown;
     this.searchTerm = '';
     this.minChars = minChars;
     this.maxChars = maxChars;
@@ -68,5 +73,10 @@ export default class FilterStore extends VuexModule implements IFilterStore {
   @Mutation
   public filterByEndingChars(chars: string): void {
     this.endsWith = chars;
+  }
+
+  @Mutation
+  public showMore(): void {
+    this.maxShown = this.maxShown + maxShown;
   }
 }

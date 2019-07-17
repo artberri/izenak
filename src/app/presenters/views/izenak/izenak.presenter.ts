@@ -6,8 +6,6 @@ import { INameRepository } from '../../../services';
 import { shuffle } from '../../../utils';
 import { injectable, inject } from 'inversify';
 
-const MAX_NAMES = 100;
-
 @injectable()
 export class IzenakPresenter extends BasePresenter<IIzenakView> {
   private allnames!: Name[];
@@ -114,6 +112,6 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
       return true;
     });
 
-    return names.slice(0, MAX_NAMES);
+    return names.slice(0, filter.maxShown);
   }
 }
