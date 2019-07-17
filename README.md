@@ -1,6 +1,9 @@
 # izenak.eus
 
-Aurkitu izena zure seme-alabentzat.
+[![Build Status](https://travis-ci.org/artberri/izenak.svg?branch=master)](https://travis-ci.org/artberri/izenak)
+[![Coverage Status](https://coveralls.io/repos/github/artberri/izenak/badge.svg?branch=master)](https://coveralls.io/github/artberri/izenak?branch=master)
+
+Web Application to find Basque names. Deployed at [https://izenak.eus/](https://izenak.eus/).
 
 ## Project setup
 
