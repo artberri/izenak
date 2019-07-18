@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="app flex flex--v">
-    <header class="header nav flex">
+    <header role="banner" class="header nav flex">
       <h1 class="title font--title">
         <img src="/img/icons/favicon-16x16.png" alt="izenak.eus logotipoa" style="padding-right: 5px;">
         <router-link :to="{ name: 'home'}">
@@ -24,12 +24,12 @@
         <router-view />
       </transition>
     </div>
-    <footer class="footer flex">
+    <footer role="contentinfo" class="footer flex">
       <div class="font--smaller"><span class="footer__dev"><a class="footer__link" href="http://www.berriart.com">berriart</a><span>ek garatua</span></span></div>
       <div>
         <router-link
           class="footer__info"
-          :to="{ name: 'about'}"><Icon icon="icon-info" /></router-link>
+          :to="{ name: 'about'}"><Icon icon="icon-info" /><span class="pseudohidden">Honi buruz</span></router-link>
       </div>
     </footer>
   </div>

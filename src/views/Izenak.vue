@@ -1,5 +1,5 @@
 <template>
-  <div class="section flex flex--v izenak">
+  <main role="main" class="section flex flex--v izenak">
     <div class="flex flex--v">
       <GoBack>{{ title }}</GoBack>
     </div>
@@ -14,9 +14,9 @@
           @next="onNextClicked"
           @previous="onPreviousClicked" />
       </transition>
-      <NameFilter :scrollPosition="scrollPosition" />
       <div class="izenak__shadowtop"></div>
       <div class="flex cloud">
+        <NameFilter :scrollPosition="scrollPosition" />
         <div v-if="names.length === 0">
           Bilaketak ez du emaitzarik. Aldatu iragazkiak izenak ikusteko.
         </div>
@@ -25,7 +25,7 @@
       <div><ShowMore v-if="showMoreButton" /></div>
       <div class="izenak__shadowbottom"></div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -193,7 +193,7 @@ export default class Izenak extends Vue implements IIzenakView {
 }
 
 .cloud {
-  padding: 300px 2em 1em;
+  padding: 330px 2em 1em;
   justify-content: center;
   flex-wrap: wrap;
 }

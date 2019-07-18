@@ -1,5 +1,5 @@
 <template>
-  <nav class="home section flex flex--v">
+  <nav class="home section flex flex--v" role="navigation" aria-label="Menu nagusia">
     <router-link
       class="link link__1 background--girl flex flex--center font--slabo"
       :to="{ name: 'neskak'}">Nesken izenak</router-link>

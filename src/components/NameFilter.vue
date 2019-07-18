@@ -1,5 +1,5 @@
 <template>
-  <section ref="filter" :class="filterClass">
+  <section ref="filter" role="search" :class="filterClass">
     <div class="filter__box">
       <div v-if="minimize" @click="openFilters" class="iragazkiak"><Icon icon="icon-filter" class="filter-icon" /></div>
       <div v-if="!minimize">
@@ -102,6 +102,7 @@ export default class NameFilter extends Vue implements INameFilterView {
       'flex--v': true,
       'filter': true,
       'minimize': this.minimize,
+      'forced': this.forced,
     };
 
     return classObj;
@@ -109,6 +110,10 @@ export default class NameFilter extends Vue implements INameFilterView {
 
   public get minimize(): boolean {
     return !this.forceOpenFilters && this.scrollPosition > 100;
+  }
+
+  public get forced(): boolean {
+    return this.forceOpenFilters && this.scrollPosition > 100;
   }
 
   @Watch('scrollPosition')
@@ -160,12 +165,21 @@ export default class NameFilter extends Vue implements INameFilterView {
 <style >
 .filter {
   padding: 1.3em 1.3em 0em;
-  position: fixed;
+  position: absolute;
   width: 100%;
+  top: 0;
+  left: 0;
 }
 
 .minimize.filter {
+  position: fixed;
   width: auto;
+  top: 110px;
+}
+
+.forced.filter {
+  position: fixed;
+  top: 110px;
 }
 
 .filter__box {

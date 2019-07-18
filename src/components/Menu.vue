@@ -4,7 +4,7 @@
     <transition name="fade">
       <div class="menu" v-if="menuOpened">
         <div @click="closeMenu"><Icon icon="icon-cross" class="close" /></div>
-          <nav class="expand">
+          <nav class="expand" role="navigation" aria-label="Menu orrialde guztiekin">
             <ul class="flex flex--v flex--center expand font--slabo menu-container">
               <li @click="closeMenu"><router-link
                 :to="{ name: 'home'}">- Hasiera -</router-link></li>

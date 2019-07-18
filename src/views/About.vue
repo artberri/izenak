@@ -1,5 +1,5 @@
 <template>
-  <div class="section flex flex--v about">
+  <main role="main" class="section flex flex--v about">
     <div class="flex flex--v">
       <GoBack>Honi buruz</GoBack>
     </div>
@@ -20,7 +20,7 @@
         Webgune honetara haurdun zaude(te)lako heldu izatekotan... Zorionak! :D
       </p>
     </div>
-  </div>
+  </main>
 </template>
 
 
