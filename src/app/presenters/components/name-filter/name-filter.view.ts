@@ -8,6 +8,7 @@ export interface INameFilterUserActions {
   onStartsWithInputChanged(): void;
   onEndsWithInputChanged(): void;
   onResetFiltersClicked(): void;
+  onOrderByAlphabeticalToggled(): void;
 }
 
 export interface INameFilterView extends INameFilterUserActions {
@@ -17,4 +18,5 @@ export interface INameFilterView extends INameFilterUserActions {
   onlyBasque: boolean;
   startsWith: string;
   endsWith: string;
+  alphabetical: boolean;
 }

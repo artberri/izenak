@@ -36,6 +36,10 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
     this.view.filterStore.filterByOnlyBasque(this.view.onlyBasque);
   }
 
+  public onOrderByAlphabeticalToggled(): void {
+    this.view.filterStore.orderAlphabetically(this.view.alphabetical);
+  }
+
   public onResetFiltersClicked(): void {
     this.view.filterStore.resetFilters();
     this.view.onlyBasque = this.view.filterStore.filter.onlyBasque;

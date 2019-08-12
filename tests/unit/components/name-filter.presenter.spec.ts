@@ -25,6 +25,7 @@ describe('NameFilterPresenter', () => {
       filterStore.onlyBasque = true;
       filterStore.startsWith = 'starts';
       filterStore.endsWith = 'ends';
+      filterStore.alphabetical = true;
 
       nameFilterPresenter.attach(nameFilterViewMock);
 
@@ -35,6 +36,7 @@ describe('NameFilterPresenter', () => {
       expect(filterStore.filter.onlyBasque).to.equal(true);
       expect(filterStore.filter.startsWith).to.equal('starts');
       expect(filterStore.filter.endsWith).to.equal('ends');
+      expect(filterStore.filter.alphabetical).to.equal(true);
     });
   });
 
@@ -146,6 +148,22 @@ describe('NameFilterPresenter', () => {
     });
   });
 
+  describe('On order alphabetically checkbox toggled', () => {
+    beforeEach(() => {
+      nameFilterPresenter.attach(nameFilterViewMock);
+    });
+
+    it('sets the alphabetical filter', () => {
+      nameFilterViewMock.alphabetical = true;
+      nameFilterPresenter.onOrderByAlphabeticalToggled();
+      expect(filterStore.filter.alphabetical).to.equal(true);
+
+      nameFilterViewMock.alphabetical = false;
+      nameFilterPresenter.onOrderByAlphabeticalToggled();
+      expect(filterStore.filter.alphabetical).to.equal(false);
+    });
+  });
+
   describe('On reset filters clicked', () => {
     beforeEach(() => {
       nameFilterPresenter.attach(nameFilterViewMock);
@@ -157,6 +175,7 @@ describe('NameFilterPresenter', () => {
       nameFilterViewMock.startsWith = 'startsWith';
       nameFilterViewMock.endsWith = 'endsWith';
       nameFilterViewMock.charLengthRange = [4, 8];
+      nameFilterViewMock.alphabetical = true;
       nameFilterPresenter.onResetFiltersClicked();
 
       expect(filterStore.filter.searchTerm).to.equal('');
@@ -165,6 +184,7 @@ describe('NameFilterPresenter', () => {
       expect(filterStore.filter.endsWith).to.equal('');
       expect(filterStore.filter.minChars).to.equal(2);
       expect(filterStore.filter.maxChars).to.equal(22);
+      expect(filterStore.filter.alphabetical).to.equal(false);
     });
   });
 });

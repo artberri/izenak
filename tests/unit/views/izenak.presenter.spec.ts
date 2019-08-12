@@ -23,6 +23,12 @@ describe('IzenakPresenter', () => {
   });
 
   describe('As soon as the view is attached', () => {
+    it('gets names from the repository', () => {
+      izenakPresenter.attach(izenakViewMock);
+
+      expect(nameRepositoryMock.getAllNames.calledOnce).to.eql(true);
+    });
+
     it('has not a selected name', () => {
       izenakPresenter.attach(izenakViewMock);
 
@@ -35,6 +41,7 @@ describe('IzenakPresenter', () => {
       filterStore.minChars = 2;
       filterStore.maxChars = 5;
       filterStore.onlyBasque = true;
+      filterStore.alphabetical = true;
 
       izenakViewMock.pageFilter = 'male';
       izenakPresenter.attach(izenakViewMock);
@@ -45,6 +52,7 @@ describe('IzenakPresenter', () => {
       expect(filterStore.filter.maxChars).to.equal(5);
       expect(filterStore.filter.onlyBasque).to.equal(true);
       expect(filterStore.filter.maxShown).to.equal(100);
+      expect(filterStore.filter.alphabetical).to.equal(true);
     });
   });
 
@@ -56,6 +64,7 @@ describe('IzenakPresenter', () => {
       filterStore.maxChars = 5;
       filterStore.onlyBasque = true;
       filterStore.maxShown = 200;
+      filterStore.alphabetical = true;
 
       nameRepositoryMock.willReturnWhenGetAllNamesIsCalled(nameSamples());
       izenakPresenter.attach(izenakViewMock);
@@ -160,10 +169,13 @@ describe('IzenakPresenter', () => {
         filterStore.startsWith = startsWith;
         filterStore.endsWith = endsWith;
         filterStore.maxShown = 10;
-
+        filterStore.alphabetical = false;
         favouritesStore.favouritesObject = favourites;
 
         expect(izenakPresenter.names.map((n) => n.text).sort()).to.eql(expectedNames.sort());
+
+        filterStore.alphabetical = true;
+        expect(izenakPresenter.names.map((n) => n.text)).to.eql(expectedNames.sort());
       });
     });
 

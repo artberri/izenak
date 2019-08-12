@@ -53,6 +53,12 @@
             Euskal jatorrizko izenak soilik
           </label>
         </div>
+        <div class="field">
+          <label for="alphabeticalorder" class="label checkbox__label">
+            <input id="alphabeticalorder" name="alphabeticalorder" type="checkbox" class="checkbox" v-model="alphabetical" @change="onOrderByAlphabeticalToggled" /><span class="checkmark"></span>
+            Izenak alfabetikoki ordenatu
+          </label>
+        </div>
         <div class="center">
           <button class="reset" @click="onResetFiltersClicked">
             <span>Kendu iragazkiak</span>
@@ -90,6 +96,7 @@ export default class NameFilter extends Vue implements INameFilterView {
   public onlyBasque: boolean = filterStore.filter.onlyBasque;
   public startsWith: string = filterStore.filter.startsWith;
   public endsWith: string = filterStore.filter.endsWith;
+  public alphabetical: boolean = filterStore.filter.alphabetical;
   public forceOpenFilters: boolean = false;
   @Ref('filter')
   public filterElement!: HTMLDivElement;
@@ -159,6 +166,10 @@ export default class NameFilter extends Vue implements INameFilterView {
   public onResetFiltersClicked(): void {
     this.presenter.onResetFiltersClicked();
   }
+
+  public onOrderByAlphabeticalToggled(): void {
+    this.presenter.onOrderByAlphabeticalToggled();
+  }
 }
 </script>
 
@@ -183,7 +194,7 @@ export default class NameFilter extends Vue implements INameFilterView {
 }
 
 .filter__box {
-  height: 290px;
+  height: 320px;
   background: #fff;
   border-radius: 5px;
   padding: 1.3em 1.3em 0em;

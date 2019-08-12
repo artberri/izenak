@@ -9,4 +9,5 @@ export interface IFilter {
     onlyBasque: boolean;
     startsWith: string;
     endsWith: string;
+    alphabetical: boolean;
 }

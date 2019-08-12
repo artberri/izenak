@@ -8,6 +8,7 @@ export class NameFilterViewMock implements INameFilterView {
     public onlyBasque!: boolean;
     public startsWith!: string;
     public endsWith!: string;
+    public alphabetical!: boolean;
     public onSearchInputChanged: () => void = sinon.fake();
     public onKeyPressedOnInput: () => void = sinon.fake();
     public onCharLengthSliderChanged: () => void = sinon.fake();
@@ -15,4 +16,5 @@ export class NameFilterViewMock implements INameFilterView {
     public onStartsWithInputChanged: () => void = sinon.fake();
     public onEndsWithInputChanged: () => void = sinon.fake();
     public onResetFiltersClicked: () => void = sinon.fake();
+    public onOrderByAlphabeticalToggled: () => void = sinon.fake();
 }

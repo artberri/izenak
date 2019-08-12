@@ -8,7 +8,8 @@ import { injectable, inject } from 'inversify';
 
 @injectable()
 export class IzenakPresenter extends BasePresenter<IIzenakView> {
-  private allnames!: Name[];
+  private allNames!: Name[];
+  private allOrderedNames!: Name[];
 
   constructor(
     @inject(DI.INameRepository) private readonly nameRepository: INameRepository,
@@ -69,7 +70,8 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
   }
 
   protected init(): void {
-    this.allnames = shuffle(this.nameRepository.getAllNames());
+    this.allNames = shuffle(this.nameRepository.getAllNames());
+    this.allOrderedNames = [...this.allNames].sort((a, b) => (a.text > b.text) ? 1 : -1);
     this.view.filterStore.filterByPage(this.view.pageFilter);
   }
 
@@ -79,7 +81,8 @@ export class IzenakPresenter extends BasePresenter<IIzenakView> {
 
   private getFiltered(filter: IFilter): Name[] {
     const favourites = this.view.favouritesStore.favourites;
-    return this.allnames.filter((n) => {
+    const names = filter.alphabetical ? this.allOrderedNames : this.allNames;
+    return names.filter((n) => {
       if (filter.page === 'male' && n.gender === Gender.Female) {
         return false;
       }

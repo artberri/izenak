@@ -193,7 +193,7 @@ export default class Izenak extends Vue implements IIzenakView {
 }
 
 .cloud {
-  padding: 330px 2em 1em;
+  padding: 360px 2em 1em;
   justify-content: center;
   flex-wrap: wrap;
 }
