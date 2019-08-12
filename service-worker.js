@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.5b90ab2defba1e90327581f89929b431.js"
+  "/precache-manifest.59612190172cea4c778bd5e8da118c55.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "izenak"});
