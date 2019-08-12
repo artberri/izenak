@@ -179,12 +179,18 @@ describe('NameFilterPresenter', () => {
       nameFilterPresenter.onResetFiltersClicked();
 
       expect(filterStore.filter.searchTerm).to.equal('');
+      expect(nameFilterViewMock.searchTerm).to.equal('');
       expect(filterStore.filter.onlyBasque).to.equal(false);
+      expect(nameFilterViewMock.onlyBasque).to.equal(false);
       expect(filterStore.filter.startsWith).to.equal('');
+      expect(nameFilterViewMock.startsWith).to.equal('');
       expect(filterStore.filter.endsWith).to.equal('');
+      expect(nameFilterViewMock.endsWith).to.equal('');
       expect(filterStore.filter.minChars).to.equal(2);
       expect(filterStore.filter.maxChars).to.equal(22);
+      expect(nameFilterViewMock.charLengthRange).to.eql([2, 22]);
       expect(filterStore.filter.alphabetical).to.equal(false);
+      expect(nameFilterViewMock.alphabetical).to.equal(false);
     });
   });
 });

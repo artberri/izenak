@@ -47,6 +47,7 @@ export class NameFilterPresenter extends BasePresenter<INameFilterView> {
     this.view.startsWith = this.view.filterStore.filter.startsWith;
     this.view.endsWith = this.view.filterStore.filter.endsWith;
     this.view.charLengthRange = [this.view.filterStore.filter.minChars, this.view.filterStore.filter.maxChars];
+    this.view.alphabetical = this.view.filterStore.filter.alphabetical;
   }
 
   protected init(): void {}
