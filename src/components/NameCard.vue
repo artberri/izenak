@@ -119,9 +119,9 @@ export default class NameCard extends Vue implements INameCardView {
 }
 
 .favourite {
-  font-size: 4em;
+  font-size: 64px;
   color: var(--mainColor);
-  width: 130px;
+  width: 200px;
 }
 
 .favourite__icon {
@@ -130,7 +130,7 @@ export default class NameCard extends Vue implements INameCardView {
 }
 
 .favourite__icon--selected {
-  font-size: 1.2em;
+  font-size: 76px;
   opacity: 1;
 }
 
