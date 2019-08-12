@@ -17,11 +17,11 @@
       <div class="section_container">
         <div>
           <h4 class="section__title">Beste hizkuntzetan</h4>
-          <p class="section__content">{{ name.translations || 'Izen hau ez dauka itzulpenik Euskaltzaindiaren corpusean' }}</p>
+          <p class="section__content">{{ name.translations || 'Izen honek ez dauka itzulpenik Euskaltzaindiaren corpusean' }}</p>
         </div>
         <div>
           <h4 class="section__title">Esanahia</h4>
-          <p class="section__content">{{ name.meaning || 'Izen hau ez dauka definiziorik Euskaltzaindiaren corpusean' }}</p>
+          <p class="section__content">{{ name.meaning || 'Izen honek ez dauka definiziorik Euskaltzaindiaren corpusean' }}</p>
         </div>
       </div>
     </div>
