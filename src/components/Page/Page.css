@@ -1,0 +1,38 @@
+.page {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+}
+
+.page--out {
+	animation: out 200ms forwards;
+}
+
+@keyframes out {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(100vw);
+	}
+}
+
+.page--in {
+	animation: in 200ms forwards;
+}
+
+@keyframes in {
+	0% {
+		opacity: 0;
+		transform: translateX(-100vw);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}

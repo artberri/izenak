@@ -1,12 +1,8 @@
 import "./Home.css"
 
-export interface HomeProps {
-	path: string
-}
-
-export function Home({ path: _ }: HomeProps) {
+export function Home() {
 	return (
-		<nav class="home page" role="navigation" aria-label="Menu nagusia">
+		<nav class="home" role="navigation" aria-label="Menu nagusia">
 			<a
 				class="home__link home__link--girl flex flex--center font--slabo"
 				href="/neskak"
