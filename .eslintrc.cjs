@@ -14,6 +14,7 @@ module.exports = {
 	ignorePatterns: [".eslintrc.cjs", "vue/", "dist/", "src/*.d.ts"],
 	rules: {
 		"react/no-unknown-property": [0],
+		"@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }],
 	},
 	settings: {
 		react: {

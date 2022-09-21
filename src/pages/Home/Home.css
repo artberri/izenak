@@ -1,0 +1,30 @@
+.home {
+	display: flex;
+	flex-direction: column;
+}
+
+.home__link {
+	flex-grow: 1;
+	text-decoration: none;
+	font-size: 2.4rem;
+	padding: 2rem;
+	transform: translateX(0);
+	opacity: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: var(--secondary-font);
+	color: var(--whiteColor);
+}
+
+.home__link--boy {
+	background: var(--boyColor);
+}
+
+.home__link--girl {
+	background: var(--girlColor);
+}
+
+.home__link--all {
+	background: var(--allColor);
+}

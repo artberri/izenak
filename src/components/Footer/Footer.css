@@ -1,0 +1,15 @@
+.footer {
+	display: flex;
+	justify-content: space-between;
+	padding: 1em 2em;
+}
+
+.footer__dev {
+	font-size: 0.8rem;
+}
+
+.footer__link {
+	text-decoration: none;
+	color: var(--mainColor);
+	font-weight: bold;
+}

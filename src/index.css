@@ -1,70 +1,66 @@
 :root {
-	font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 400;
+	--mainColor: #555;
+	--whiteColor: #ffffff;
+	--backgroundColor: #f8f8f8;
+	--girlColorSoft: #7a4579;
+	--boyColorSoft: #d56073;
+	--allColorSoft: #ec9e69;
+	--girlColor: #7a4579;
+	--boyColor: #d56073;
+	--allColor: #ec9e69;
+	--main-font: Raleway, sans-serif;
+	--secondary-font: "Slabo 27px", serif;
+}
 
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
 
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-text-size-adjust: 100%;
+*:focus {
+	outline: none;
 }
 
 a {
-	font-weight: 500;
-	color: #646cff;
-	text-decoration: inherit;
+	cursor: pointer;
+	color: var(--mainColor);
 }
-a:hover {
-	color: #535bf2;
+
+strong {
+	font-weight: bold;
+}
+
+p {
+	line-height: 1.4em;
+}
+
+html,
+body {
+	height: 100%;
 }
 
 body {
+	color: var(--mainColor);
+	display: block;
 	margin: 0;
-	display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh;
+	padding: 0;
+	font-family: var(--main-font);
+	font-size: 16px;
+	background: var(--whiteColor);
 }
 
-h1 {
-	font-size: 3.2em;
-	line-height: 1.1;
+input[type="text"] {
+	box-sizing: border-box;
 }
 
 button {
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 0.6em 1.2em;
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	background-color: #1a1a1a;
-	cursor: pointer;
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
+	background: transparent;
+	border: 0;
 }
 
-@media (prefers-color-scheme: light) {
-	:root {
-		color: #213547;
-		background-color: #ffffff;
-	}
-	a:hover {
-		color: #747bff;
-	}
-	button {
-		background-color: #f9f9f9;
-	}
+.page {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 }

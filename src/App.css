@@ -1,0 +1,14 @@
+.app {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.app__container {
+	flex: 1;
+	position: relative;
+}

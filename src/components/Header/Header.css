@@ -1,0 +1,31 @@
+.header {
+	padding: 1em 1.5em;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header__title {
+	font-size: 2rem;
+}
+
+.header__title a {
+	text-decoration: none;
+	color: var(--mainColor);
+}
+
+.header__letter--boy {
+	color: var(--boyColor);
+}
+
+.header__letter--girl {
+	color: var(--girlColor);
+}
+
+.header__letter--all {
+	color: var(--allColor);
+}
+
+.header__letter--small {
+	font-size: 0.8rem;
+}

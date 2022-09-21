@@ -2,19 +2,32 @@
   <div id="app" class="app flex flex--v">
     <header role="banner" class="header nav flex">
       <h1 class="title font--title">
-        <img src="/img/icons/favicon-16x16.png" alt="izenak.eus logotipoa" style="padding-right: 5px;">
-        <router-link :to="{ name: 'home'}">
+        <img
+          src="/img/icons/favicon-16x16.png"
+          alt="izenak.eus logotipoa"
+          style="padding-right: 5px"
+        />
+        <router-link :to="{ name: 'home' }">
           <!--
-          --><span class="color--girl">i</span><!--
-          --><span class="color--boy">z</span><!--
-          --><span class="color--all">e</span><!--
-          --><span>n</span><!--
-          --><span>a</span><!--
-          --><span>k</span><!--
-          --><span>.</span><!--
-          --><span class=" font--small">e</span><!--
-          --><span class=" font--small">u</span><!--
-          --><span class=" font--small">s</span>
+          --><span class="color--girl">i</span
+          ><!--
+          --><span class="color--boy">z</span
+          ><!--
+          --><span class="color--all">e</span
+          ><!--
+          --><span>n</span
+          ><!--
+          --><span>a</span
+          ><!--
+          --><span>k</span
+          ><!--
+          --><span>.</span
+          ><!--
+          --><span class="font--small">e</span
+          ><!--
+          --><span class="font--small">u</span
+          ><!--
+          --><span class="font--small">s</span>
         </router-link>
       </h1>
       <Menu />
@@ -25,20 +38,27 @@
       </transition>
     </div>
     <footer role="contentinfo" class="footer flex">
-      <div class="font--smaller"><span class="footer__dev"><a class="footer__link" href="http://www.berriart.com">berriart</a><span>ek garatua</span></span></div>
+      <div class="font--smaller">
+        <span class="footer__dev"
+          ><a class="footer__link" href="http://www.berriart.com">berriart</a
+          ><span>ek garatua</span></span
+        >
+      </div>
       <div>
-        <router-link
-          class="footer__info"
-          :to="{ name: 'about'}"><Icon icon="icon-info" /><span class="pseudohidden">Honi buruz</span></router-link>
+        <router-link class="footer__info" :to="{ name: 'about' }"
+          ><Icon icon="icon-info" /><span class="pseudohidden"
+            >Honi buruz</span
+          ></router-link
+        >
       </div>
     </footer>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import Icon from './components/Icon.vue';
-import Menu from './components/Menu.vue';
+import { Component, Vue } from "vue-property-decorator"
+import Icon from "./components/Icon.vue"
+import Menu from "./components/Menu.vue"
 
 @Component({
   components: {

@@ -22,7 +22,12 @@
     "qa": "pnpm run prettier && pnpm run eslint"
   },
   "dependencies": {
-    "preact": "^10.10.6"
+    "@fontsource/montserrat": "^4.5.12",
+    "@fontsource/raleway": "^4.5.10",
+    "@fontsource/slabo-27px": "^4.5.9",
+    "preact": "^10.10.6",
+    "preact-router": "^4.1.0",
+    "reset-css": "^5.0.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
