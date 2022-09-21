@@ -39,7 +39,7 @@ npm test
 
 Izenak.eus. Aurkitu izena zure seme-alabentzat.
 
-Copyright (C) 2019 Alberto Varela <alberto@berriart.com>
+Copyright (C) 2019-2022 Alberto Varela <alberto@berriart.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
