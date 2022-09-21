@@ -10,6 +10,7 @@
 	--allColor: #ec9e69;
 	--main-font: Raleway, sans-serif;
 	--secondary-font: "Slabo 27px", serif;
+	--title-font: Montserrat, serif;
 }
 
 *,
@@ -33,6 +34,7 @@ strong {
 
 p {
 	line-height: 1.4em;
+	margin-bottom: 1.2em;
 }
 
 html,

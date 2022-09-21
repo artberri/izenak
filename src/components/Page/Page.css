@@ -5,6 +5,7 @@
 	left: 0;
 	right: 0;
 	overflow: auto;
+	background: var(--whiteColor);
 }
 
 .page--out {
