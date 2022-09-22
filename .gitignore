@@ -7,10 +7,14 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Project
 node_modules
 dist
 dist-ssr
 *.local
+scraper/env
+__pycache__
+public/izenak.json
 
 # Editor directories and files
 .vscode/*
