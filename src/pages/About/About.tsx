@@ -4,9 +4,7 @@ import "./About.css"
 export function About() {
 	return (
 		<main role="main" class="about">
-			<div class="flex flex--v">
-				<PageTitle>Honi buruz</PageTitle>
-			</div>
+			<PageTitle>Honi buruz</PageTitle>
 			<div class="about__content">
 				<p>
 					<strong>Izenak.eus</strong> webgunea/aplikazioa{" "}

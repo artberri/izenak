@@ -7,6 +7,7 @@ import { Header } from "./components/Header/Header"
 import { Page } from "./components/Page/Page"
 import { About } from "./pages/About/About"
 import { Home } from "./pages/Home/Home"
+import { Izenak } from "./pages/Izenak/Izenak"
 
 export function App() {
 	const [previousEl, setPreviousEl] = useState<ComponentChildren | null>(null)
@@ -36,6 +37,15 @@ export function App() {
 				>
 					<Page path="/">
 						<Home />
+					</Page>
+					<Page path="/neskak">
+						<Izenak pageFilter="female" />
+					</Page>
+					<Page path="/mutilak">
+						<Izenak pageFilter="male" />
+					</Page>
+					<Page path="/guztiak">
+						<Izenak pageFilter="all" />
 					</Page>
 					<Page path="/honiburuz">
 						<About />
