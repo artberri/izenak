@@ -1,0 +1,40 @@
+.nametag {
+	display: block;
+	margin: 0.2rem;
+	padding: 0.5rem 0.8rem 0.3rem;
+	font-size: 1.3rem;
+	color: var(--whiteColor);
+	border-radius: 0.3rem;
+	background: transparent;
+	font-family: var(--secondary-font);
+}
+
+.nametag--male {
+	border: 1px solid var(--boyColor);
+	color: var(--boyColor);
+}
+
+.nametag--male.active {
+	color: var(--whiteColor);
+	background: var(--boyColor);
+}
+
+.nametag--female {
+	border: 1px solid var(--girlColor);
+	color: var(--girlColor);
+}
+
+.nametag--female.active {
+	color: var(--whiteColor);
+	background: var(--girlColor);
+}
+
+.nametag--neutral {
+	border: 1px solid var(--allColor);
+	color: var(--allColor);
+}
+
+.nametag--neutral.active {
+	color: var(--whiteColor);
+	background: var(--allColor);
+}

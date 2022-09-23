@@ -1,0 +1,50 @@
+.loader {
+	display: inline-block;
+	position: relative;
+	width: 6rem;
+	height: 6rem;
+}
+.loader::before,
+.loader::after {
+	display: block;
+	content: " ";
+	position: absolute;
+	border: 4px solid var(--girlColor);
+	opacity: 1;
+	border-radius: 50%;
+	animation: loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.loader::after {
+	animation-delay: -0.5s;
+}
+
+@keyframes loader {
+	0% {
+		top: 3rem;
+		left: 3rem;
+		width: 0;
+		height: 0;
+		opacity: 0;
+	}
+	4.9% {
+		top: 3rem;
+		left: 3rem;
+		width: 0;
+		height: 0;
+		opacity: 0;
+	}
+	5% {
+		top: 3rem;
+		left: 3rem;
+		width: 0;
+		height: 0;
+		opacity: 1;
+	}
+	100% {
+		top: 0px;
+		left: 0px;
+		width: 6rem;
+		height: 6rem;
+		opacity: 0;
+	}
+}

@@ -15,7 +15,7 @@ export function Page({ children, route, slide }: PageProps) {
 	return (
 		<CSSTransition
 			in={isRoute(route)}
-			duration={2000}
+			duration={500}
 			classNames={{
 				appear: `page ${slideClass}`,
 				appearActive: `page ${slideClass}`,

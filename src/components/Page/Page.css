@@ -11,7 +11,7 @@
 }
 
 .page--in {
-	animation: scaleUp 2000ms forwards;
+	animation: scaleUp 500ms forwards;
 }
 
 @keyframes scaleUp {
@@ -26,7 +26,7 @@
 }
 
 .page--out {
-	animation: scaleDown 2000ms forwards;
+	animation: scaleDown 500ms forwards;
 }
 
 @keyframes scaleDown {
@@ -45,7 +45,7 @@
 }
 
 .page--slide.page--out {
-	animation: slideOut 2000ms forwards;
+	animation: slideOut 500ms forwards;
 }
 
 @keyframes slideOut {
@@ -58,7 +58,7 @@
 }
 
 .page--slide.page--in {
-	animation: slideIn 2000ms forwards;
+	animation: slideIn 500ms forwards;
 }
 
 @keyframes slideIn {

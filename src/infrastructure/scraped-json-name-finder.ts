@@ -82,7 +82,7 @@ const fetchNames = async () => {
 }
 
 const filterByGender = (gender?: Gender) => (name: Name) =>
-	!gender || name.gender === gender
+	!gender || name.gender === gender || name.gender === Gender.Neutral
 const filterBySearchTerm = (searchTerm?: string) => (name: Name) =>
 	!searchTerm || name.value.includes(searchTerm)
 const filterByMaxChars = (maxChars: number) => (name: Name) =>

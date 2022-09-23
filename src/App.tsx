@@ -4,7 +4,7 @@ import { Header } from "./components/Header/Header"
 import { Page } from "./components/Page/Page"
 import { About } from "./pages/About/About"
 import { Home } from "./pages/Home/Home"
-import { Izenak } from "./pages/Izenak/Izenak"
+import { Names } from "./pages/Names/Names"
 import { NavigationProvider, Route } from "./providers/NavigationProvider"
 import { Gender } from "./types/Gender"
 
@@ -17,13 +17,13 @@ export function App() {
 					<Home />
 				</Page>
 				<Page route={Route.FemaleNames}>
-					<Izenak gender={Gender.Female} />
+					<Names gender={Gender.Female} />
 				</Page>
 				<Page route={Route.MaleNames}>
-					<Izenak gender={Gender.Male} />
+					<Names gender={Gender.Male} />
 				</Page>
 				<Page route={Route.AllNames}>
-					<Izenak />
+					<Names />
 				</Page>
 				<Page route={Route.About}>
 					<About />
