@@ -1,3 +1,5 @@
+import { Route } from "../../providers/NavigationProvider"
+import { Link } from "../Link/Link"
 import "./Header.css"
 
 export function Header() {
@@ -9,7 +11,7 @@ export function Header() {
 					alt=""
 					style="padding-right: 5px"
 				/>
-				<a href="/">
+				<Link route={Route.Home}>
 					<span class="header__letter header__letter--girl">i</span>
 					<span class="header__letter header__letter--boy">z</span>
 					<span class="header__letter header__letter--all">e</span>
@@ -20,7 +22,7 @@ export function Header() {
 					<span class="header__letter header__letter--small">e</span>
 					<span class="header__letter header__letter--small">u</span>
 					<span class="header__letter header__letter--small">s</span>
-				</a>
+				</Link>
 			</h1>
 		</header>
 	)

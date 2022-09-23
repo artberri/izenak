@@ -6,9 +6,9 @@ import "@fontsource/slabo-27px"
 import { render } from "preact"
 import "reset-css"
 import { App } from "./App"
-import { DependencyInjectionContext } from "./contexts/DependencyInjectionContext"
-import { appBuilder } from "./dependency-injection"
+import { appContainerBuilder } from "./dependency-injection"
 import "./index.css"
+import { DependencyInjectionProvider } from "./providers/DependencyInjectionProvider"
 
 const app = document.getElementById("app")
 if (!app) {
@@ -16,8 +16,8 @@ if (!app) {
 }
 
 render(
-	<DependencyInjectionContext.Provider value={appBuilder.build()}>
+	<DependencyInjectionProvider container={appContainerBuilder.build()}>
 		<App />
-	</DependencyInjectionContext.Provider>,
+	</DependencyInjectionProvider>,
 	app
 )

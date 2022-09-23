@@ -15,7 +15,7 @@ specifiers:
   eslint-plugin-react: ^7.31.8
   eslint-plugin-react-hooks: ^4.6.0
   preact: ^10.10.6
-  preact-router: ^4.1.0
+  preact-transitioning: ^1.3.2
   prettier: 2.7.1
   ramda: ^0.28.0
   reflect-metadata: ^0.1.13
@@ -29,7 +29,7 @@ dependencies:
   '@fontsource/slabo-27px': 4.5.9
   diod: 1.0.2
   preact: 10.11.0
-  preact-router: 4.1.0_preact@10.11.0
+  preact-transitioning: 1.3.2_preact@10.11.0
   ramda: 0.28.0
   reflect-metadata: 0.1.13
   reset-css: 5.0.1
@@ -1982,10 +1982,10 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /preact-router/4.1.0_preact@10.11.0:
-    resolution: {integrity: sha512-y1w2YvVpKAju9FMV+fAVR1NpH4MW5q07BZrziMZeg6F/rGJ9KvLUZtjOqsy2I8fDYiX36AM1AQTXIIK3jigBhA==}
+  /preact-transitioning/1.3.2_preact@10.11.0:
+    resolution: {integrity: sha512-PiEKfoFO6iRDNVFOU9t3hLQWc3eYf+80gqnrjEqe38Bw/mEidvDB4idSl8aSPMRZeob/Q21/b98xjpoVR8ZPow==}
     peerDependencies:
-      preact: '>=10'
+      preact: ^10.0.0
     dependencies:
       preact: 10.11.0
     dev: false

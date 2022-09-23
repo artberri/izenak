@@ -1,4 +1,6 @@
+import { Route } from "../../providers/NavigationProvider"
 import { InfoIcon } from "../InfoIcon/InfoIcon"
+import { Link } from "../Link/Link"
 import "./Footer.css"
 
 export function Footer() {
@@ -9,6 +11,8 @@ export function Footer() {
 					class="footer__link"
 					href="https://www.albertovarela.net"
 					title="Aplikazio honen egilearen webgunea"
+					target="_blank"
+					rel="noreferrer noopener"
 				>
 					Alberto Varelak
 				</a>
@@ -16,9 +20,9 @@ export function Footer() {
 				<span>garatua</span>
 			</div>
 			<div>
-				<a href="/honiburuz">
+				<Link route={Route.About}>
 					<InfoIcon title="Honi buruz" />
-				</a>
+				</Link>
 			</div>
 		</footer>
 	)

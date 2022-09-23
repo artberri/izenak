@@ -1,0 +1,21 @@
+.link {
+	border: 0;
+	cursor: pointer;
+	color: var(--mainColor);
+	background: none;
+	border-style: none;
+	box-sizing: content-box;
+	cursor: pointer;
+	display: inline;
+	font: inherit;
+	height: auto;
+	padding: 0;
+	perspective-origin: 0 0;
+	text-align: start;
+	text-decoration: none;
+	transform-origin: 0 0;
+	width: auto;
+	-moz-appearance: none;
+	-webkit-logical-height: 1em;
+	-webkit-logical-width: auto;
+}

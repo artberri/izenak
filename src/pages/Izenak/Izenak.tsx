@@ -1,6 +1,6 @@
 import { useEffect, useState } from "preact/hooks"
 import { PageTitle } from "../../components/PageTitle/PageTitle"
-import { useService } from "../../hooks/useService"
+import { useService } from "../../providers/DependencyInjectionProvider"
 import { NameFinder } from "../../services/name-finder"
 import { Filter } from "../../types/Filter"
 import { Gender } from "../../types/Gender"

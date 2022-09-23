@@ -1,26 +1,28 @@
+import { Link } from "../../components/Link/Link"
+import { Route } from "../../providers/NavigationProvider"
 import "./Home.css"
 
 export function Home() {
 	return (
 		<nav class="home" role="navigation" aria-label="Menu nagusia">
-			<a
+			<Link
 				class="home__link home__link--girl flex flex--center font--slabo"
-				href="/neskak"
+				route={Route.FemaleNames}
 			>
 				Nesken izenak
-			</a>
-			<a
+			</Link>
+			<Link
 				class="home__link home__link--boy flex flex--center font--slabo"
-				href="/mutilak"
+				route={Route.MaleNames}
 			>
 				Mutilen izenak
-			</a>
-			<a
+			</Link>
+			<Link
 				class="home__link home__link--all flex flex--center font--slabo"
-				href="/guztiak"
+				route={Route.AllNames}
 			>
 				Izen guztiak
-			</a>
+			</Link>
 		</nav>
 	)
 }
