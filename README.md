@@ -8,31 +8,25 @@ Web Application to find Basque names. Deployed at [https://izenak.eus/](https://
 ## Project setup
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 
 ```bash
-npm run serve
+pnpm run dev
 ```
 
 ### Compiles and minifies for production
 
 ```bash
-npm run build
+npnpmpm run build
 ```
 
-### Lints and fixes files
+### QA (static code analysis and tests)
 
 ```bash
-npm run lint
-```
-
-### Run the unit tests
-
-```bash
-npm test
+pnpm run qa
 ```
 
 ## Scraper
@@ -65,7 +59,7 @@ deativate
 
 ## License
 
-Izenak.eus. Aurkitu izena zure seme-alabentzat.
+izenak.eus. Aurkitu izena zure seme-alabentzat.
 
 Copyright (C) 2019-2022 Alberto Varela <alberto@berriart.com>
 
@@ -73,7 +67,3 @@ This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
-
-```
-
-```
