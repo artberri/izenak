@@ -8,6 +8,7 @@ import { Page } from "./components/Page/Page"
 import { About } from "./pages/About/About"
 import { Home } from "./pages/Home/Home"
 import { Izenak } from "./pages/Izenak/Izenak"
+import { Gender } from "./types/Gender"
 
 export function App() {
 	const [previousEl, setPreviousEl] = useState<ComponentChildren | null>(null)
@@ -30,22 +31,20 @@ export function App() {
 								</div>
 							)
 						}
-						if (e.current) {
-							setPreviousEl(e.current.props.children)
-						}
+						setPreviousEl(e.current.props.children)
 					}}
 				>
 					<Page path="/">
 						<Home />
 					</Page>
 					<Page path="/neskak">
-						<Izenak pageFilter="female" />
+						<Izenak gender={Gender.Female} />
 					</Page>
 					<Page path="/mutilak">
-						<Izenak pageFilter="male" />
+						<Izenak gender={Gender.Male} />
 					</Page>
 					<Page path="/guztiak">
-						<Izenak pageFilter="all" />
+						<Izenak />
 					</Page>
 					<Page path="/honiburuz">
 						<About />

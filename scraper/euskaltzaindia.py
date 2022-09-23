@@ -5,7 +5,7 @@ start_urls = []
 baseurl = 'https://www.euskaltzaindia.eus/index.php?option=com_ecoeoda&Itemid=469&task=bilaketa&view=bilaketa&lang=eu&query=%2A%3A%2A&mota=izenak&sexua_facet[]='
 nora = 2480 # Review next time
 
-for sexua in range(1, 3):
+for sexua in range(1, 4):
     url = baseurl + str(sexua) + '&nondik='
     for i in range(0, nora, 10):
         start_urls.append(url + str(i))

@@ -25,12 +25,16 @@
     "@fontsource/montserrat": "^4.5.12",
     "@fontsource/raleway": "^4.5.10",
     "@fontsource/slabo-27px": "^4.5.9",
+    "diod": "^1.0.2",
     "preact": "^10.10.6",
     "preact-router": "^4.1.0",
+    "ramda": "^0.28.0",
+    "reflect-metadata": "^0.1.13",
     "reset-css": "^5.0.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
+    "@types/ramda": "^0.28.15",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
     "eslint": "^8.23.1",
