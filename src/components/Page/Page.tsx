@@ -6,9 +6,10 @@ import "./Page.css"
 export interface PageProps extends WithChildren {
 	route: Route
 	slide?: boolean
+	onEntered?: () => void
 }
 
-export function Page({ children, route, slide }: PageProps) {
+export function Page({ children, route, slide, onEntered }: PageProps) {
 	const { isRoute } = useNavigation()
 	const slideClass = slide ? "page--slide" : ""
 
@@ -28,6 +29,7 @@ export function Page({ children, route, slide }: PageProps) {
 				exitDone: `page ${slideClass} page--out`,
 			}}
 			key={route}
+			onEntered={onEntered}
 		>
 			<div>{children}</div>
 		</CSSTransition>

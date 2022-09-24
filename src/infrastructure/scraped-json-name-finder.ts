@@ -86,9 +86,9 @@ const filterByGender = (gender?: Gender) => (name: Name) =>
 const filterBySearchTerm = (searchTerm?: string) => (name: Name) =>
 	!searchTerm || name.value.includes(searchTerm)
 const filterByMaxChars = (maxChars: number) => (name: Name) =>
-	maxChars < 1 || name.value.length < maxChars
+	maxChars < 1 || name.value.length <= maxChars
 const filterByMinChars = (minChars: number) => (name: Name) =>
-	minChars < 1 || name.value.length > minChars
+	minChars < 1 || name.value.length >= minChars
 const filterByOnlyBasque = (onlyBasque: boolean) => (name: Name) =>
 	!onlyBasque || !name.translations
 const filterByStartsWith = (startsWith: string) => (name: Name) =>

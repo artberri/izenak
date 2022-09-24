@@ -1,0 +1,22 @@
+.filterslider {
+	width: 100%;
+	--mdc-theme-primary: var(--allColor);
+}
+
+.filterslider__label {
+	width: 100%;
+	display: block;
+	padding-bottom: 0.2rem;
+	font-size: 0.8em;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 0.2rem;
+}
+
+.filterslider__slider .mdc-slider__thumb-knob {
+	opacity: 1;
+	transition: all 100ms;
+}
+
+.filterslider__slider--loading .mdc-slider__thumb-knob {
+	opacity: 0;
+}

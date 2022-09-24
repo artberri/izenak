@@ -18,7 +18,7 @@ export function FilterInput({
 	onChange,
 }: FilterInputProps) {
 	return (
-		<section class="filterinput" key={name}>
+		<div class="filterinput" key={name}>
 			<label class="filterinput__label" for={`filterinput-${name}`}>
 				{label}
 			</label>
@@ -28,13 +28,15 @@ export function FilterInput({
 					id={`filterinput-${name}`}
 					name={name}
 					value={value}
-					class={`filterinput__input ${icon ? "filterinput__input--withicon" : ""}`}
+					class={`filterinput__input ${
+						icon ? "filterinput__input--withicon" : ""
+					}`}
 					type="text"
 					autocomplete="off"
-					onChange={(e) => onChange((e.target as HTMLInputElement).value)}
+					onInput={(e) => onChange((e.target as HTMLInputElement).value)}
 					onKeyUp={(e) => onChange((e.target as HTMLInputElement).value)}
 				/>
 			</div>
-		</section>
+		</div>
 	)
 }
