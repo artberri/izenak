@@ -26,7 +26,7 @@ export interface IzenakProps {
 export function Names({ gender }: IzenakProps) {
 	const [loading, setLoading] = useState(true)
 	const [names, setNames] = useState<Name[]>([])
-	const [filter] = useState<Filter>({
+	const [filter, setFilter] = useState<Filter>({
 		endsWith: "",
 		maxChars: 0,
 		minChars: 0,
@@ -43,14 +43,14 @@ export function Names({ gender }: IzenakProps) {
 			.find(filter, 0, namesPerPage)
 			.then((foundNames) => setNames(foundNames))
 			.finally(() => setLoading(false))
-	}, [filter, nameFinder, names])
+	}, [filter, nameFinder])
 
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
 			<div className="names__container">
 				{loading && <NameLoader />}
-				{!loading && <NameFilter />}
+				{!loading && <NameFilter filter={filter} setFilter={setFilter} />}
 				{!loading && (
 					<div class="names__cloud">
 						{names.length === 0 && (

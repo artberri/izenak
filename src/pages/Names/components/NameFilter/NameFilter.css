@@ -1,0 +1,30 @@
+.namefilter {
+	display: flex;
+	flex-direction: column;
+	padding: 1.3rem 1.3rem 0em;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+}
+
+.namefilter__container {
+	height: 20rem;
+	background: var(--whiteColor);
+	border-radius: 0.25rem;
+	padding: 1.3rem 1.3rem 0em;
+	position: relative;
+	text-align: left;
+	box-shadow: 0px 2px 5px 0px rgba(214, 214, 214, 1);
+	transition: all 0.3s;
+	width: 100%;
+	overflow: hidden;
+}
+
+.namefilter__field {
+	margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	gap: 1rem;
+}
