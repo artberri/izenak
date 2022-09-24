@@ -8,6 +8,8 @@ export interface FilterSliderProps {
 	label: string
 	min: number
 	max: number
+	start: number
+	end: number
 	onChange: (minValue: number, maxValue: number) => void
 }
 
@@ -16,34 +18,48 @@ export function FilterSlider({
 	label,
 	min,
 	max,
+	start: startValue,
+	end: endValue,
 	onChange,
 }: FilterSliderProps) {
 	const [loading, setLoading] = useState(true)
+	const [slider, setSlider] = useState<MDCSlider | null>(null)
 	const ref = useRef<HTMLDivElement>(null)
 	const startInputRef = useRef<HTMLInputElement>(null)
 	const endInputRef = useRef<HTMLInputElement>(null)
 
+	const start = startValue === 0 ? min : startValue
+	const end = endValue === 0 ? max : endValue
+
 	useEffect(() => {
-		let slider: MDCSlider
-		let callback: () => void
+		if (!startInputRef.current || !endInputRef.current) {
+			return
+		}
+
+		startInputRef.current.setAttribute("value", start.toString())
+		endInputRef.current.setAttribute("value", end.toString())
+		slider?.setValueStart(start)
+		slider?.setValue(end)
+	}, [start, end, slider])
+
+	useEffect(() => {
+		let callback: (() => void) | undefined
 		setTimeout(() => {
 			setLoading(false)
-			if (!ref.current || !startInputRef.current || !endInputRef.current) {
+			if (!ref.current) {
 				return
 			}
 
-			startInputRef.current.setAttribute("value", min.toString())
-			endInputRef.current.setAttribute("value", max.toString())
-			slider = new MDCSlider(ref.current)
-			callback = () => onChange(slider.getValueStart(), slider.getValue())
+			const s = new MDCSlider(ref.current)
+			callback = () => onChange(s.getValueStart(), s.getValue())
 
-			slider.listen("MDCSlider:change", callback)
-			slider.listen("MDCSlider:input", callback)
+			s.listen("MDCSlider:change", callback)
+			s.listen("MDCSlider:input", callback)
+			setSlider(s)
 		}, 510)
 
 		return () => {
-			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-			if (!slider) {
+			if (!slider || !callback) {
 				return
 			}
 
@@ -72,6 +88,7 @@ export function FilterSlider({
 					type="range"
 					min={min}
 					max={max}
+					value={start}
 					step="1"
 					name={`filterslider-start-${name}`}
 					aria-label={`Gutxienezko ${label}`}
@@ -82,6 +99,7 @@ export function FilterSlider({
 					type="range"
 					min={min}
 					max={max}
+					value={end}
 					step="1"
 					name={`filterslider-end-${name}`}
 					aria-label={`Gehienezko ${label}`}

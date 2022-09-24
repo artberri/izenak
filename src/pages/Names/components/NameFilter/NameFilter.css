@@ -9,7 +9,7 @@
 }
 
 .namefilter__container {
-	height: 20rem;
+	height: 20.5rem;
 	background: var(--whiteColor);
 	border-radius: 0.25rem;
 	padding: 1.3rem 1.3rem 0em;
@@ -27,4 +27,12 @@
 	justify-content: space-between;
 	width: 100%;
 	gap: 1rem;
+}
+
+.namefilter__reset {
+	cursor: pointer;
+	text-decoration: underline;
+	color: var(--mainColor);
+	display: block;
+	margin: 0 auto;
 }

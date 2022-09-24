@@ -24,9 +24,7 @@ export interface IzenakProps {
 }
 
 export function Names({ gender }: IzenakProps) {
-	const [loading, setLoading] = useState(true)
-	const [names, setNames] = useState<Name[]>([])
-	const [filter, setFilter] = useState<Filter>({
+	const defaultFilter = {
 		endsWith: "",
 		maxChars: 0,
 		minChars: 0,
@@ -35,7 +33,11 @@ export function Names({ gender }: IzenakProps) {
 		sort: false,
 		startsWith: "",
 		gender,
-	})
+	}
+
+	const [loading, setLoading] = useState(true)
+	const [names, setNames] = useState<Name[]>([])
+	const [filter, setFilter] = useState<Filter>(() => defaultFilter)
 
 	const nameFinder = useService(NameFinder)
 	useEffect(() => {
@@ -45,12 +47,16 @@ export function Names({ gender }: IzenakProps) {
 			.finally(() => setLoading(false))
 	}, [filter, nameFinder])
 
+	const reset = () => setFilter(defaultFilter)
+
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
 			<div className="names__container">
 				{loading && <NameLoader />}
-				{!loading && <NameFilter filter={filter} setFilter={setFilter} />}
+				{!loading && (
+					<NameFilter filter={filter} setFilter={setFilter} reset={reset} />
+				)}
 				{!loading && (
 					<div class="names__cloud">
 						{names.length === 0 && (

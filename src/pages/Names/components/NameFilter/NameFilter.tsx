@@ -1,42 +1,58 @@
 import { SearchIcon } from "../../../../components/SearchIcon/SearchIcon"
 import { Filter } from "../../../../types/Filter"
+import { FilterCheckbox } from "./components/FilterCheckbox/FilterCheckbox"
 import { FilterInput } from "./components/FilterInput/FilterInput"
 import { FilterSlider } from "./components/FilterSlider/FilterSlider"
 import "./NameFilter.css"
 
 export interface NameFilterProps {
 	filter: Filter
-	setFilter: (f: Filter) => void
+	setFilter: (c: (previousValue: Filter) => Filter) => void
+	reset: () => void
 }
 
-export function NameFilter({ filter, setFilter }: NameFilterProps) {
+export function NameFilter({ filter, setFilter, reset }: NameFilterProps) {
 	const onSerchTermChanged = (searchTerm: string) => {
-		setFilter({
-			...filter,
+		setFilter((previousValue) => ({
+			...previousValue,
 			searchTerm,
-		})
+		}))
 	}
 
 	const onStartsWithChanged = (startsWith: string) => {
-		setFilter({
-			...filter,
+		setFilter((previousValue) => ({
+			...previousValue,
 			startsWith,
-		})
+		}))
 	}
 
 	const onEndsWithChanged = (endsWith: string) => {
-		setFilter({
-			...filter,
+		setFilter((previousValue) => ({
+			...previousValue,
 			endsWith,
-		})
+		}))
 	}
 
 	const onCharsRangeChanged = (minValue: number, maxValue: number) => {
-		setFilter({
-			...filter,
+		setFilter((previousValue) => ({
+			...previousValue,
 			maxChars: maxValue,
 			minChars: minValue,
-		})
+		}))
+	}
+
+	const onOnlyBasqueChanged = () => {
+		setFilter((previousValue) => ({
+			...filter,
+			onlyBasque: !previousValue.onlyBasque,
+		}))
+	}
+
+	const onSortChanged = () => {
+		setFilter((previousValue) => ({
+			...filter,
+			sort: !previousValue.sort,
+		}))
 	}
 
 	return (
@@ -65,15 +81,37 @@ export function NameFilter({ filter, setFilter }: NameFilterProps) {
 						onChange={onEndsWithChanged}
 					/>
 				</div>
-
 				<div class="namefilter__field">
 					<FilterSlider
 						min={2}
 						max={23}
+						start={filter.minChars}
+						end={filter.maxChars}
 						label="Letra kopurua"
 						name="char-length"
 						onChange={onCharsRangeChanged}
 					/>
+				</div>
+				<div class="namefilter__field">
+					<FilterCheckbox
+						label="Euskal jatorrizko izenak soilik"
+						name="onlybasque"
+						checked={filter.onlyBasque}
+						onChange={onOnlyBasqueChanged}
+					/>
+				</div>
+				<div class="namefilter__field">
+					<FilterCheckbox
+						label="Izenak alfabetikoki ordenatu"
+						name="alphabeticalorder"
+						checked={filter.sort}
+						onChange={onSortChanged}
+					/>
+				</div>
+				<div class="namefilter__field">
+					<button class="namefilter__reset" onClick={reset}>
+						Kendu iragazkiak
+					</button>
 				</div>
 			</div>
 		</section>
