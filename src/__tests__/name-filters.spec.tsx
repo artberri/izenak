@@ -159,4 +159,46 @@ describe("Name filters", () => {
 		expect(nameTags[4]?.innerHTML).toBe("Julen")
 		expect(nameTags[5]?.innerHTML).toBe("Leize")
 	})
+
+	test("can reset filters", async () => {
+		// Arrange
+		const toMatchNames = [
+			NameBuilder.aRandomName()
+				.withName("atriisss")
+				.withTranslations("")
+				.build(),
+			NameBuilder.aRandomName().withName("alis").withTranslations("").build(),
+		]
+		const otherNames = [
+			NameBuilder.aRandomName().withName("ails").withTranslations("t1").build(),
+			NameBuilder.aRandomName()
+				.withName("atrisss")
+				.withTranslations("t2")
+				.build(),
+			NameBuilder.aRandomName().withName("otro").build(),
+		]
+		await arrange([...toMatchNames, ...otherNames])
+		await userEvent.type(screen.getByLabelText("Bilaketa-terminoa"), "i")
+		await userEvent.type(screen.getByLabelText("Hasten da"), "a")
+		await userEvent.type(screen.getByLabelText("Amaitzen da"), "s")
+		await userEvent.click(
+			screen.getByLabelText("Euskal jatorrizko izenak soilik")
+		)
+		await userEvent.click(screen.getByLabelText("Izenak alfabetikoki ordenatu"))
+		const nameTags = screen.queryAllByTestId("nametag")
+		expect(nameTags).toHaveLength(toMatchNames.length)
+		expect(nameTags[0]?.innerHTML).toBe("alis")
+		expect(nameTags[1]?.innerHTML).toBe("atriisss")
+		for (const name of otherNames) {
+			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+		}
+
+		// Act
+		await userEvent.click(screen.getByText("Kendu iragazkiak"))
+
+		// Assert
+		for (const name of [...toMatchNames, ...otherNames]) {
+			expect(screen.getByText(name.name)).toBeInTheDocument()
+		}
+	})
 })
