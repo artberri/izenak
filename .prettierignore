@@ -5,3 +5,4 @@ package.json
 pnpm-lock.yaml
 public/izenak.json
 scraper/env
+coverage/

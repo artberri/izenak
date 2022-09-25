@@ -16,6 +16,7 @@ export function NameTag({ name }: NameTagProps) {
 
 	return (
 		<button
+			data-testid="nametag"
 			class={`nametag ${genderClass(name.gender)}`}
 			onClick={() => undefined}
 		>

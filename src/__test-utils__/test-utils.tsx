@@ -4,6 +4,7 @@ import "reflect-metadata"
 import { App } from "../App"
 import { getDependencyInjectionContainer } from "../dependency-injection"
 import { MockNameGetter } from "../infrastructure/mock-name-getter"
+import { JsonName } from "../infrastructure/name-getter"
 import { DependencyInjectionProvider } from "../providers/DependencyInjectionProvider"
 import { WithChildren } from "../types/WithChildren"
 
@@ -11,13 +12,8 @@ const nameGetterMock = new MockNameGetter()
 
 const { click } = userEvent
 
-beforeEach(() => {
-	//jest.useFakeTimers()
-})
-
 afterEach(() => {
 	nameGetterMock.reset()
-	//jest.useRealTimers()
 })
 
 const AllTheProviders = ({ children }: WithChildren) => {
@@ -35,5 +31,7 @@ const AllTheProviders = ({ children }: WithChildren) => {
 const customRender = (options?: Omit<RenderOptions, "wrapper">) =>
 	render(<App />, { wrapper: AllTheProviders, ...options })
 
+const setNamesForTest = (names: JsonName[]) => nameGetterMock.setAll(names)
+
 export * from "@testing-library/preact"
-export { customRender as render, screen, click, waitFor }
+export { customRender as render, screen, click, waitFor, setNamesForTest }

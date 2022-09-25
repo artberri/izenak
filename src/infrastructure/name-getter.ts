@@ -1,4 +1,4 @@
-type JsonNameGender = "epizenoa" | "gizonezkoa" | "emakumezkoa"
+export type JsonNameGender = "epizenoa" | "gizonezkoa" | "emakumezkoa"
 
 export interface JsonName {
 	name: string

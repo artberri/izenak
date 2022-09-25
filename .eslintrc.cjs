@@ -19,7 +19,14 @@ module.exports = {
 	},
 	plugins: ["@typescript-eslint", "jsx-a11y"],
 	root: true,
-	ignorePatterns: ["/*.cjs", "vue/", "dist/", "src/*.d.ts", "vite.config.ts"],
+	ignorePatterns: [
+		"/*.cjs",
+		"vue/",
+		"dist/",
+		"src/*.d.ts",
+		"vite.config.ts",
+		"coverage/",
+	],
 	rules: {
 		"react/no-unknown-property": [0],
 		"@typescript-eslint/no-unused-vars": [2, { argsIgnorePattern: "^_" }],

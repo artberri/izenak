@@ -27,9 +27,9 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"paths": {
-			"test-utils": ["src/__test-utils__/test-utils"]
+			"test-utils": ["./src/__test-utils__/test-utils"]
 		}
 	},
-	"include": ["src"],
+	"include": ["src", "./jest-setup.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
