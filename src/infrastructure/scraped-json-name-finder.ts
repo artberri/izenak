@@ -14,6 +14,7 @@ import { NameFinder } from "../services/name-finder"
 import { Filter } from "../types/Filter"
 import { Gender } from "../types/Gender"
 import { Name } from "../types/Name"
+import { NameGetter } from "./name-getter"
 
 type JsonNameGender = "epizenoa" | "gizonezkoa" | "emakumezkoa"
 
@@ -68,19 +69,6 @@ const mapNames = map(
 	})
 )
 
-const fetchNames = async () => {
-	const response = await fetch("/izenak.json")
-	if (!response.ok) {
-		// eslint-disable-next-line no-console
-		console.error(response.status)
-		throw new Error(`Could not fetch name JSON. Error: ${response.status}`)
-	}
-
-	const names = (await response.json()) as JsonName[]
-
-	return mapNames(names)
-}
-
 const filterByGender = (gender?: Gender) => (name: Name) =>
 	!gender || name.gender === gender || name.gender === Gender.Neutral
 const filterBySearchTerm = (searchTerm?: string) => (name: Name) =>
@@ -126,6 +114,8 @@ export class ScrapedJsonNameFinder implements NameFinder {
 	private names: Name[] = []
 	private sortedNames: Name[] = []
 
+	public constructor(private readonly nameGetter: NameGetter) {}
+
 	public async find(
 		filter: Filter,
 		from: number,
@@ -140,7 +130,7 @@ export class ScrapedJsonNameFinder implements NameFinder {
 
 	private async getAllNames(sorted: boolean) {
 		if (this.names.length === 0) {
-			this.names = shuffle(await fetchNames())
+			this.names = shuffle(mapNames(await this.nameGetter.getAll()))
 			this.sortedNames = sortByName(this.names)
 		}
 

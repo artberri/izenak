@@ -15,6 +15,7 @@ dist-ssr
 scraper/env
 __pycache__
 public/izenak.json
+coverage/
 
 # Editor directories and files
 .vscode/*
