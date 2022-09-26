@@ -38,3 +38,10 @@
 	);
 	z-index: 1;
 }
+
+.names__showmore {
+	text-decoration: underline;
+	color: var(--mainColor);
+	font-size: 1.1rem;
+	padding: 0 2rem 2rem;
+}

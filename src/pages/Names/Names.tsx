@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks"
 import { always, cond, equals, T } from "ramda"
+import { Loader } from "../../components/Loader/Loader"
 import { PageTitle } from "../../components/PageTitle/PageTitle"
 import { useService } from "../../providers/DependencyInjectionProvider"
 import { NameFinder } from "../../services/name-finder"
@@ -38,22 +39,40 @@ export function Names({ gender }: IzenakProps) {
 	const [loading, setLoading] = useState(true)
 	const [names, setNames] = useState<Name[]>([])
 	const [filter, setFilter] = useState<Filter>(() => defaultFilter)
+	const [from, setFrom] = useState(0)
+	const [loadingMore, setLoadingMore] = useState(false)
+	const [showMoreButton, setShowMoreButton] = useState(false)
 
 	const nameFinder = useService(NameFinder)
 	useEffect(() => {
+		setFrom(0)
 		void nameFinder
 			.find(filter, 0, namesPerPage)
-			.then((foundNames) => setNames(foundNames))
+			.then((foundNames) => {
+				setNames(foundNames)
+				setFrom((prev) => prev + namesPerPage)
+				setShowMoreButton(foundNames.length === namesPerPage)
+			})
 			.finally(() => setLoading(false))
 	}, [filter, nameFinder])
 
 	const reset = () => setFilter(defaultFilter)
+	const showMore = () => {
+		setLoadingMore(true)
+		void nameFinder
+			.find(filter, from, namesPerPage)
+			.then((foundNames) => {
+				setNames((prev) => [...prev, ...foundNames])
+				setFrom((prev) => prev + namesPerPage)
+				setShowMoreButton(foundNames.length === namesPerPage)
+			})
+			.finally(() => setLoadingMore(false))
+	}
 
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
 			<div className="names__container">
-				{loading && <NameLoader />}
 				{!loading && (
 					<NameFilter filter={filter} setFilter={setFilter} reset={reset} />
 				)}
@@ -70,6 +89,15 @@ export function Names({ gender }: IzenakProps) {
 						))}
 					</div>
 				)}
+				{loading && <NameLoader />}
+				{showMoreButton &&
+					(loadingMore ? (
+						<Loader />
+					) : (
+						<button className="names__showmore" onClick={showMore}>
+							Gehiago ikusi
+						</button>
+					))}
 			</div>
 		</main>
 	)

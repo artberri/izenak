@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import userEvent from "@testing-library/user-event"
 import { render, screen, setNamesForTest, waitFor } from "test-utils"
 import { JsonName } from "../infrastructure/name-getter"
