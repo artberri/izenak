@@ -13,6 +13,7 @@ import { NameTag } from "./components/NameTag/NameTag"
 import "./Names.css"
 
 const namesPerPage = 100
+const minimizeFilterPixelScroll = 100
 
 const title = cond([
 	[equals<Gender | undefined>(Gender.Male), always("Mutilen izenak")],
@@ -37,6 +38,8 @@ export function Names({ gender }: IzenakProps) {
 	}
 
 	const [loading, setLoading] = useState(true)
+	const [minimizeFilter, setMinimizeFilter] = useState(false)
+	const [fixFilter, setFixFilter] = useState(false)
 	const [names, setNames] = useState<Name[]>([])
 	const [filter, setFilter] = useState<Filter>(() => defaultFilter)
 	const [from, setFrom] = useState(0)
@@ -46,6 +49,7 @@ export function Names({ gender }: IzenakProps) {
 	const nameFinder = useService(NameFinder)
 	useEffect(() => {
 		setFrom(0)
+		setMinimizeFilter(false)
 		void nameFinder
 			.find(filter, 0, namesPerPage)
 			.then((foundNames) => {
@@ -69,12 +73,26 @@ export function Names({ gender }: IzenakProps) {
 			.finally(() => setLoadingMore(false))
 	}
 
+	const onScroll = (e: Event) => {
+		const fix =
+			(e.target as HTMLDivElement).scrollTop > minimizeFilterPixelScroll
+		setFixFilter(fix)
+		setMinimizeFilter(fix)
+	}
+
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
-			<div className="names__container">
+			<div className="names__container" onScroll={onScroll}>
 				{!loading && (
-					<NameFilter filter={filter} setFilter={setFilter} reset={reset} />
+					<NameFilter
+						minimized={minimizeFilter}
+						fixed={fixFilter}
+						maximize={() => setMinimizeFilter(false)}
+						filter={filter}
+						setFilter={setFilter}
+						reset={reset}
+					/>
 				)}
 				{!loading && (
 					<div class="names__cloud">

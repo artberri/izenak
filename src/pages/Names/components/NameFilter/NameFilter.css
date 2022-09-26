@@ -8,6 +8,15 @@
 	left: 0;
 }
 
+.namefilter--fixed {
+	position: fixed;
+	top: 110px;
+}
+
+.namefilter--minimized {
+	width: auto;
+}
+
 .namefilter__container {
 	height: 20.5rem;
 	background: var(--whiteColor);
@@ -19,6 +28,25 @@
 	transition: all 0.3s;
 	width: 100%;
 	overflow: hidden;
+}
+
+.namefilter--minimized .namefilter__container {
+	height: 3rem;
+	width: 3rem;
+	border-radius: 1.5rem;
+	padding: 0;
+	background: var(--allColor);
+}
+
+.namefilter__toggle {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	cursor: pointer;
+	height: 3rem;
+	width: 3rem;
+	border-radius: 1.5rem;
+	color: var(--whiteColor);
 }
 
 .namefilter__field {

@@ -1,4 +1,4 @@
-import { SearchIcon } from "../../../../components/Icons/Icons"
+import { FilterIcon, SearchIcon } from "../../../../components/Icons/Icons"
 import { Filter } from "../../../../types/Filter"
 import { FilterCheckbox } from "./components/FilterCheckbox/FilterCheckbox"
 import { FilterInput } from "./components/FilterInput/FilterInput"
@@ -9,9 +9,19 @@ export interface NameFilterProps {
 	filter: Filter
 	setFilter: (c: (previousValue: Filter) => Filter) => void
 	reset: () => void
+	minimized: boolean
+	fixed: boolean
+	maximize: () => void
 }
 
-export function NameFilter({ filter, setFilter, reset }: NameFilterProps) {
+export function NameFilter({
+	filter,
+	setFilter,
+	reset,
+	minimized,
+	fixed,
+	maximize,
+}: NameFilterProps) {
 	const onSerchTermChanged = (searchTerm: string) => {
 		setFilter((previousValue) => ({
 			...previousValue,
@@ -55,64 +65,81 @@ export function NameFilter({ filter, setFilter, reset }: NameFilterProps) {
 		}))
 	}
 
+	let classes = "namefilter"
+	if (fixed) {
+		classes += " namefilter--fixed"
+	}
+	if (minimized) {
+		classes += " namefilter--minimized"
+	}
+
 	return (
-		<section role="search" class="namefilter">
+		<section role="search" class={classes}>
 			<div class="namefilter__container">
-				<div class="namefilter__field">
-					<FilterInput
-						name="search"
-						label="Bilaketa-terminoa"
-						icon={<SearchIcon />}
-						value={filter.searchTerm}
-						onChange={onSerchTermChanged}
-					/>
-				</div>
-				<div class="namefilter__field">
-					<FilterInput
-						name="start-words"
-						label="Hasten da"
-						value={filter.startsWith}
-						onChange={onStartsWithChanged}
-					/>
-					<FilterInput
-						name="end-words"
-						label="Amaitzen da"
-						value={filter.endsWith}
-						onChange={onEndsWithChanged}
-					/>
-				</div>
-				<div class="namefilter__field">
-					<FilterSlider
-						min={2}
-						max={23}
-						start={filter.minChars}
-						end={filter.maxChars}
-						label="Letra kopurua"
-						name="char-length"
-						onChange={onCharsRangeChanged}
-					/>
-				</div>
-				<div class="namefilter__field">
-					<FilterCheckbox
-						label="Euskal jatorrizko izenak soilik"
-						name="onlybasque"
-						checked={filter.onlyBasque}
-						onChange={onOnlyBasqueChanged}
-					/>
-				</div>
-				<div class="namefilter__field">
-					<FilterCheckbox
-						label="Izenak alfabetikoki ordenatu"
-						name="alphabeticalorder"
-						checked={filter.sort}
-						onChange={onSortChanged}
-					/>
-				</div>
-				<div class="namefilter__field">
-					<button class="namefilter__reset" onClick={reset}>
-						Kendu iragazkiak
+				{minimized && (
+					<button class="namefilter__toggle" onClick={maximize}>
+						<FilterIcon />
 					</button>
-				</div>
+				)}
+				{!minimized && (
+					<>
+						<div class="namefilter__field">
+							<FilterInput
+								name="search"
+								label="Bilaketa-terminoa"
+								icon={<SearchIcon />}
+								value={filter.searchTerm}
+								onChange={onSerchTermChanged}
+							/>
+						</div>
+						<div class="namefilter__field">
+							<FilterInput
+								name="start-words"
+								label="Hasten da"
+								value={filter.startsWith}
+								onChange={onStartsWithChanged}
+							/>
+							<FilterInput
+								name="end-words"
+								label="Amaitzen da"
+								value={filter.endsWith}
+								onChange={onEndsWithChanged}
+							/>
+						</div>
+						<div class="namefilter__field">
+							<FilterSlider
+								min={2}
+								max={23}
+								start={filter.minChars}
+								end={filter.maxChars}
+								label="Letra kopurua"
+								name="char-length"
+								onChange={onCharsRangeChanged}
+							/>
+						</div>
+						<div class="namefilter__field">
+							<FilterCheckbox
+								label="Euskal jatorrizko izenak soilik"
+								name="onlybasque"
+								checked={filter.onlyBasque}
+								onChange={onOnlyBasqueChanged}
+							/>
+						</div>
+						<div class="namefilter__field">
+							<FilterCheckbox
+								label="Izenak alfabetikoki ordenatu"
+								name="alphabeticalorder"
+								checked={filter.sort}
+								onChange={onSortChanged}
+							/>
+						</div>
+						<div class="namefilter__field">
+							<button class="namefilter__reset" onClick={reset}>
+								Kendu iragazkiak
+							</button>
+						</div>
+					</>
+				)}
 			</div>
 		</section>
 	)
