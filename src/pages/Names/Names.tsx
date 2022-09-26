@@ -1,6 +1,7 @@
-import { useEffect, useState } from "preact/hooks"
+import { useCallback, useEffect, useState } from "preact/hooks"
 import { always, cond, equals, T } from "ramda"
 import { Loader } from "../../components/Loader/Loader"
+import { NameCard } from "../../components/NameCard/NameCard"
 import { PageTitle } from "../../components/PageTitle/PageTitle"
 import { useService } from "../../providers/DependencyInjectionProvider"
 import { NameFinder } from "../../services/name-finder"
@@ -45,6 +46,7 @@ export function Names({ gender }: IzenakProps) {
 	const [from, setFrom] = useState(0)
 	const [loadingMore, setLoadingMore] = useState(false)
 	const [showMoreButton, setShowMoreButton] = useState(false)
+	const [selectedName, setSelectedName] = useState<Name | undefined>(undefined)
 
 	const nameFinder = useService(NameFinder)
 	useEffect(() => {
@@ -80,9 +82,12 @@ export function Names({ gender }: IzenakProps) {
 		setMinimizeFilter(fix)
 	}
 
+	const closeNameCard = useCallback(() => setSelectedName(undefined), [])
+
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
+			{selectedName && <NameCard name={selectedName} close={closeNameCard} />}
 			<div className="names__container" onScroll={onScroll}>
 				{!loading && (
 					<NameFilter
@@ -103,7 +108,11 @@ export function Names({ gender }: IzenakProps) {
 							</>
 						)}
 						{names.map((name) => (
-							<NameTag key={name.id} name={name} />
+							<NameTag
+								key={name.id}
+								name={name}
+								onClick={() => setSelectedName(name)}
+							/>
 						))}
 					</div>
 				)}

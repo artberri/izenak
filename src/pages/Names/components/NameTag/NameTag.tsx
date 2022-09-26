@@ -5,9 +5,10 @@ import "./NameTag.css"
 
 export interface NameTagProps {
 	name: Name
+	onClick: () => void
 }
 
-export function NameTag({ name }: NameTagProps) {
+export function NameTag({ name, onClick }: NameTagProps) {
 	const genderClass = cond([
 		[equals(Gender.Male), always("nametag--male")],
 		[equals(Gender.Female), always("nametag--female")],
@@ -18,7 +19,7 @@ export function NameTag({ name }: NameTagProps) {
 		<button
 			data-testid="nametag"
 			class={`nametag ${genderClass(name.gender)}`}
-			onClick={() => undefined}
+			onClick={onClick}
 		>
 			{name.value}
 		</button>
