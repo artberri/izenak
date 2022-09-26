@@ -1,5 +1,5 @@
 import { Route } from "../../providers/NavigationProvider"
-import { InfoIcon } from "../InfoIcon/InfoIcon"
+import { InfoIcon } from "../Icons/Icons"
 import { Link } from "../Link/Link"
 import "./Footer.css"
 

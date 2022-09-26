@@ -1,5 +1,5 @@
 import { WithChildren } from "../../types/WithChildren"
-import { BackIcon } from "../BackIcon/BackIcon"
+import { BackIcon } from "../Icons/Icons"
 import { Link } from "../Link/Link"
 import "./PageTitle.css"
 

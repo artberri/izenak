@@ -1,4 +1,4 @@
-import { WithChildren } from "../../types/WithChildren"
+import { WithChildren } from "../../../types/WithChildren"
 import "./Icon.css"
 
 export interface IconProps extends WithChildren {

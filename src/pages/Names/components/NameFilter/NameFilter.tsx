@@ -1,4 +1,4 @@
-import { SearchIcon } from "../../../../components/SearchIcon/SearchIcon"
+import { SearchIcon } from "../../../../components/Icons/Icons"
 import { Filter } from "../../../../types/Filter"
 import { FilterCheckbox } from "./components/FilterCheckbox/FilterCheckbox"
 import { FilterInput } from "./components/FilterInput/FilterInput"
