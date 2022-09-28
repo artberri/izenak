@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "preact/hooks"
+import { useCallback, useEffect, useMemo, useState } from "preact/hooks"
 import { always, cond, equals, T } from "ramda"
 import { Loader } from "../../components/Loader/Loader"
 import { NameCard } from "../../components/NameCard/NameCard"
@@ -46,7 +46,12 @@ export function Names({ gender }: IzenakProps) {
 	const [from, setFrom] = useState(0)
 	const [loadingMore, setLoadingMore] = useState(false)
 	const [showMoreButton, setShowMoreButton] = useState(false)
-	const [selectedName, setSelectedName] = useState<Name | undefined>(undefined)
+	const [selectedNameIndex, setSelectedNameIndex] = useState(-1)
+
+	const selectedName = useMemo(
+		() => (selectedNameIndex >= 0 ? names[selectedNameIndex] : undefined),
+		[names, selectedNameIndex]
+	)
 
 	const nameFinder = useService(NameFinder)
 	useEffect(() => {
@@ -82,12 +87,31 @@ export function Names({ gender }: IzenakProps) {
 		setMinimizeFilter(fix)
 	}
 
-	const closeNameCard = useCallback(() => setSelectedName(undefined), [])
+	const closeNameCard = useCallback(() => setSelectedNameIndex(-1), [])
+	const previousNameCard = useCallback(
+		() => setSelectedNameIndex(selectedNameIndex - 1),
+		[selectedNameIndex]
+	)
+	const nextNameCard = useCallback(
+		() => setSelectedNameIndex(selectedNameIndex + 1),
+		[selectedNameIndex]
+	)
 
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
-			{selectedName && <NameCard name={selectedName} close={closeNameCard} />}
+			{selectedName && (
+				<NameCard
+					name={selectedName}
+					close={closeNameCard}
+					onLeft={selectedNameIndex > 0 ? previousNameCard : undefined}
+					onRight={
+						selectedNameIndex >= 0 && selectedNameIndex < names.length - 1
+							? nextNameCard
+							: undefined
+					}
+				/>
+			)}
 			<div className="names__container" onScroll={onScroll}>
 				{!loading && (
 					<NameFilter
@@ -107,11 +131,11 @@ export function Names({ gender }: IzenakProps) {
 								<p>Aldatu iragazkiak izenak ikusteko.</p>
 							</>
 						)}
-						{names.map((name) => (
+						{names.map((name, index) => (
 							<NameTag
 								key={name.id}
 								name={name}
-								onClick={() => setSelectedName(name)}
+								onClick={() => setSelectedNameIndex(index)}
 							/>
 						))}
 					</div>

@@ -12,7 +12,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 6rem 3rem;
+	padding: 6rem 2rem;
 	z-index: 10;
 }
 
@@ -22,9 +22,11 @@
 	height: 100%;
 	width: 100%;
 	max-width: 40rem;
-	padding: 2rem;
 	box-shadow: 0px 5px 10px 0px rgba(200, 200, 200, 1);
 	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 .namecard__close {
@@ -46,6 +48,7 @@
 	font-family: var(--secondary-font);
 	font-size: 2rem;
 	padding: 0.5rem 0;
+	padding: 2rem 2rem 0;
 }
 
 .namecard--male .namecard__title {
@@ -58,4 +61,78 @@
 
 .namecard--neutral .namecard__title {
 	color: var(--allColor);
+}
+
+.namecard__controls {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 9rem;
+	min-height: 9rem;
+	padding: 0 2rem;
+}
+
+.namecard__navigation {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 1rem;
+	border: 3px solid var(--mainColor);
+	color: var(--mainColor);
+	cursor: pointer;
+}
+
+.namecard__navigation[disabled] {
+	opacity: 0.1;
+}
+
+.namecard__navigation--left {
+	padding-right: 8px;
+}
+
+.namecard__navigation--right {
+	padding-left: 6px;
+}
+
+.namecard__heart {
+	width: 4rem;
+	height: 4rem;
+	transition: all 100ms;
+	color: var(--mainColor);
+	opacity: 0.3;
+	cursor: pointer;
+}
+
+.namecard__selected {
+	width: 5rem;
+	height: 5rem;
+	opacity: 1;
+}
+
+.namecard--male .namecard__selected {
+	color: var(--boyColor);
+}
+
+.namecard--female .namecard__selected {
+	color: var(--girlColor);
+}
+
+.namecard--neutral .namecard__selected {
+	color: var(--allColor);
+}
+
+.namecard__info {
+	background: var(--mainColor);
+	color: var(--whiteColor);
+	flex-grow: 1;
+	padding: 2rem;
+	overflow-y: auto;
+}
+
+.namecard__subtitle {
+	font-size: 1.1rem;
+	font-weight: bold;
+	padding-bottom: 0.5rem;
 }
