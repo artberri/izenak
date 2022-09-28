@@ -42,10 +42,14 @@
 
 .page--slide {
 	z-index: 1;
-}
 
-.page--slide.page--out {
-	animation: slideOut 500ms forwards;
+	&.page--out {
+		animation: slideOut 500ms forwards;
+	}
+
+	&.page--in {
+		animation: slideIn 500ms forwards;
+	}
 }
 
 @keyframes slideOut {
@@ -55,10 +59,6 @@
 	100% {
 		transform: translateX(-100vw);
 	}
-}
-
-.page--slide.page--in {
-	animation: slideIn 500ms forwards;
 }
 
 @keyframes slideIn {

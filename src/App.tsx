@@ -1,7 +1,7 @@
 import "./App.css"
 import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
-import { NameCard } from "./components/NameCard/NameCard"
+import { NameCards } from "./components/NameCards/NameCards"
 import { Page } from "./components/Page/Page"
 import { About } from "./pages/About/About"
 import { Home } from "./pages/Home/Home"
@@ -31,7 +31,7 @@ export function App() {
 				</Page>
 			</div>
 			<Footer />
-			<NameCard.Container />
+			<NameCards.Container />
 		</NavigationProvider>
 	)
 }

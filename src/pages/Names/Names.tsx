@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from "preact/hooks"
+import { useEffect, useState } from "preact/hooks"
 import { always, cond, equals, T } from "ramda"
 import { Loader } from "../../components/Loader/Loader"
-import { NameCard } from "../../components/NameCard/NameCard"
+import { NameCards } from "../../components/NameCards/NameCards"
 import { PageTitle } from "../../components/PageTitle/PageTitle"
 import { useService } from "../../providers/DependencyInjectionProvider"
 import { NameFinder } from "../../services/name-finder"
@@ -46,11 +46,8 @@ export function Names({ gender }: IzenakProps) {
 	const [from, setFrom] = useState(0)
 	const [loadingMore, setLoadingMore] = useState(false)
 	const [showMoreButton, setShowMoreButton] = useState(false)
-	const [selectedNameIndex, setSelectedNameIndex] = useState(-1)
-
-	const selectedName = useMemo(
-		() => (selectedNameIndex >= 0 ? names[selectedNameIndex] : undefined),
-		[names, selectedNameIndex]
+	const [openedNameCard, setOpenedNameCard] = useState<Name | undefined>(
+		undefined
 	)
 
 	const nameFinder = useService(NameFinder)
@@ -87,31 +84,15 @@ export function Names({ gender }: IzenakProps) {
 		setMinimizeFilter(fix)
 	}
 
-	const closeNameCard = useCallback(() => setSelectedNameIndex(-1), [])
-	const previousNameCard = useCallback(
-		() => setSelectedNameIndex(selectedNameIndex - 1),
-		[selectedNameIndex]
-	)
-	const nextNameCard = useCallback(
-		() => setSelectedNameIndex(selectedNameIndex + 1),
-		[selectedNameIndex]
-	)
-
 	return (
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
-			{selectedName && (
-				<NameCard
-					name={selectedName}
-					close={closeNameCard}
-					onLeft={selectedNameIndex > 0 ? previousNameCard : undefined}
-					onRight={
-						selectedNameIndex >= 0 && selectedNameIndex < names.length - 1
-							? nextNameCard
-							: undefined
-					}
-				/>
-			)}
+			<NameCards
+				show={!!openedNameCard}
+				openedName={openedNameCard}
+				setOpenedName={setOpenedNameCard}
+				names={names}
+			/>
 			<div className="names__container" onScroll={onScroll}>
 				{!loading && (
 					<NameFilter
@@ -131,11 +112,11 @@ export function Names({ gender }: IzenakProps) {
 								<p>Aldatu iragazkiak izenak ikusteko.</p>
 							</>
 						)}
-						{names.map((name, index) => (
+						{names.map((name) => (
 							<NameTag
 								key={name.id}
 								name={name}
-								onClick={() => setSelectedNameIndex(index)}
+								onClick={() => setOpenedNameCard(name)}
 							/>
 						))}
 					</div>

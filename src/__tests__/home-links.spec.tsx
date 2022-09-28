@@ -1,10 +1,14 @@
 import userEvent from "@testing-library/user-event"
-import { uniqBy } from "ramda"
 import { render, screen, setNamesForTest, waitFor } from "test-utils"
 import { JsonName } from "../infrastructure/name-getter"
 import { NameBuilder } from "../__test-utils__/name-builder"
 
-const nameValue = (name: JsonName) => name.name
+const unique =
+	(base: number) =>
+	(name: JsonName, index: number): JsonName => ({
+		...name,
+		name: `${name.name}-${index + base}`,
+	})
 
 describe("Home links", () => {
 	let maleNames: JsonName[]
@@ -12,18 +16,15 @@ describe("Home links", () => {
 	let neutralNames: JsonName[]
 
 	beforeEach(() => {
-		maleNames = uniqBy(
-			nameValue,
-			Array.from({ length: 3 }, () => NameBuilder.aMaleName().build())
-		)
-		femaleNames = uniqBy(
-			nameValue,
-			Array.from({ length: 3 }, () => NameBuilder.aFemaleName().build())
-		)
-		neutralNames = uniqBy(
-			nameValue,
-			Array.from({ length: 3 }, () => NameBuilder.aNeutralName().build())
-		)
+		maleNames = Array.from({ length: 3 }, () =>
+			NameBuilder.aMaleName().build()
+		).map(unique(0))
+		femaleNames = Array.from({ length: 3 }, () =>
+			NameBuilder.aFemaleName().build()
+		).map(unique(3))
+		neutralNames = Array.from({ length: 3 }, () =>
+			NameBuilder.aNeutralName().build()
+		).map(unique(6))
 
 		setNamesForTest([...maleNames, ...femaleNames, ...neutralNames])
 	})

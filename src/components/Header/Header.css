@@ -7,11 +7,11 @@
 
 .header__title {
 	font-size: 2rem;
-}
 
-.header__title a {
-	text-decoration: none;
-	color: var(--mainColor);
+	& a {
+		text-decoration: none;
+		color: var(--mainColor);
+	}
 }
 
 .header__letter--boy {

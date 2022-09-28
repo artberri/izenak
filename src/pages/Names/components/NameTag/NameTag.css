@@ -13,29 +13,29 @@
 .nametag--male {
 	border: 1px solid var(--boyColor);
 	color: var(--boyColor);
-}
 
-.nametag--male.active {
-	color: var(--whiteColor);
-	background: var(--boyColor);
+	&.nametag--active {
+		color: var(--whiteColor);
+		background: var(--boyColor);
+	}
 }
 
 .nametag--female {
 	border: 1px solid var(--girlColor);
 	color: var(--girlColor);
-}
 
-.nametag--female.active {
-	color: var(--whiteColor);
-	background: var(--girlColor);
+	&.nametag--active {
+		color: var(--whiteColor);
+		background: var(--girlColor);
+	}
 }
 
 .nametag--neutral {
 	border: 1px solid var(--allColor);
 	color: var(--allColor);
-}
 
-.nametag--neutral.active {
-	color: var(--whiteColor);
-	background: var(--allColor);
+	&.nametag--active {
+		color: var(--whiteColor);
+		background: var(--allColor);
+	}
 }

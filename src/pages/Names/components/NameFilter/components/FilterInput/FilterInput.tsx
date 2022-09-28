@@ -1,5 +1,5 @@
 import { VNode } from "preact"
-import { IconProps } from "../../../../../../components/Icon/Icon"
+import { IconProps } from "../../../../../../components/Icons/Icon/Icon"
 import "./FilterInput.css"
 
 export interface FilterInputProps {
