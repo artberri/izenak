@@ -1,5 +1,4 @@
 import "./App.css"
-import { Footer } from "./components/Footer/Footer"
 import { Header } from "./components/Header/Header"
 import { NameCards } from "./components/NameCards/NameCards"
 import { Page } from "./components/Page/Page"
@@ -30,7 +29,6 @@ export function App() {
 					<About />
 				</Page>
 			</div>
-			<Footer />
 			<NameCards.Container />
 		</NavigationProvider>
 	)

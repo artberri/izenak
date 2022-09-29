@@ -1,4 +1,5 @@
 import { Route } from "../../providers/NavigationProvider"
+import { InfoIcon } from "../Icons/Icons"
 import { Link } from "../Link/Link"
 import "./Header.css"
 
@@ -24,6 +25,9 @@ export function Header() {
 					<span class="header__letter header__letter--small">s</span>
 				</Link>
 			</h1>
+			<Link route={Route.About}>
+				<InfoIcon title="Honi buruz" class="header__info" />
+			</Link>
 		</header>
 	)
 }

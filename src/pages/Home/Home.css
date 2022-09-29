@@ -29,4 +29,5 @@
 
 .home__link--all {
 	background: var(--allColor);
+	padding-bottom: 5rem;
 }

@@ -13,13 +13,11 @@ export const enum Route {
 export interface Navigation {
 	isRoute: (r: Route) => boolean
 	navigate: (r: Route) => void
-	back: () => void
 }
 
 const NavigationContext = createContext<Navigation>({
 	isRoute: () => false,
 	navigate: () => undefined,
-	back: () => undefined,
 })
 
 export function NavigationProvider({ children }: WithChildren) {
@@ -45,10 +43,8 @@ export function NavigationProvider({ children }: WithChildren) {
 		setRoute(r)
 	}, [])
 
-	const back = useCallback(() => window.history.back(), [])
-
 	return (
-		<NavigationContext.Provider value={{ navigate, isRoute, back }}>
+		<NavigationContext.Provider value={{ navigate, isRoute }}>
 			{children}
 		</NavigationContext.Provider>
 	)

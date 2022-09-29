@@ -3,6 +3,8 @@
 	text-align: center;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	background: var(--whiteColor);
 }
 
 .header__title {
@@ -28,4 +30,9 @@
 
 .header__letter--small {
 	font-size: 0.8rem;
+}
+
+.header__info {
+	width: 1.6rem;
+	height: 1.6rem;
 }

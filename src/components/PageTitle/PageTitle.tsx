@@ -1,3 +1,4 @@
+import { Route } from "../../providers/NavigationProvider"
 import { WithChildren } from "../../types/WithChildren"
 import { BackIcon } from "../Icons/Icons"
 import { Link } from "../Link/Link"
@@ -7,7 +8,7 @@ export function PageTitle({ children }: WithChildren) {
 	return (
 		<div class="pagetitle">
 			<div class="pagetitle__link">
-				<Link back>
+				<Link route={Route.Home}>
 					<BackIcon /> Atzera
 				</Link>
 			</div>
