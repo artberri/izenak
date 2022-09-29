@@ -1,6 +1,6 @@
-import { JsonName, NameGetter } from "./name-getter"
+import { JsonName, NameGetter } from "../infrastructure/name-getter"
 
-export class MockNameGetter implements NameGetter {
+export class InMemoryNameGetter implements NameGetter {
 	private names: JsonName[] = []
 
 	public setAll(names: JsonName[]): void {
