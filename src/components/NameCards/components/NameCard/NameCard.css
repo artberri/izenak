@@ -78,13 +78,39 @@
 	padding-left: 6px;
 }
 
+.namecard__favourite {
+	width: 5rem;
+	height: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .namecard__heart {
 	width: 4rem;
 	height: 4rem;
-	transition: all 100ms;
+	transition: all 300ms;
 	color: var(--mainColor);
 	opacity: 0.3;
 	cursor: pointer;
+}
+
+.namecard__heart--active {
+	opacity: 1;
+	width: 5rem;
+	height: 5rem;
+
+	@nest .namecard--male & {
+		color: var(--boyColor);
+	}
+
+	@nest .namecard--female & {
+		color: var(--girlColor);
+	}
+
+	@nest .namecard--neutral & {
+		color: var(--allColor);
+	}
 }
 
 .namecard__selected {
