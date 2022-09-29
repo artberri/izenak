@@ -1,11 +1,13 @@
 import {
 	allPass,
 	always,
+	ascend,
 	cond,
 	equals,
 	filter as filterArray,
 	map,
 	pipe,
+	prop,
 	slice,
 	sort,
 	T,
@@ -42,16 +44,7 @@ export const shuffle = <T>(arr: T[]) => {
 	return arr
 }
 
-export const sortByName = sort<Name>((a, b) => {
-	if (a.value > b.value) {
-		return 1
-	}
-	if (a.value < b.value) {
-		return -1
-	}
-
-	return 0
-})
+export const sortByName = sort(ascend<Name>(prop("value")))
 
 const mapGender = cond([
 	[equals<JsonNameGender>("emakumezkoa"), always(Gender.Female)],

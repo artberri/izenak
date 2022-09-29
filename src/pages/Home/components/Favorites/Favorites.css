@@ -1,7 +1,4 @@
 .favorites {
-	display: flex;
-	justify-content: center;
-	padding: 0.7rem;
 	position: absolute;
 	bottom: 0;
 	left: calc(50% - 4rem);
@@ -12,6 +9,7 @@
 	border-top-left-radius: 4rem;
 	border-top-right-radius: 4rem;
 	transition: 0.3s ease all;
+	overflow: hidden;
 
 	@nest .page--in & {
 		bottom: -50%;
@@ -23,10 +21,18 @@
 }
 
 .favorites__button {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: 0.7rem;
+	cursor: pointer;
+}
+
+.favorites__icon {
 	width: 2.7rem;
 	height: 2.7rem;
 	padding: 0.4rem;
-	cursor: pointer;
 	color: var(--girlColor);
 	animation: colorWheel 5s infinite;
 }
