@@ -1,0 +1,68 @@
+.modal {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+	backdrop-filter: blur(1px);
+	opacity: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+}
+
+.modal--in {
+	animation: appear 0.3s ease both;
+}
+
+.modal--out {
+	animation: disappear 0.3s ease both;
+}
+
+.modal__content {
+	position: relative;
+	background: var(--whiteColor);
+	min-width: 16rem;
+	min-height: 10rem;
+	max-width: 40rem;
+	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	padding: 1rem;
+	margin: 1rem;
+}
+
+.modal__close {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	color: var(--whiteColor);
+	background: var(--allColor);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.8rem;
+	height: 1.8rem;
+	border-radius: 1rem;
+	cursor: pointer;
+}
+
+@keyframes appear {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes disappear {
+	from {
+	}
+	to {
+		opacity: 0;
+	}
+}

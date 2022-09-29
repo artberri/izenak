@@ -88,7 +88,6 @@ export function Names({ gender }: IzenakProps) {
 		<main role="main" class="names">
 			<PageTitle>{title(gender)}</PageTitle>
 			<NameCards
-				show={!!openedNameCard}
 				openedName={openedNameCard}
 				setOpenedName={setOpenedNameCard}
 				names={names}

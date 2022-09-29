@@ -37,6 +37,10 @@
 	animation: colorWheel 5s infinite;
 }
 
+.favorites__modal {
+	margin: 2rem 1rem;
+}
+
 @keyframes colorWheel {
 	from,
 	to {

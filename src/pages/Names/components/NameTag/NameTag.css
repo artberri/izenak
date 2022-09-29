@@ -14,7 +14,7 @@
 	border: 1px solid var(--boyColor);
 	color: var(--boyColor);
 
-	&.nametag--active {
+	&.nametag--favorite {
 		color: var(--whiteColor);
 		background: var(--boyColor);
 	}
@@ -24,7 +24,7 @@
 	border: 1px solid var(--girlColor);
 	color: var(--girlColor);
 
-	&.nametag--active {
+	&.nametag--favorite {
 		color: var(--whiteColor);
 		background: var(--girlColor);
 	}
@@ -34,7 +34,7 @@
 	border: 1px solid var(--allColor);
 	color: var(--allColor);
 
-	&.nametag--active {
+	&.nametag--favorite {
 		color: var(--whiteColor);
 		background: var(--allColor);
 	}

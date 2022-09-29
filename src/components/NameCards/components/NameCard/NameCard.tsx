@@ -1,6 +1,4 @@
-import { useEffect, useState } from "preact/hooks"
-import { useService } from "../../../../providers/DependencyInjectionProvider"
-import { FavoriteRepository } from "../../../../services/favorite-repository"
+import { useFavorites } from "../../../../providers/FavoritesProvider"
 import { Name } from "../../../../types/Name"
 import { CloseIcon } from "../../../Icons/CloseIcon/CloseIcon"
 import { BackwardIcon, ForwardIcon, HeartIcon } from "../../../Icons/Icons"
@@ -15,21 +13,8 @@ export interface NameCardProps {
 
 export function NameCard({ onClose, name, onLeft, onRight }: NameCardProps) {
 	const cardClasses = `namecard namecard--${name.gender.toLowerCase()}`
-	const [isFavorite, setIsFavorite] = useState(false)
-	const favoriteRepository = useService(FavoriteRepository)
 
-	useEffect(() => {
-		void favoriteRepository.is(name).then((value) => setIsFavorite(value))
-	}, [favoriteRepository, name])
-
-	const toggleFavorite = () => {
-		if (isFavorite) {
-			void favoriteRepository.remove(name)
-		} else {
-			void favoriteRepository.add(name)
-		}
-		setIsFavorite((prev) => !prev)
-	}
+	const { isFavorite, toggleFavorite } = useFavorites()
 
 	return (
 		<article class={cardClasses}>
@@ -45,10 +30,13 @@ export function NameCard({ onClose, name, onLeft, onRight }: NameCardProps) {
 				>
 					<BackwardIcon title="Aurreko izena ikusi" />
 				</button>
-				<button class="namecard__favourite" onClick={toggleFavorite}>
+				<button
+					class="namecard__favourite"
+					onClick={() => toggleFavorite(name)}
+				>
 					<HeartIcon
 						class={`namecard__heart ${
-							isFavorite ? " namecard__heart--active" : ""
+							isFavorite(name) ? " namecard__heart--active" : ""
 						}`}
 					/>
 				</button>

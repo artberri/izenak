@@ -1,45 +1,50 @@
 import { useState } from "preact/hooks"
-import { ascend, prop, sort } from "ramda"
 import { HeartIcon } from "../../../../components/Icons/Icons"
+import { Modal } from "../../../../components/Modal/Modal"
 import { NameCards } from "../../../../components/NameCards/NameCards"
-import { useService } from "../../../../providers/DependencyInjectionProvider"
-import { FavoriteRepository } from "../../../../services/favorite-repository"
+import { useFavorites } from "../../../../providers/FavoritesProvider"
 import { Name } from "../../../../types/Name"
 import "./Favorites.css"
 
-const sortByName = sort(ascend<Name>(prop("value")))
-
 export function Favorites() {
-	const favoriteRepository = useService(FavoriteRepository)
-	const [favorites, setFavorites] = useState<Name[]>([])
+	const { favorites } = useFavorites()
+	const [shownFavorites, setShownFavorites] = useState<Name[]>([])
+	const [showEmpty, setShowEmpty] = useState(false)
 
 	const [openedNameCard, setOpenedNameCard] = useState<Name | undefined>(
 		undefined
 	)
 
 	const openFavorites = () => {
-		void favoriteRepository
-			.getAll()
-			.then((all) => sortByName(all))
-			.then((all) => {
-				setFavorites(all)
-				setOpenedNameCard(all[0])
-			})
+		if (!favorites[0]) {
+			setShowEmpty(true)
+
+			return
+		}
+
+		setShownFavorites(favorites)
+		setOpenedNameCard(favorites[0])
 	}
+
+	const closeEmptyModal = () => setShowEmpty(false)
 
 	return (
 		<div class="favorites">
 			<button class="favorites__button" onClick={openFavorites}>
 				<HeartIcon class="favorites__icon" />
 			</button>
-			{favorites.length > 0 && (
-				<NameCards
-					show={!!openedNameCard}
-					openedName={openedNameCard}
-					setOpenedName={setOpenedNameCard}
-					names={favorites}
-				/>
-			)}
+			<NameCards
+				openedName={openedNameCard}
+				setOpenedName={setOpenedNameCard}
+				names={shownFavorites}
+			/>
+			<Modal show={showEmpty} onClose={closeEmptyModal}>
+				<p class="favorites__modal">
+					Oraindik ez duzu gogokoen duzun izenik aukeratu. Erabili iragazkiak
+					gustuko duzunak bilatzeko, eta behin gogokoenak bezala markatuta,
+					hemen agertuko dira.
+				</p>
+			</Modal>
 		</div>
 	)
 }

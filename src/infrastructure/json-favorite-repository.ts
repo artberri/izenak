@@ -29,12 +29,6 @@ export class JsonFavoriteRepository implements FavoriteRepository {
 		this.favorites = newValue
 	}
 
-	public async is(name: Name): Promise<boolean> {
-		const favorites = await this.getAll()
-
-		return favorites.some((favorite) => favorite.id === name.id)
-	}
-
 	public async getAll(): Promise<Name[]> {
 		if (!this.initialized) {
 			const value =

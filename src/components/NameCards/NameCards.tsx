@@ -13,11 +13,9 @@ export interface NameCardsProps {
 	openedName?: Name
 	setOpenedName: (name?: Name) => void
 	names: Name[]
-	show: boolean
 }
 
 export function NameCards({
-	show,
 	names,
 	openedName,
 	setOpenedName,
@@ -51,7 +49,7 @@ export function NameCards({
 
 	return createPortal(
 		<CSSTransition
-			in={show}
+			in={!!openedName}
 			duration={300}
 			classNames={{
 				appear: `namecards `,
