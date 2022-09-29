@@ -31,11 +31,11 @@
 	padding: 6rem 2rem;
 
 	&.namecards__card--new {
-		animation: scaleUp 0.7s ease both;
+		animation: scaleUp 0.5s ease both;
 	}
 }
 
-.namecards__card .namecards__card--forward.namecards__card--in {
+.namecards__card--forward.namecards__card--in {
 	transform-origin: 0% 50%;
 	animation: rotateCarouselLeftIn 0.5s both ease;
 }

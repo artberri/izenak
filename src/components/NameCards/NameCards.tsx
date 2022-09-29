@@ -52,7 +52,7 @@ export function NameCards({
 	return createPortal(
 		<CSSTransition
 			in={show}
-			duration={0}
+			duration={300}
 			classNames={{
 				appear: `namecards `,
 				appearActive: `$namecards namecards--in`,
@@ -86,7 +86,7 @@ export function NameCards({
 						<CSSTransition
 							key={name.id}
 							in={name.id === openedName?.id}
-							duration={0}
+							duration={500}
 							classNames={{
 								appear: `${baseClass} `,
 								appearActive: `${baseClass} namecards__card--new`,
