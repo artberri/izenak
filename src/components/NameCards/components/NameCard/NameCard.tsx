@@ -33,11 +33,13 @@ export function NameCard({ onClose, name, onLeft, onRight }: NameCardProps) {
 				<button
 					class="namecard__favourite"
 					onClick={() => toggleFavorite(name)}
+					title={isFavorite(name) ? "Ez zait gustatzen" : "Gustatzen zait"}
 				>
 					<HeartIcon
 						class={`namecard__heart ${
 							isFavorite(name) ? " namecard__heart--active" : ""
 						}`}
+						title={isFavorite(name) ? "Gustokoa" : "Ez da gustokoa"}
 					/>
 				</button>
 				<button

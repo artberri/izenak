@@ -38,7 +38,7 @@ export function FavoritesProvider({ children }: WithChildren) {
 
 	const addFavorite = useCallback(
 		(name: Name) => {
-			setFavorites((prev) => [...prev, name])
+			setFavorites((prev) => sortByName([...prev, name]))
 			void favoriteRepository.add(name)
 		},
 		[favoriteRepository]
@@ -46,7 +46,9 @@ export function FavoritesProvider({ children }: WithChildren) {
 
 	const removeFavorite = useCallback(
 		(name: Name) => {
-			setFavorites((prev) => prev.filter((favorite) => favorite.id !== name.id))
+			setFavorites((prev) =>
+				sortByName(prev.filter((favorite) => favorite.id !== name.id))
+			)
 			void favoriteRepository.remove(name)
 		},
 		[favoriteRepository]

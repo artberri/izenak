@@ -31,7 +31,7 @@ export function Favorites() {
 	return (
 		<div class="favorites">
 			<button class="favorites__button" onClick={openFavorites}>
-				<HeartIcon class="favorites__icon" />
+				<HeartIcon class="favorites__icon" title="Gogokoak" />
 			</button>
 			<NameCards
 				openedName={openedNameCard}
@@ -40,9 +40,9 @@ export function Favorites() {
 			/>
 			<Modal show={showEmpty} onClose={closeEmptyModal}>
 				<p class="favorites__modal">
-					Oraindik ez duzu gogokoen duzun izenik aukeratu. Erabili iragazkiak
-					gustuko duzunak bilatzeko, eta behin gogokoenak bezala markatuta,
-					hemen agertuko dira.
+					Oraindik ez duzu gogoko duzun izenik aukeratu. Erabili iragazkiak
+					gustuko duzunak bilatzeko, eta behin gogokoak bezala markatuta, hemen
+					agertuko dira.
 				</p>
 			</Modal>
 		</div>

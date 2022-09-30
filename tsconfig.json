@@ -30,6 +30,6 @@
 			"test-utils": ["./src/__test-utils__/test-utils"]
 		}
 	},
-	"include": ["src", "./jest-setup.ts"],
+	"include": ["src", "./jest-setup.ts", "__mocks__"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

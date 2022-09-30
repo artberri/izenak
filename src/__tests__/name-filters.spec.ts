@@ -107,15 +107,15 @@ describe("Name filters", () => {
 	test("can filter by names without translations", async () => {
 		// Arrange
 		const toMatchNames = [
-			NameBuilder.aRandomName().withTranslations("").build(),
-			NameBuilder.aRandomName().withTranslations("").build(),
-			NameBuilder.aRandomName().withTranslations("").build(),
-			NameBuilder.aRandomName().withTranslations("").build(),
+			NameBuilder.aRandomName().withName("a1").withTranslations("").build(),
+			NameBuilder.aRandomName().withName("a2").withTranslations("").build(),
+			NameBuilder.aRandomName().withName("a3").withTranslations("").build(),
+			NameBuilder.aRandomName().withName("a4").withTranslations("").build(),
 		]
 		const otherNames = [
-			NameBuilder.aRandomName().withTranslations("t1").build(),
-			NameBuilder.aRandomName().withTranslations("t2").build(),
-			NameBuilder.aRandomName().withTranslations("t3").build(),
+			NameBuilder.aRandomName().withName("b1").withTranslations("t1").build(),
+			NameBuilder.aRandomName().withName("b2").withTranslations("t2").build(),
+			NameBuilder.aRandomName().withName("b3").withTranslations("t3").build(),
 		]
 		await arrange([...toMatchNames, ...otherNames])
 
