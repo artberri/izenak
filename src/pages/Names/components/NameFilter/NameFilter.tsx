@@ -1,4 +1,5 @@
 import { FilterIcon, SearchIcon } from "../../../../components/Icons/Icons"
+import { useTranslation } from "../../../../providers/TranslationProvider"
 import { Filter } from "../../../../types/Filter"
 import { FilterCheckbox } from "./components/FilterCheckbox/FilterCheckbox"
 import { FilterInput } from "./components/FilterInput/FilterInput"
@@ -22,6 +23,8 @@ export function NameFilter({
 	fixed,
 	maximize,
 }: NameFilterProps) {
+	const { t } = useTranslation()
+
 	const onSerchTermChanged = (searchTerm: string) => {
 		setFilter((previousValue) => ({
 			...previousValue,
@@ -78,7 +81,7 @@ export function NameFilter({
 			<div class="namefilter__container">
 				{minimized && (
 					<button class="namefilter__toggle" onClick={maximize}>
-						<FilterIcon />
+						<FilterIcon title={t("button.openFilters")} />
 					</button>
 				)}
 				{!minimized && (
@@ -86,7 +89,7 @@ export function NameFilter({
 						<div class="namefilter__field">
 							<FilterInput
 								name="search"
-								label="Bilaketa-terminoa"
+								label={t("label.searchTerm")}
 								icon={<SearchIcon />}
 								value={filter.searchTerm}
 								onChange={onSerchTermChanged}
@@ -95,13 +98,13 @@ export function NameFilter({
 						<div class="namefilter__field">
 							<FilterInput
 								name="start-words"
-								label="Hasten da"
+								label={t("label.startsWith")}
 								value={filter.startsWith}
 								onChange={onStartsWithChanged}
 							/>
 							<FilterInput
 								name="end-words"
-								label="Amaitzen da"
+								label={t("label.endsWith")}
 								value={filter.endsWith}
 								onChange={onEndsWithChanged}
 							/>
@@ -112,14 +115,14 @@ export function NameFilter({
 								max={23}
 								start={filter.minChars}
 								end={filter.maxChars}
-								label="Letra kopurua"
+								label={t("label.numberOfLetters")}
 								name="char-length"
 								onChange={onCharsRangeChanged}
 							/>
 						</div>
 						<div class="namefilter__field">
 							<FilterCheckbox
-								label="Euskal jatorrizko izenak soilik"
+								label={t("label.onlyBasque")}
 								name="onlybasque"
 								checked={filter.onlyBasque}
 								onChange={onOnlyBasqueChanged}
@@ -127,7 +130,7 @@ export function NameFilter({
 						</div>
 						<div class="namefilter__field">
 							<FilterCheckbox
-								label="Izenak alfabetikoki ordenatu"
+								label={t("label.sortAlphabetically")}
 								name="alphabeticalorder"
 								checked={filter.sort}
 								onChange={onSortChanged}
@@ -135,7 +138,7 @@ export function NameFilter({
 						</div>
 						<div class="namefilter__field">
 							<button class="namefilter__reset" onClick={reset}>
-								Kendu iragazkiak
+								{t("button.removeFilters")}
 							</button>
 						</div>
 					</>

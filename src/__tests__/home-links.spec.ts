@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest, waitFor } from "test-utils"
+import { render, screen, setNamesForTest } from "test-utils"
 import { JsonName } from "../infrastructure/name-getter"
 import { NameBuilder } from "../__test-utils__/name-builder"
 
@@ -34,11 +34,10 @@ describe("Home links", () => {
 		render()
 
 		// Act
-		await userEvent.click(screen.getByText("Nesken izenak"))
-		await waitFor(() => screen.getByText("Nesken izenak"))
+		await userEvent.click(screen.getByText("link.femaleNames"))
 
 		// Assert
-		expect(screen.getByText("Nesken izenak")).toBeInTheDocument()
+		expect(screen.getByText("title.femaleNames")).toBeInTheDocument()
 		for (const name of [...femaleNames, ...neutralNames]) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
@@ -52,11 +51,10 @@ describe("Home links", () => {
 		render()
 
 		// Act
-		await userEvent.click(screen.getByText("Mutilen izenak"))
-		await waitFor(() => screen.getByText("Mutilen izenak"))
+		await userEvent.click(screen.getByText("link.maleNames"))
 
 		// Assert
-		expect(screen.getByText("Mutilen izenak")).toBeInTheDocument()
+		expect(screen.getByText("title.maleNames")).toBeInTheDocument()
 		for (const name of [...maleNames, ...neutralNames]) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
@@ -70,11 +68,10 @@ describe("Home links", () => {
 		render()
 
 		// Act
-		await userEvent.click(screen.getByText("Izen guztiak"))
-		await waitFor(() => screen.getByText("Izen guztiak"))
+		await userEvent.click(screen.getByText("link.allNames"))
 
 		// Assert
-		expect(screen.getByText("Izen guztiak")).toBeInTheDocument()
+		expect(screen.getByText("title.allNames")).toBeInTheDocument()
 		for (const name of [...maleNames, ...neutralNames, ...femaleNames]) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}

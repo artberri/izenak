@@ -21,22 +21,14 @@ describe("Name favorites", () => {
 		arrange(names)
 
 		// Act
-		await userEvent.click(screen.getByText("Gogokoak"))
+		await userEvent.click(screen.getByText("button.favorites"))
 		// Assert
-		expect(
-			screen.getByText(
-				"Oraindik ez duzu gogoko duzun izenik aukeratu. Erabili iragazkiak gustuko duzunak bilatzeko, eta behin gogokoak bezala markatuta, hemen agertuko dira."
-			)
-		).toBeInTheDocument()
+		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
 
 		// Act
-		await userEvent.click(screen.getByText("Itxi"))
+		await userEvent.click(screen.getByText("button.close"))
 		// Assert
-		expect(
-			screen.queryByText(
-				"Oraindik ez duzu gogoko duzun izenik aukeratu. Erabili iragazkiak gustuko duzunak bilatzeko, eta behin gogokoak bezala markatuta, hemen agertuko dira."
-			)
-		).not.toBeInTheDocument()
+		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
 	})
 
 	test("can add favorites and they will be shown alphabetically in the proper section", async () => {
@@ -49,36 +41,36 @@ describe("Name favorites", () => {
 			NameBuilder.aRandomName().withName("Enara").build(),
 		]
 		arrange(names)
-		await userEvent.click(screen.getByText("Izen guztiak"))
+		await userEvent.click(screen.getByText("link.allNames"))
 
 		// Open mane card Leize and favorite it
 		await userEvent.click(screen.getByText("Leize"))
-		await userEvent.click(screen.getByTitle("Gustatzen zait"))
-		await userEvent.click(screen.getByText("Itxi"))
+		await userEvent.click(screen.getByTitle("button.like"))
+		await userEvent.click(screen.getByText("button.close"))
 
 		// Open mane card Aiert and favorite it
 		await userEvent.click(screen.getByText("Aiert"))
-		await userEvent.click(screen.getByTitle("Gustatzen zait"))
-		await userEvent.click(screen.getByText("Itxi"))
+		await userEvent.click(screen.getByTitle("button.like"))
+		await userEvent.click(screen.getByText("button.close"))
 
 		// Go home and open favorites section
-		await userEvent.click(screen.getByText("Atzera"))
-		await userEvent.click(screen.getByText("Gogokoak"))
+		await userEvent.click(screen.getByText("link.back"))
+		await userEvent.click(screen.getByText("button.favorites"))
 
 		// Assert there are in the favorites section
 		expect(screen.getByText("Aiert")).toBeInTheDocument()
 		expect(
-			screen.getByRole("button", { name: "Aurreko izena ikusi" })
+			screen.getByRole("button", { name: "button.previousName" })
 		).toBeDisabled()
 		await userEvent.click(
-			screen.getByRole("button", { name: "Hurrengo izena ikusi" })
+			screen.getByRole("button", { name: "button.nextName" })
 		)
 		expect(screen.getByText("Leize")).toBeInTheDocument()
 		expect(
-			screen.getByRole("button", { name: "Aurreko izena ikusi" })
+			screen.getByRole("button", { name: "button.previousName" })
 		).toBeEnabled()
 		expect(
-			screen.getByRole("button", { name: "Hurrengo izena ikusi" })
+			screen.getByRole("button", { name: "button.nextName" })
 		).toBeDisabled()
 	})
 })

@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest, waitFor } from "test-utils"
+import { render, screen, setNamesForTest } from "test-utils"
 import { NameBuilder } from "../__test-utils__/name-builder"
 
 const arrange = async () => {
@@ -22,9 +22,8 @@ const arrange = async () => {
 	]
 	setNamesForTest(names)
 	render()
-	await userEvent.click(screen.getByText("Izen guztiak"))
-	await waitFor(() => screen.getByText("Izen guztiak"))
-	await userEvent.click(screen.getByLabelText("Izenak alfabetikoki ordenatu"))
+	await userEvent.click(screen.getByText("link.allNames"))
+	await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
 	for (const name of names) {
 		expect(screen.getByText(name.name)).toBeInTheDocument()
 	}
@@ -37,15 +36,11 @@ describe("Name cards", () => {
 
 		// Act & assert
 		await userEvent.click(screen.getByText("Hodei"))
-		expect(
-			screen.getByText(
-				"Izen honek ez dauka itzulpenik Euskaltzaindiaren corpusean"
-			)
-		).toBeInTheDocument()
+		expect(screen.getByText("content.noTranslations")).toBeInTheDocument()
 		expect(screen.getByText("Nube")).toBeInTheDocument()
 
 		// Act & assert
-		await userEvent.click(screen.getByText("Aurreko izena ikusi"))
+		await userEvent.click(screen.getByText("button.previousName"))
 		expect(screen.getByText("Un nombre")).toBeInTheDocument()
 		expect(screen.getByText("Salvador")).toBeInTheDocument()
 	})
@@ -56,20 +51,12 @@ describe("Name cards", () => {
 
 		// Act & assert
 		await userEvent.click(screen.getByText("Hodei"))
-		expect(
-			screen.getByText(
-				"Izen honek ez dauka itzulpenik Euskaltzaindiaren corpusean"
-			)
-		).toBeInTheDocument()
+		expect(screen.getByText("content.noTranslations")).toBeInTheDocument()
 		expect(screen.getByText("Nube")).toBeInTheDocument()
 
 		// Act & assert
-		await userEvent.click(screen.getByText("Hurrengo izena ikusi"))
+		await userEvent.click(screen.getByText("button.nextName"))
 		expect(screen.getByText("Dolores")).toBeInTheDocument()
-		expect(
-			screen.getByText(
-				"Izen honek ez dauka definiziorik Euskaltzaindiaren corpusean"
-			)
-		).toBeInTheDocument()
+		expect(screen.getByText("content.noMeaning")).toBeInTheDocument()
 	})
 })

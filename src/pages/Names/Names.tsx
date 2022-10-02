@@ -4,6 +4,7 @@ import { Loader } from "../../components/Loader/Loader"
 import { NameCards } from "../../components/NameCards/NameCards"
 import { PageTitle } from "../../components/PageTitle/PageTitle"
 import { useService } from "../../providers/DependencyInjectionProvider"
+import { useTranslation } from "../../providers/TranslationProvider"
 import { NameFinder } from "../../services/name-finder"
 import { Filter } from "../../types/Filter"
 import { Gender } from "../../types/Gender"
@@ -17,9 +18,9 @@ const namesPerPage = 100
 const minimizeFilterPixelScroll = 100
 
 const title = cond([
-	[equals<Gender | undefined>(Gender.Male), always("Mutilen izenak")],
-	[equals<Gender | undefined>(Gender.Female), always("Nesken izenak")],
-	[T, always("Izen guztiak")],
+	[equals<Gender | undefined>(Gender.Male), always("title.maleNames")],
+	[equals<Gender | undefined>(Gender.Female), always("title.femaleNames")],
+	[T, always("title.allNames")],
 ])
 
 export interface IzenakProps {
@@ -38,6 +39,7 @@ export function Names({ gender }: IzenakProps) {
 		gender,
 	}
 
+	const { t } = useTranslation()
 	const [loading, setLoading] = useState(true)
 	const [minimizeFilter, setMinimizeFilter] = useState(false)
 	const [fixFilter, setFixFilter] = useState(false)
@@ -86,7 +88,7 @@ export function Names({ gender }: IzenakProps) {
 
 	return (
 		<main role="main" class="names">
-			<PageTitle>{title(gender)}</PageTitle>
+			<PageTitle>{t(title(gender))}</PageTitle>
 			<NameCards
 				openedName={openedNameCard}
 				setOpenedName={setOpenedNameCard}
@@ -107,8 +109,8 @@ export function Names({ gender }: IzenakProps) {
 					<div class="names__cloud">
 						{names.length === 0 && (
 							<>
-								<p>Bilaketak ez du emaitzarik. </p>
-								<p>Aldatu iragazkiak izenak ikusteko.</p>
+								<p>{t("content.noResults")}</p>
+								<p>{t("content.refineSearch")}</p>
 							</>
 						)}
 						{names.map((name) => (
@@ -126,7 +128,7 @@ export function Names({ gender }: IzenakProps) {
 						<Loader />
 					) : (
 						<button className="names__showmore" onClick={showMore}>
-							Gehiago ikusi
+							{t("button.seeMore")}
 						</button>
 					))}
 			</div>

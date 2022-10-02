@@ -3,6 +3,7 @@
 import { CSSTransition } from "preact-transitioning"
 import { createPortal } from "preact/compat"
 import { useEffect } from "preact/hooks"
+import { useTranslation } from "../../providers/TranslationProvider"
 import { WithChildren } from "../../types/WithChildren"
 import { CloseIcon } from "../Icons/CloseIcon/CloseIcon"
 import { ModalContainer } from "./components/ModalContainer/ModalContainer"
@@ -14,6 +15,8 @@ export interface NameCardsProps extends WithChildren {
 }
 
 export function Modal({ show, onClose, children }: NameCardsProps) {
+	const { t } = useTranslation()
+
 	useEffect(() => {
 		const closeOnEscapeKey = (e: KeyboardEvent) => {
 			if (e.key === "Escape") {
@@ -53,7 +56,7 @@ export function Modal({ show, onClose, children }: NameCardsProps) {
 			<div role="dialog" class="modal" onClick={closeIfDirectClick}>
 				<div class="modal__content">
 					<button class="modal__close" onClick={onClose}>
-						<CloseIcon title="Itxi" />
+						<CloseIcon title={t("button.close")} />
 					</button>
 					{children}
 				</div>

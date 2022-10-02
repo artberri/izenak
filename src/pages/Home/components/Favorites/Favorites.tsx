@@ -3,10 +3,12 @@ import { HeartIcon } from "../../../../components/Icons/Icons"
 import { Modal } from "../../../../components/Modal/Modal"
 import { NameCards } from "../../../../components/NameCards/NameCards"
 import { useFavorites } from "../../../../providers/FavoritesProvider"
+import { useTranslation } from "../../../../providers/TranslationProvider"
 import { Name } from "../../../../types/Name"
 import "./Favorites.css"
 
 export function Favorites() {
+	const { t } = useTranslation()
 	const { favorites } = useFavorites()
 	const [shownFavorites, setShownFavorites] = useState<Name[]>([])
 	const [showEmpty, setShowEmpty] = useState(false)
@@ -31,7 +33,7 @@ export function Favorites() {
 	return (
 		<div class="favorites">
 			<button class="favorites__button" onClick={openFavorites}>
-				<HeartIcon class="favorites__icon" title="Gogokoak" />
+				<HeartIcon class="favorites__icon" title={t("button.favorites")} />
 			</button>
 			<NameCards
 				openedName={openedNameCard}
@@ -39,11 +41,7 @@ export function Favorites() {
 				names={shownFavorites}
 			/>
 			<Modal show={showEmpty} onClose={closeEmptyModal}>
-				<p class="favorites__modal">
-					Oraindik ez duzu gogoko duzun izenik aukeratu. Erabili iragazkiak
-					gustuko duzunak bilatzeko, eta behin gogokoak bezala markatuta, hemen
-					agertuko dira.
-				</p>
+				<p class="favorites__modal">{t("content.noFavorites")}</p>
 			</Modal>
 		</div>
 	)

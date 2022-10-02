@@ -17,7 +17,7 @@ module.exports = {
 	parserOptions: {
 		project: "./tsconfig.json",
 	},
-	plugins: ["@typescript-eslint", "jsx-a11y"],
+	plugins: ["@typescript-eslint", "jsx-a11y", "jest-dom", "testing-library"],
 	root: true,
 	ignorePatterns: [
 		"/*.cjs",
@@ -38,6 +38,12 @@ module.exports = {
 		"brace-style": [2],
 		"newline-before-return": [2],
 	},
+	overrides: [
+		{
+			files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+			extends: ["plugin:jest-dom/recommended", "plugin:testing-library/react"],
+		},
+	],
 	settings: {
 		react: {
 			version: "18",

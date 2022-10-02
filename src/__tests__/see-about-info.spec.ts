@@ -7,13 +7,9 @@ describe("About info page", () => {
 		render()
 
 		// Act
-		await userEvent.click(screen.getByText("Honi buruz"))
+		await userEvent.click(screen.getByText("link.aboutUs"))
 
 		// Assert
-		expect(
-			screen.getByText(
-				"Webgune honetara haurdun zaude(te)lako heldu izatekotan... Zorionak! :D"
-			)
-		).toBeInTheDocument()
+		expect(screen.getByText("title.aboutUs")).toBeInTheDocument()
 	})
 })

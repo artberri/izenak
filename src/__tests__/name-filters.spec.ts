@@ -1,13 +1,12 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest, waitFor } from "test-utils"
+import { render, screen, setNamesForTest } from "test-utils"
 import { JsonName } from "../infrastructure/name-getter"
 import { NameBuilder } from "../__test-utils__/name-builder"
 
 const arrange = async (names: JsonName[]) => {
 	setNamesForTest(names)
 	render()
-	await userEvent.click(screen.getByText("Izen guztiak"))
-	await waitFor(() => screen.getByText("Izen guztiak"))
+	await userEvent.click(screen.getByText("link.allNames"))
 	for (const name of names) {
 		expect(screen.getByText(name.name)).toBeInTheDocument()
 	}
@@ -33,7 +32,7 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.type(screen.getByLabelText("Bilaketa-terminoa"), "it")
+		await userEvent.type(screen.getByLabelText("label.searchTerm"), "it")
 
 		// Assert
 		for (const name of toMatchNames) {
@@ -65,7 +64,7 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.type(screen.getByLabelText("Hasten da"), "alb")
+		await userEvent.type(screen.getByLabelText("label.startsWith"), "alb")
 
 		// Assert
 		for (const name of toMatchNames) {
@@ -93,7 +92,7 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.type(screen.getByLabelText("Amaitzen da"), "ets")
+		await userEvent.type(screen.getByLabelText("label.endsWith"), "ets")
 
 		// Assert
 		for (const name of toMatchNames) {
@@ -120,9 +119,7 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.click(
-			screen.getByLabelText("Euskal jatorrizko izenak soilik")
-		)
+		await userEvent.click(screen.getByLabelText("label.onlyBasque"))
 
 		// Assert
 		for (const name of toMatchNames) {
@@ -146,7 +143,7 @@ describe("Name filters", () => {
 		await arrange(names)
 
 		// Act
-		await userEvent.click(screen.getByLabelText("Izenak alfabetikoki ordenatu"))
+		await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
 
 		// Assert
 		const nameTags = screen.queryAllByTestId("nametag")
@@ -177,13 +174,11 @@ describe("Name filters", () => {
 			NameBuilder.aRandomName().withName("otro").build(),
 		]
 		await arrange([...toMatchNames, ...otherNames])
-		await userEvent.type(screen.getByLabelText("Bilaketa-terminoa"), "i")
-		await userEvent.type(screen.getByLabelText("Hasten da"), "a")
-		await userEvent.type(screen.getByLabelText("Amaitzen da"), "s")
-		await userEvent.click(
-			screen.getByLabelText("Euskal jatorrizko izenak soilik")
-		)
-		await userEvent.click(screen.getByLabelText("Izenak alfabetikoki ordenatu"))
+		await userEvent.type(screen.getByLabelText("label.searchTerm"), "i")
+		await userEvent.type(screen.getByLabelText("label.startsWith"), "a")
+		await userEvent.type(screen.getByLabelText("label.endsWith"), "s")
+		await userEvent.click(screen.getByLabelText("label.onlyBasque"))
+		await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
 		const nameTags = screen.queryAllByTestId("nametag")
 		expect(nameTags).toHaveLength(toMatchNames.length)
 		expect(nameTags[0]?.innerHTML).toBe("alis")
@@ -193,7 +188,7 @@ describe("Name filters", () => {
 		}
 
 		// Act
-		await userEvent.click(screen.getByText("Kendu iragazkiak"))
+		await userEvent.click(screen.getByText("button.removeFilters"))
 
 		// Assert
 		for (const name of [...toMatchNames, ...otherNames]) {

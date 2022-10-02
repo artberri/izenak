@@ -1,4 +1,4 @@
-import { render, RenderOptions, screen, waitFor } from "@testing-library/preact"
+import { render, RenderOptions, screen } from "@testing-library/preact"
 import userEvent from "@testing-library/user-event"
 import "reflect-metadata"
 import { App } from "../App"
@@ -6,6 +6,7 @@ import { getDependencyInjectionContainer } from "../dependency-injection"
 import { JsonFavoriteRepository } from "../infrastructure/json-favorite-repository"
 import { JsonName } from "../infrastructure/name-getter"
 import { DependencyInjectionProvider } from "../providers/DependencyInjectionProvider"
+import { TranslationProvider } from "../providers/TranslationProvider"
 import { Name } from "../types/Name"
 import { WithChildren } from "../types/WithChildren"
 import { InMemoryKeyValueStorage } from "./in-memory-key-value-storage"
@@ -23,14 +24,16 @@ afterEach(() => {
 
 const AllTheProviders = ({ children }: WithChildren) => {
 	return (
-		<DependencyInjectionProvider
-			container={getDependencyInjectionContainer({
-				nameGetterMock,
-				keyValueStorageMock,
-			})}
-		>
-			{children}
-		</DependencyInjectionProvider>
+		<TranslationProvider translations={{}}>
+			<DependencyInjectionProvider
+				container={getDependencyInjectionContainer({
+					nameGetterMock,
+					keyValueStorageMock,
+				})}
+			>
+				{children}
+			</DependencyInjectionProvider>
+		</TranslationProvider>
 	)
 }
 
@@ -46,7 +49,6 @@ export {
 	customRender as render,
 	screen,
 	click,
-	waitFor,
 	setNamesForTest,
 	setFavoritesForTest,
 }

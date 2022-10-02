@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest, waitFor } from "test-utils"
+import { render, screen, setNamesForTest } from "test-utils"
 import { NameBuilder } from "../__test-utils__/name-builder"
 
 const arrange = async (count: number) => {
@@ -10,8 +10,7 @@ const arrange = async (count: number) => {
 	)
 	setNamesForTest(names)
 	render()
-	await userEvent.click(screen.getByText("Izen guztiak"))
-	await waitFor(() => screen.getByText("Izen guztiak"))
+	await userEvent.click(screen.getByText("link.allNames"))
 }
 
 describe("Name pagination", () => {
@@ -23,12 +22,12 @@ describe("Name pagination", () => {
 		expect(screen.queryAllByTestId("nametag")).toHaveLength(100)
 
 		// Act & Assert
-		await userEvent.click(screen.getByText("Gehiago ikusi"))
+		await userEvent.click(screen.getByText("button.seeMore"))
 		expect(screen.queryAllByTestId("nametag")).toHaveLength(200)
 
 		// Act & Assert
-		await userEvent.click(screen.getByText("Gehiago ikusi"))
+		await userEvent.click(screen.getByText("button.seeMore"))
 		expect(screen.queryAllByTestId("nametag")).toHaveLength(230)
-		expect(screen.queryByText("Gehiago ikusi")).not.toBeInTheDocument()
+		expect(screen.queryByText("button.seeMore")).not.toBeInTheDocument()
 	})
 })

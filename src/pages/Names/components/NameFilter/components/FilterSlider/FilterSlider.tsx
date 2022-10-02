@@ -1,6 +1,7 @@
 import { MDCSlider } from "@material/slider"
 import "@material/slider/dist/mdc.slider.css"
 import { useEffect, useRef, useState } from "preact/hooks"
+import { useTranslation } from "../../../../../../providers/TranslationProvider"
 import "./FilterSlider.css"
 
 export interface FilterSliderProps {
@@ -22,6 +23,7 @@ export function FilterSlider({
 	end: endValue,
 	onChange,
 }: FilterSliderProps) {
+	const { t } = useTranslation()
 	const [loading, setLoading] = useState(true)
 	const [slider, setSlider] = useState<MDCSlider | null>(null)
 	const ref = useRef<HTMLDivElement>(null)
@@ -91,7 +93,7 @@ export function FilterSlider({
 					value={start}
 					step="1"
 					name={`filterslider-start-${name}`}
-					aria-label={`Gutxienezko ${label}`}
+					aria-label={t("label.rangeMin", { label })}
 				/>
 				<input
 					ref={endInputRef}
@@ -102,7 +104,7 @@ export function FilterSlider({
 					value={end}
 					step="1"
 					name={`filterslider-end-${name}`}
-					aria-label={`Gehienezko ${label}`}
+					aria-label={t("label.rangeMax", { label })}
 				/>
 				<div class="mdc-slider__track">
 					<div class="mdc-slider__track--inactive"></div>
