@@ -9,6 +9,7 @@ module.exports = {
 	],
 	moduleNameMapper: {
 		"\\.css$": "identity-obj-proxy",
+		"\\.html\\?raw": "jest-raw-loader",
 	},
 	moduleDirectories: ["node_modules", "src/__test-utils__"],
 	coveragePathIgnorePatterns: ["__test-utils__"],

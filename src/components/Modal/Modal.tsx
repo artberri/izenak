@@ -53,7 +53,12 @@ export function Modal({ show, onClose, children }: NameCardsProps) {
 				exitDone: `modal modal--out`,
 			}}
 		>
-			<div role="dialog" class="modal" onClick={closeIfDirectClick}>
+			<div
+				role="dialog"
+				class="modal"
+				data-testid="modal-background"
+				onClick={closeIfDirectClick}
+			>
 				<div class="modal__content">
 					<button class="modal__close" onClick={onClose}>
 						<CloseIcon title={t("button.close")} />
