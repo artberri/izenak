@@ -1,6 +1,5 @@
 import { rand, randFirstName, randNumber, randSkill } from "@ngneat/falso"
 import { JsonName, JsonNameGender } from "../infrastructure/name-getter"
-import { Name } from "../types/Name"
 
 export class NameBuilder {
 	private name: string = randFirstName()
@@ -10,15 +9,6 @@ export class NameBuilder {
 	private constructor(private gender: JsonNameGender) {}
 
 	public build(): JsonName {
-		return {
-			name: this.name,
-			gender: this.gender,
-			meaning: this.meaning,
-			translations: this.translations,
-		}
-	}
-
-	public buildModel(): Name {
 		return {
 			name: this.name,
 			gender: this.gender,
