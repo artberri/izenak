@@ -1,7 +1,7 @@
 # izenak.eus
 
-[![Build Status](https://travis-ci.org/artberri/izenak.svg?branch=master)](https://travis-ci.org/artberri/izenak)
-[![Coverage Status](https://coveralls.io/repos/github/artberri/izenak/badge.svg?branch=master)](https://coveralls.io/github/artberri/izenak?branch=master)
+[![qa](https://github.com/artberri/izenak/actions/workflows/qa.yml/badge.svg)](https://github.com/artberri/izenak/actions/workflows/qa.yml)
+[![Coverage Status](https://coveralls.io/repos/github/artberri/izenak/badge.svg?branch=main)](https://coveralls.io/github/artberri/izenak?branch=main)
 
 Web Application to find Basque names. Deployed at [https://izenak.eus/](https://izenak.eus/).
 
@@ -20,7 +20,7 @@ pnpm run dev
 ### Compiles and minifies for production
 
 ```bash
-npnpmpm run build
+pmpm run build
 ```
 
 ### QA (static code analysis and tests)

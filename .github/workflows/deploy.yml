@@ -1,18 +1,13 @@
-name: qa
+name: deploy
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "src/**"
-      - "public/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
-  pull_request:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["qa"]
+    branches: [main]
+    types:
+      - completed
 jobs:
-  qa:
+  build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,9 +36,24 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
-      - name: Run QA
-        run: pnpm run qa:coverage
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Build
+        run: pnpm run build
+      - uses: actions/upload-artifact@v3
+        name: Upload artifact
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: github-pages
+          path: dist
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
