@@ -20,7 +20,9 @@
     "prettier": "prettier --check .",
     "preview": "vite preview",
     "qa": "pnpm run prettier && pnpm run eslint && pnpm run test",
-    "test": "jest"
+		"qa:coverage": "pnpm run prettier && pnpm run eslint && pnpm run test:coverage",
+    "test": "jest",
+		"test:coverage": "pnpm test -- --coverage"
   },
   "dependencies": {
     "@fontsource/montserrat": "^4.5.12",

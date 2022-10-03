@@ -12,15 +12,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
           node-version: "16.x"
           registry-url: "https://registry.npmjs.org"
-      - uses: pnpm/action-setup@v2.1.0
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.1.0
         with:
           version: "7.x"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
       - name: Run QA
-        run: pnpm run qa
+        run: pnpm run qa:coverage
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
