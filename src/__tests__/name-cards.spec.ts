@@ -59,4 +59,17 @@ describe("Name cards", () => {
 		expect(screen.getByText("Dolores")).toBeInTheDocument()
 		expect(screen.getByText("content.noMeaning")).toBeInTheDocument()
 	})
+
+	test("can close card", async () => {
+		// Arrange
+		await arrange()
+
+		// Act & assert
+		await userEvent.click(screen.getByText("Hodei"))
+		expect(screen.getByText("Nube")).toBeInTheDocument()
+
+		// Act & assert
+		await userEvent.click(screen.getByText("button.close"))
+		expect(screen.queryByText("Nube")).not.toBeInTheDocument()
+	})
 })
