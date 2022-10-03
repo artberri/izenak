@@ -38,11 +38,10 @@ jobs:
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
       - name: Build
         run: pnpm run build
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-pages-artifact@v1
         name: Upload artifact
         with:
-          name: github-pages
-          path: dist
+          path: dist/
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest

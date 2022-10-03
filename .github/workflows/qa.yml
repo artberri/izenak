@@ -3,11 +3,11 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "src/**"
-      - "public/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
+    # paths:
+    #   - "src/**"
+    #   - "public/**"
+    #   - "package.json"
+    #   - "pnpm-lock.yaml"
   pull_request:
     branches:
       - main
