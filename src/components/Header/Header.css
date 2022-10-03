@@ -9,11 +9,19 @@
 
 .header__title {
 	font-size: 2rem;
+	display: flex;
+	align-items: center;
 
 	& a {
 		text-decoration: none;
 		color: var(--mainColor);
 	}
+}
+
+.header__titletext {
+	display: inline-block;
+	padding-bottom: 0.3rem;
+	padding-left: 0.5rem;
 }
 
 .header__letter--boy {

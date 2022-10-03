@@ -11,21 +11,25 @@ export function Header() {
 		<header role="banner" class="header nav">
 			<h1 class="header__title">
 				<img
-					src="/img/icons/favicon-16x16.png"
+					class="header__logo"
+					src="/icon-24.png"
+					height="24"
+					width="24"
 					alt=""
-					style="padding-right: 5px"
 				/>
 				<Link route={Route.Home}>
-					<span class="header__letter header__letter--girl">i</span>
-					<span class="header__letter header__letter--boy">z</span>
-					<span class="header__letter header__letter--all">e</span>
-					<span class="header__letter">n</span>
-					<span class="header__letter">a</span>
-					<span class="header__letter">k</span>
-					<span>.</span>
-					<span class="header__letter header__letter--small">e</span>
-					<span class="header__letter header__letter--small">u</span>
-					<span class="header__letter header__letter--small">s</span>
+					<span class="header__titletext">
+						<span class="header__letter header__letter--girl">i</span>
+						<span class="header__letter header__letter--boy">z</span>
+						<span class="header__letter header__letter--all">e</span>
+						<span class="header__letter">n</span>
+						<span class="header__letter">a</span>
+						<span class="header__letter">k</span>
+						<span>.</span>
+						<span class="header__letter header__letter--small">e</span>
+						<span class="header__letter header__letter--small">u</span>
+						<span class="header__letter header__letter--small">s</span>
+					</span>
 				</Link>
 			</h1>
 			<Link route={Route.About}>
