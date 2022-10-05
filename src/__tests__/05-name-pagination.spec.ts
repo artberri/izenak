@@ -13,19 +13,15 @@ const arrange = async (count: number) => {
 	await userEvent.click(screen.getByText("link.allNames"))
 }
 
-describe("Name pagination", () => {
-	test("show a maximum of 100 name and paginate them", async () => {
-		// Arrange
+describe("Names are paginated", () => {
+	it("shows a maximum of 100 names per page and you can ask for more", async () => {
 		await arrange(230)
 
-		// Act & Assert
 		expect(screen.queryAllByTestId("nametag")).toHaveLength(100)
 
-		// Act & Assert
 		await userEvent.click(screen.getByText("button.seeMore"))
 		expect(screen.queryAllByTestId("nametag")).toHaveLength(200)
 
-		// Act & Assert
 		await userEvent.click(screen.getByText("button.seeMore"))
 		expect(screen.queryAllByTestId("nametag")).toHaveLength(230)
 		expect(screen.queryByText("button.seeMore")).not.toBeInTheDocument()

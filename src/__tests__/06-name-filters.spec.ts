@@ -12,9 +12,8 @@ const arrange = async (names: JsonName[]) => {
 	}
 }
 
-describe("Name filters", () => {
-	test("can filter names by containing letters", async () => {
-		// Arrange
+describe("Names can be filtered", () => {
+	it("filters names by containing letters", async () => {
 		const toMatchNames = [
 			NameBuilder.aRandomName().withName("Albertito").build(),
 			NameBuilder.aRandomName().withName("Robertíto").build(),
@@ -31,10 +30,8 @@ describe("Name filters", () => {
 		]
 		await arrange([...toMatchNames, ...otherNames])
 
-		// Act
 		await userEvent.type(screen.getByLabelText("label.searchTerm"), "it")
 
-		// Assert
 		for (const name of toMatchNames) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
@@ -43,8 +40,7 @@ describe("Name filters", () => {
 		}
 	})
 
-	test("can filter names by starting letters", async () => {
-		// Arrange
+	it("filters names by starting letters", async () => {
 		const toMatchNames = [
 			NameBuilder.aRandomName().withName("Albertito").build(),
 			NameBuilder.aRandomName().withName("albino").build(),
@@ -63,10 +59,8 @@ describe("Name filters", () => {
 		]
 		await arrange([...toMatchNames, ...otherNames])
 
-		// Act
 		await userEvent.type(screen.getByLabelText("label.startsWith"), "alb")
 
-		// Assert
 		for (const name of toMatchNames) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
@@ -75,8 +69,7 @@ describe("Name filters", () => {
 		}
 	})
 
-	test("can filter names by ending letters", async () => {
-		// Arrange
+	it("filters names by ending letters", async () => {
 		const toMatchNames = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Latets").build(),
@@ -91,10 +84,8 @@ describe("Name filters", () => {
 		]
 		await arrange([...toMatchNames, ...otherNames])
 
-		// Act
 		await userEvent.type(screen.getByLabelText("label.endsWith"), "ets")
 
-		// Assert
 		for (const name of toMatchNames) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
@@ -103,8 +94,7 @@ describe("Name filters", () => {
 		}
 	})
 
-	test("can filter by names without translations", async () => {
-		// Arrange
+	it("filters by names without translations", async () => {
 		const toMatchNames = [
 			NameBuilder.aRandomName().withName("a1").withTranslations("").build(),
 			NameBuilder.aRandomName().withName("a2").withTranslations("").build(),
@@ -118,10 +108,8 @@ describe("Name filters", () => {
 		]
 		await arrange([...toMatchNames, ...otherNames])
 
-		// Act
 		await userEvent.click(screen.getByLabelText("label.onlyBasque"))
 
-		// Assert
 		for (const name of toMatchNames) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
@@ -130,8 +118,7 @@ describe("Name filters", () => {
 		}
 	})
 
-	test("can order names alphabetically", async () => {
-		// Arrange
+	it("filters names alphabetically", async () => {
 		const names = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Jare").build(),
@@ -142,10 +129,8 @@ describe("Name filters", () => {
 		]
 		await arrange(names)
 
-		// Act
 		await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
 
-		// Assert
 		const nameTags = screen.queryAllByTestId("nametag")
 		expect(nameTags).toHaveLength(names.length)
 		expect(nameTags[0]?.innerHTML).toBe("Aiert")
@@ -156,8 +141,7 @@ describe("Name filters", () => {
 		expect(nameTags[5]?.innerHTML).toBe("Leize")
 	})
 
-	test("can reset filters", async () => {
-		// Arrange
+	it("resets filters if the button to remove filters is pressed", async () => {
 		const toMatchNames = [
 			NameBuilder.aRandomName()
 				.withName("atriisss")
@@ -187,10 +171,8 @@ describe("Name filters", () => {
 			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
 		}
 
-		// Act
 		await userEvent.click(screen.getByText("button.removeFilters"))
 
-		// Assert
 		for (const name of [...toMatchNames, ...otherNames]) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}

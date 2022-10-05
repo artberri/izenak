@@ -9,8 +9,7 @@ const arrange = (names: JsonName[]) => {
 }
 
 describe("Name favorites", () => {
-	test("no-favorites message is shown if trying to show favorites but empty, it can be closed", async () => {
-		// Arrange
+	it("shows no-favorites message if trying to show favorites but empty, it can be closed", async () => {
 		const names = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Jare").build(),
@@ -20,19 +19,14 @@ describe("Name favorites", () => {
 		]
 		arrange(names)
 
-		// Act
 		await userEvent.click(screen.getByText("button.favorites"))
-		// Assert
 		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
 
-		// Act
 		await userEvent.click(screen.getByText("button.close"))
-		// Assert
 		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
 	})
 
-	test("no-favorites message is shown if trying to show favorites but empty, it can be closed with ESC key", async () => {
-		// Arrange
+	test("shows no-favorites message if trying to show favorites but empty, it can be closed with ESC key", async () => {
 		const names = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Jare").build(),
@@ -42,19 +36,14 @@ describe("Name favorites", () => {
 		]
 		arrange(names)
 
-		// Act
 		await userEvent.click(screen.getByText("button.favorites"))
-		// Assert
 		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
 
-		// Act
 		await userEvent.keyboard("{Escape}")
-		// Assert
 		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
 	})
 
 	test("no-favorites message is shown if trying to show favorites but empty, it can be closed clicking outside modal", async () => {
-		// Arrange
 		const names = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Jare").build(),
@@ -64,19 +53,14 @@ describe("Name favorites", () => {
 		]
 		arrange(names)
 
-		// Act
 		await userEvent.click(screen.getByText("button.favorites"))
-		// Assert
 		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
 
-		// Act
 		await userEvent.click(screen.getByTestId("modal-background"))
-		// Assert
 		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
 	})
 
 	test("can add favorites and they will be shown alphabetically in the proper section", async () => {
-		// Arrange
 		const names = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Jare").build(),
@@ -119,7 +103,6 @@ describe("Name favorites", () => {
 	})
 
 	test("can remove favorites", async () => {
-		// Arrange
 		const names = [
 			NameBuilder.aRandomName().withName("Amets").build(),
 			NameBuilder.aRandomName().withName("Jare").build(),

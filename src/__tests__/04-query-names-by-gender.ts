@@ -10,7 +10,7 @@ const unique =
 		name: `${name.name}-${index + base}`,
 	})
 
-describe("Home links", () => {
+describe("Query names by gender", () => {
 	let maleNames: JsonName[]
 	let femaleNames: JsonName[]
 	let neutralNames: JsonName[]
@@ -29,14 +29,22 @@ describe("Home links", () => {
 		setNamesForTest([...maleNames, ...femaleNames, ...neutralNames])
 	})
 
-	test("exists a link to go to a page with the female names", async () => {
-		// Arange
+	it("is possible to see all names together", async () => {
 		render()
 
-		// Act
+		await userEvent.click(screen.getByText("link.allNames"))
+
+		expect(screen.getByText("title.allNames")).toBeInTheDocument()
+		for (const name of [...maleNames, ...neutralNames, ...femaleNames]) {
+			expect(screen.getByText(name.name)).toBeInTheDocument()
+		}
+	})
+
+	it("is possible to see only female names", async () => {
+		render()
+
 		await userEvent.click(screen.getByText("link.femaleNames"))
 
-		// Assert
 		expect(screen.getByText("title.femaleNames")).toBeInTheDocument()
 		for (const name of [...femaleNames, ...neutralNames]) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
@@ -46,34 +54,17 @@ describe("Home links", () => {
 		}
 	})
 
-	test("exists a link to go to a page with the male names", async () => {
-		// Arange
+	it("is possible to see only male names", async () => {
 		render()
 
-		// Act
 		await userEvent.click(screen.getByText("link.maleNames"))
 
-		// Assert
 		expect(screen.getByText("title.maleNames")).toBeInTheDocument()
 		for (const name of [...maleNames, ...neutralNames]) {
 			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
 		for (const name of femaleNames) {
 			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
-		}
-	})
-
-	test("exists a link to go to a page with all the names", async () => {
-		// Arange
-		render()
-
-		// Act
-		await userEvent.click(screen.getByText("link.allNames"))
-
-		// Assert
-		expect(screen.getByText("title.allNames")).toBeInTheDocument()
-		for (const name of [...maleNames, ...neutralNames, ...femaleNames]) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
 		}
 	})
 })

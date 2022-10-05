@@ -30,45 +30,36 @@ const arrange = async () => {
 }
 
 describe("Name cards", () => {
-	test("can navigate backward if previous card exist", async () => {
-		// Arrange
+	it("can navigate backward if previous card exist", async () => {
 		await arrange()
 
-		// Act & assert
 		await userEvent.click(screen.getByText("Hodei"))
 		expect(screen.getByText("content.noTranslations")).toBeInTheDocument()
 		expect(screen.getByText("Nube")).toBeInTheDocument()
 
-		// Act & assert
 		await userEvent.click(screen.getByText("button.previousName"))
 		expect(screen.getByText("Un nombre")).toBeInTheDocument()
 		expect(screen.getByText("Salvador")).toBeInTheDocument()
 	})
 
-	test("can navigate forward if next card exist", async () => {
-		// Arrange
+	it("can navigate forward if next card exist", async () => {
 		await arrange()
 
-		// Act & assert
 		await userEvent.click(screen.getByText("Hodei"))
 		expect(screen.getByText("content.noTranslations")).toBeInTheDocument()
 		expect(screen.getByText("Nube")).toBeInTheDocument()
 
-		// Act & assert
 		await userEvent.click(screen.getByText("button.nextName"))
 		expect(screen.getByText("Dolores")).toBeInTheDocument()
 		expect(screen.getByText("content.noMeaning")).toBeInTheDocument()
 	})
 
-	test("can close card", async () => {
-		// Arrange
+	it("can close card", async () => {
 		await arrange()
 
-		// Act & assert
 		await userEvent.click(screen.getByText("Hodei"))
 		expect(screen.getByText("Nube")).toBeInTheDocument()
 
-		// Act & assert
 		await userEvent.click(screen.getByText("button.close"))
 		expect(screen.queryByText("Nube")).not.toBeInTheDocument()
 	})
