@@ -10,6 +10,5 @@ describe("About information is accessible", () => {
 
 		await userEvent.click(screen.getByText("link.back"))
 		expect(screen.queryByText("title.aboutUs")).not.toBeInTheDocument()
-		expect(screen.getByText("button.favorites")).toBeInTheDocument()
 	})
 })
