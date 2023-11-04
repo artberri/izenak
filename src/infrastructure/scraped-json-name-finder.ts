@@ -59,7 +59,7 @@ const mapNames = map(
 		meaning: name.meaning || undefined,
 		translations: name.translations || undefined,
 		gender: mapGender(name.gender),
-	})
+	}),
 )
 
 const filterByGender = (gender?: Gender) => (name: Name) =>
@@ -99,7 +99,7 @@ const filterName = (filter: Filter) => {
 			filterByOnlyBasque(normalizedFilter.onlyBasque),
 			filterByStartsWith(normalizedFilter.startsWith),
 			filterByEndsWith(normalizedFilter.endsWith),
-		])
+		]),
 	)
 }
 
@@ -112,7 +112,7 @@ export class ScrapedJsonNameFinder implements NameFinder {
 	public async find(
 		filter: Filter,
 		from: number,
-		limit: number
+		limit: number,
 	): Promise<Name[]> {
 		const paginateNames = slice(from, from + limit)
 		const filterNames = filterArray(filterName(filter))

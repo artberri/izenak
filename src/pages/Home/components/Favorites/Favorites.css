@@ -11,11 +11,11 @@
 	transition: 0.3s ease all;
 	overflow: hidden;
 
-	@nest .page--in & {
+	.page--in & {
 		bottom: -50%;
 	}
 
-	@nest .page--out & {
+	.page--out & {
 		bottom: -50%;
 	}
 }

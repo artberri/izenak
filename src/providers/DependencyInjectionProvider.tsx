@@ -6,7 +6,7 @@ import { WithChildren } from "../types/WithChildren"
 const builder = new ContainerBuilder()
 
 export const DependencyInjectionContext = createContext<Container>(
-	builder.build()
+	builder.build(),
 )
 
 export interface DependencyInjectionProviderProps extends WithChildren {
@@ -24,6 +24,7 @@ export function DependencyInjectionProvider({
 	)
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export interface Class<T> extends Function {
 	prototype: T
 }

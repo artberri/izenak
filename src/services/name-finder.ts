@@ -5,6 +5,6 @@ export abstract class NameFinder {
 	public abstract find(
 		filter: Filter,
 		from: number,
-		limit: number
+		limit: number,
 	): Promise<Name[]>
 }

@@ -16,26 +16,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: "20.9.0"
           registry-url: "https://registry.npmjs.org"
       - name: Install pnpm
         id: pnpm-install
-        uses: pnpm/action-setup@v2.1.0
+        uses: pnpm/action-setup@v2
         with:
-          version: "7.x"
+          version: "8.10.2"
           run_install: false
       - name: Get pnpm store directory
-        id: pnpm-cache
+        shell: bash
         run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
       - uses: actions/cache@v3
         name: Setup pnpm cache
         with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          path: ${{ env.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
@@ -43,7 +43,9 @@ jobs:
         run: pnpm install --frozen-lockfile --strict-peer-dependencies
       - name: Run QA
         run: pnpm run qa:coverage
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          directory: ./coverage/

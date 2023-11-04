@@ -1,14 +1,14 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest } from "test-utils"
-import { JsonName } from "../infrastructure/name-getter"
+import { render, screen, setNamesForTest, waitFor } from "test-utils"
 import { NameBuilder } from "../__test-utils__/name-builder"
+import { JsonName } from "../infrastructure/name-getter"
 
 const arrange = async (names: JsonName[]) => {
 	setNamesForTest(names)
 	render()
 	await userEvent.click(screen.getByText("link.allNames"))
 	for (const name of names) {
-		expect(screen.getByText(name.name)).toBeInTheDocument()
+		await screen.findByText(name.name)
 	}
 }
 
@@ -32,14 +32,18 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.type(screen.getByLabelText("label.searchTerm"), "it")
+		await userEvent.type(await screen.findByLabelText("label.searchTerm"), "it")
 
 		// Assert
 		for (const name of toMatchNames) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 		for (const name of otherNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 	})
 
@@ -64,14 +68,21 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.type(screen.getByLabelText("label.startsWith"), "alb")
+		await userEvent.type(
+			await screen.findByLabelText("label.startsWith"),
+			"alb",
+		)
 
 		// Assert
 		for (const name of toMatchNames) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 		for (const name of otherNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 	})
 
@@ -92,14 +103,18 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.type(screen.getByLabelText("label.endsWith"), "ets")
+		await userEvent.type(await screen.findByLabelText("label.endsWith"), "ets")
 
 		// Assert
 		for (const name of toMatchNames) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 		for (const name of otherNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 	})
 
@@ -119,14 +134,18 @@ describe("Name filters", () => {
 		await arrange([...toMatchNames, ...otherNames])
 
 		// Act
-		await userEvent.click(screen.getByLabelText("label.onlyBasque"))
+		await userEvent.click(await screen.findByLabelText("label.onlyBasque"))
 
 		// Assert
 		for (const name of toMatchNames) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 		for (const name of otherNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 	})
 
@@ -143,17 +162,22 @@ describe("Name filters", () => {
 		await arrange(names)
 
 		// Act
-		await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
+		await userEvent.click(
+			await screen.findByLabelText("label.sortAlphabetically"),
+		)
 
 		// Assert
-		const nameTags = screen.queryAllByTestId("nametag")
-		expect(nameTags).toHaveLength(names.length)
-		expect(nameTags[0]?.innerHTML).toBe("Aiert")
-		expect(nameTags[1]?.innerHTML).toBe("Amets")
-		expect(nameTags[2]?.innerHTML).toBe("Enara")
-		expect(nameTags[3]?.innerHTML).toBe("Jare")
-		expect(nameTags[4]?.innerHTML).toBe("Julen")
-		expect(nameTags[5]?.innerHTML).toBe("Leize")
+		await waitFor(() => {
+			const nameTags = screen.queryAllByTestId("nametag")
+			expect(nameTags.map((tag) => tag.innerHTML)).toEqual([
+				"Aiert",
+				"Amets",
+				"Enara",
+				"Jare",
+				"Julen",
+				"Leize",
+			])
+		})
 	})
 
 	test("can reset filters", async () => {
@@ -174,17 +198,28 @@ describe("Name filters", () => {
 			NameBuilder.aRandomName().withName("otro").build(),
 		]
 		await arrange([...toMatchNames, ...otherNames])
-		await userEvent.type(screen.getByLabelText("label.searchTerm"), "i")
-		await userEvent.type(screen.getByLabelText("label.startsWith"), "a")
-		await userEvent.type(screen.getByLabelText("label.endsWith"), "s")
-		await userEvent.click(screen.getByLabelText("label.onlyBasque"))
-		await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
-		const nameTags = screen.queryAllByTestId("nametag")
-		expect(nameTags).toHaveLength(toMatchNames.length)
-		expect(nameTags[0]?.innerHTML).toBe("alis")
-		expect(nameTags[1]?.innerHTML).toBe("atriisss")
+		await userEvent.type(await screen.findByLabelText("label.searchTerm"), "i")
+		await userEvent.type(await screen.findByLabelText("label.startsWith"), "a")
+		await userEvent.type(await screen.findByLabelText("label.endsWith"), "s")
+		await userEvent.click(await screen.findByLabelText("label.onlyBasque"))
+		await userEvent.click(
+			await screen.findByLabelText("label.sortAlphabetically"),
+		)
+		await waitFor(() =>
+			expect(screen.queryAllByTestId("nametag")).toHaveLength(
+				toMatchNames.length,
+			),
+		)
+		await waitFor(() =>
+			expect(screen.queryAllByTestId("nametag")[0]?.innerHTML).toBe("alis"),
+		)
+		await waitFor(() =>
+			expect(screen.queryAllByTestId("nametag")[1]?.innerHTML).toBe("atriisss"),
+		)
 		for (const name of otherNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 
 		// Act
@@ -192,7 +227,10 @@ describe("Name filters", () => {
 
 		// Assert
 		for (const name of [...toMatchNames, ...otherNames]) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			// eslint-disable-next-line testing-library/prefer-find-by
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 	})
 })

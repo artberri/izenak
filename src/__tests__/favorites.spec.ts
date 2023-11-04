@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest } from "test-utils"
-import { JsonName } from "../infrastructure/name-getter"
+import { render, screen, setNamesForTest, waitFor } from "test-utils"
 import { NameBuilder } from "../__test-utils__/name-builder"
+import { JsonName } from "../infrastructure/name-getter"
 
 const arrange = (names: JsonName[]) => {
 	setNamesForTest(names)
@@ -23,12 +23,16 @@ describe("Name favorites", () => {
 		// Act
 		await userEvent.click(screen.getByText("button.favorites"))
 		// Assert
-		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.getByText("content.noFavorites")).toBeInTheDocument(),
+		)
 
 		// Act
 		await userEvent.click(screen.getByText("button.close"))
 		// Assert
-		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument(),
+		)
 	})
 
 	test("no-favorites message is shown if trying to show favorites but empty, it can be closed with ESC key", async () => {
@@ -43,14 +47,18 @@ describe("Name favorites", () => {
 		arrange(names)
 
 		// Act
-		await userEvent.click(screen.getByText("button.favorites"))
+		await userEvent.click(await screen.findByText("button.favorites"))
 		// Assert
-		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.getByText("content.noFavorites")).toBeInTheDocument(),
+		)
 
 		// Act
 		await userEvent.keyboard("{Escape}")
 		// Assert
-		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument(),
+		)
 	})
 
 	test("no-favorites message is shown if trying to show favorites but empty, it can be closed clicking outside modal", async () => {
@@ -65,14 +73,18 @@ describe("Name favorites", () => {
 		arrange(names)
 
 		// Act
-		await userEvent.click(screen.getByText("button.favorites"))
+		await userEvent.click(await screen.findByText("button.favorites"))
 		// Assert
-		expect(screen.getByText("content.noFavorites")).toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.getByText("content.noFavorites")).toBeInTheDocument(),
+		)
 
 		// Act
 		await userEvent.click(screen.getByTestId("modal-background"))
 		// Assert
-		expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.queryByText("content.noFavorites")).not.toBeInTheDocument(),
+		)
 	})
 
 	test("can add favorites and they will be shown alphabetically in the proper section", async () => {
@@ -85,37 +97,43 @@ describe("Name favorites", () => {
 			NameBuilder.aRandomName().withName("Enara").build(),
 		]
 		arrange(names)
-		await userEvent.click(screen.getByText("link.allNames"))
+		await userEvent.click(await screen.findByText("link.allNames"))
 
 		// Open mane card Leize and favorite it
-		await userEvent.click(screen.getByText("Leize"))
-		await userEvent.click(screen.getByTitle("button.like"))
-		await userEvent.click(screen.getByText("button.close"))
+		await userEvent.click(await screen.findByText("Leize"))
+		await userEvent.click(await screen.findByTitle("button.like"))
+		await userEvent.click(await screen.findByText("button.close"))
 
 		// Open mane card Aiert and favorite it
-		await userEvent.click(screen.getByText("Aiert"))
-		await userEvent.click(screen.getByTitle("button.like"))
-		await userEvent.click(screen.getByText("button.close"))
+		await userEvent.click(await screen.findByText("Aiert"))
+		await userEvent.click(await screen.findByTitle("button.like"))
+		await userEvent.click(await screen.findByText("button.close"))
 
 		// Go home and open favorites section
-		await userEvent.click(screen.getByText("link.back"))
-		await userEvent.click(screen.getByText("button.favorites"))
+		await userEvent.click(await screen.findByText("link.back"))
+		await userEvent.click(await screen.findByText("button.favorites"))
 
 		// Assert there are in the favorites section
-		expect(screen.getByText("Aiert")).toBeInTheDocument()
-		expect(
-			screen.getByRole("button", { name: "button.previousName" })
-		).toBeDisabled()
-		await userEvent.click(
-			screen.getByRole("button", { name: "button.nextName" })
+		await waitFor(() => expect(screen.getByText("Aiert")).toBeInTheDocument())
+		await waitFor(() =>
+			expect(
+				screen.getByRole("button", { name: "button.previousName" }),
+			).toBeDisabled(),
 		)
-		expect(screen.getByText("Leize")).toBeInTheDocument()
-		expect(
-			screen.getByRole("button", { name: "button.previousName" })
-		).toBeEnabled()
-		expect(
-			screen.getByRole("button", { name: "button.nextName" })
-		).toBeDisabled()
+		await userEvent.click(
+			screen.getByRole("button", { name: "button.nextName" }),
+		)
+		await waitFor(() => expect(screen.getByText("Leize")).toBeInTheDocument())
+		await waitFor(() =>
+			expect(
+				screen.getByRole("button", { name: "button.previousName" }),
+			).toBeEnabled(),
+		)
+		await waitFor(() =>
+			expect(
+				screen.getByRole("button", { name: "button.nextName" }),
+			).toBeDisabled(),
+		)
 	})
 
 	test("can remove favorites", async () => {
@@ -128,34 +146,38 @@ describe("Name favorites", () => {
 			NameBuilder.aRandomName().withName("Enara").build(),
 		]
 		arrange(names)
-		await userEvent.click(screen.getByText("link.allNames"))
+		await userEvent.click(await screen.findByText("link.allNames"))
 
 		// Open mane card Leize and favorite it
-		await userEvent.click(screen.getByText("Leize"))
-		await userEvent.click(screen.getByTitle("button.like"))
-		await userEvent.click(screen.getByText("button.close"))
+		await userEvent.click(await screen.findByText("Leize"))
+		await userEvent.click(await screen.findByTitle("button.like"))
+		await userEvent.click(await screen.findByText("button.close"))
 
 		// Open mane card Aiert and favorite it
-		await userEvent.click(screen.getByText("Aiert"))
-		await userEvent.click(screen.getByTitle("button.like"))
-		await userEvent.click(screen.getByText("button.close"))
+		await userEvent.click(await screen.findByText("Aiert"))
+		await userEvent.click(await screen.findByTitle("button.like"))
+		await userEvent.click(await screen.findByText("button.close"))
 
 		// Open mane card Leize and favorite it
-		await userEvent.click(screen.getByText("Leize"))
-		await userEvent.click(screen.getByTitle("button.unlike"))
-		await userEvent.click(screen.getByText("button.close"))
+		await userEvent.click(await screen.findByText("Leize"))
+		await userEvent.click(await screen.findByTitle("button.unlike"))
+		await userEvent.click(await screen.findByText("button.close"))
 
 		// Go home and open favorites section
-		await userEvent.click(screen.getByText("link.back"))
-		await userEvent.click(screen.getByText("button.favorites"))
+		await userEvent.click(await screen.findByText("link.back"))
+		await userEvent.click(await screen.findByText("button.favorites"))
 
 		// Assert there are in the favorites section
-		expect(screen.getByText("Aiert")).toBeInTheDocument()
-		expect(
-			screen.getByRole("button", { name: "button.previousName" })
-		).toBeDisabled()
-		expect(
-			screen.getByRole("button", { name: "button.nextName" })
-		).toBeDisabled()
+		await waitFor(() => expect(screen.getByText("Aiert")).toBeInTheDocument())
+		await waitFor(() =>
+			expect(
+				screen.getByRole("button", { name: "button.previousName" }),
+			).toBeDisabled(),
+		)
+		await waitFor(() =>
+			expect(
+				screen.getByRole("button", { name: "button.nextName" }),
+			).toBeDisabled(),
+		)
 	})
 })

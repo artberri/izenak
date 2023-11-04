@@ -42,6 +42,9 @@ module.exports = {
 		{
 			files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
 			extends: ["plugin:jest-dom/recommended", "plugin:testing-library/react"],
+			rules: {
+				"testing-library/prefer-find-by": [0],
+			},
 		},
 	],
 	settings: {

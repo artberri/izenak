@@ -111,7 +111,7 @@ export function NameCards({
 			</div>
 		</CSSTransition>,
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		document.getElementById(NameCardsContainer.Id)!
+		document.getElementById(NameCardsContainer.Id)!,
 	)
 }
 

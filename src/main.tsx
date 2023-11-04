@@ -23,5 +23,5 @@ render(
 			<App />
 		</DependencyInjectionProvider>
 	</TranslationProvider>,
-	app
+	app,
 )

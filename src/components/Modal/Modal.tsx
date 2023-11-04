@@ -68,7 +68,7 @@ export function Modal({ show, onClose, children }: NameCardsProps) {
 			</div>
 		</CSSTransition>,
 		// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-		document.getElementById(ModalContainer.Id)!
+		document.getElementById(ModalContainer.Id)!,
 	)
 }
 
