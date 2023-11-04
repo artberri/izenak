@@ -14,7 +14,7 @@ export function Favorites() {
 	const [showEmpty, setShowEmpty] = useState(false)
 
 	const [openedNameCard, setOpenedNameCard] = useState<Name | undefined>(
-		undefined
+		undefined,
 	)
 
 	const openFavorites = () => {

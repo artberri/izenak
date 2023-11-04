@@ -14,7 +14,7 @@ export class JsonFavoriteRepository implements FavoriteRepository {
 		const newValue = [...favorites, name]
 		await this.storage.setItem(
 			JsonFavoriteRepository.key,
-			JSON.stringify(newValue)
+			JSON.stringify(newValue),
 		)
 		this.favorites = newValue
 	}
@@ -24,7 +24,7 @@ export class JsonFavoriteRepository implements FavoriteRepository {
 		const newValue = favorites.filter((favorite) => favorite.id !== name.id)
 		await this.storage.setItem(
 			JsonFavoriteRepository.key,
-			JSON.stringify(newValue)
+			JSON.stringify(newValue),
 		)
 		this.favorites = newValue
 	}
@@ -33,7 +33,14 @@ export class JsonFavoriteRepository implements FavoriteRepository {
 		if (!this.initialized) {
 			const value =
 				(await this.storage.getItem(JsonFavoriteRepository.key)) ?? "[]"
-			this.favorites = JSON.parse(value) as Name[]
+			try {
+				this.favorites = JSON.parse(value) as Name[]
+				this.initialized = true
+			} catch (error) {
+				// eslint-disable-next-line no-console
+				console.error(error)
+				this.favorites = []
+			}
 			this.initialized = true
 		}
 

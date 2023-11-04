@@ -32,15 +32,15 @@
 	padding: 0.5rem 0;
 	padding: 2rem 2rem 0;
 
-	@nest .namecard--male & {
+	.namecard--male & {
 		color: var(--boyColor);
 	}
 
-	@nest .namecard--female & {
+	.namecard--female & {
 		color: var(--girlColor);
 	}
 
-	@nest .namecard--neutral & {
+	.namecard--neutral & {
 		color: var(--allColor);
 	}
 }
@@ -100,15 +100,15 @@
 	width: 5rem;
 	height: 5rem;
 
-	@nest .namecard--male & {
+	.namecard--male & {
 		color: var(--boyColor);
 	}
 
-	@nest .namecard--female & {
+	.namecard--female & {
 		color: var(--girlColor);
 	}
 
-	@nest .namecard--neutral & {
+	.namecard--neutral & {
 		color: var(--allColor);
 	}
 }
@@ -118,15 +118,15 @@
 	height: 5rem;
 	opacity: 1;
 
-	@nest .namecard--male & {
+	.namecard--male & {
 		color: var(--boyColor);
 	}
 
-	@nest .namecard--female & {
+	.namecard--female & {
 		color: var(--girlColor);
 	}
 
-	@nest .namecard--neutral & {
+	.namecard--neutral & {
 		color: var(--allColor);
 	}
 }

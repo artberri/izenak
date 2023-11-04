@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest } from "test-utils"
+import { render, screen, setNamesForTest, waitFor } from "test-utils"
 import { NameBuilder } from "../__test-utils__/name-builder"
 
 const arrange = async () => {
@@ -22,10 +22,12 @@ const arrange = async () => {
 	]
 	setNamesForTest(names)
 	render()
-	await userEvent.click(screen.getByText("link.allNames"))
-	await userEvent.click(screen.getByLabelText("label.sortAlphabetically"))
+	await userEvent.click(await screen.findByText("link.allNames"))
+	await userEvent.click(
+		await screen.findByLabelText("label.sortAlphabetically"),
+	)
 	for (const name of names) {
-		expect(screen.getByText(name.name)).toBeInTheDocument()
+		await screen.findByText(name.name)
 	}
 }
 
@@ -35,14 +37,20 @@ describe("Name cards", () => {
 		await arrange()
 
 		// Act & assert
-		await userEvent.click(screen.getByText("Hodei"))
-		expect(screen.getByText("content.noTranslations")).toBeInTheDocument()
-		expect(screen.getByText("Nube")).toBeInTheDocument()
+		await userEvent.click(await screen.findByText("Hodei"))
+		await waitFor(() =>
+			expect(screen.getByText("content.noTranslations")).toBeInTheDocument(),
+		)
+		await waitFor(() => expect(screen.getByText("Nube")).toBeInTheDocument())
 
 		// Act & assert
-		await userEvent.click(screen.getByText("button.previousName"))
-		expect(screen.getByText("Un nombre")).toBeInTheDocument()
-		expect(screen.getByText("Salvador")).toBeInTheDocument()
+		await userEvent.click(await screen.findByText("button.previousName"))
+		await waitFor(() =>
+			expect(screen.getByText("Un nombre")).toBeInTheDocument(),
+		)
+		await waitFor(() =>
+			expect(screen.getByText("Salvador")).toBeInTheDocument(),
+		)
 	})
 
 	test("can navigate forward if next card exist", async () => {
@@ -50,14 +58,18 @@ describe("Name cards", () => {
 		await arrange()
 
 		// Act & assert
-		await userEvent.click(screen.getByText("Hodei"))
-		expect(screen.getByText("content.noTranslations")).toBeInTheDocument()
-		expect(screen.getByText("Nube")).toBeInTheDocument()
+		await userEvent.click(await screen.findByText("Hodei"))
+		await waitFor(() =>
+			expect(screen.getByText("content.noTranslations")).toBeInTheDocument(),
+		)
+		await waitFor(() => expect(screen.getByText("Nube")).toBeInTheDocument())
 
 		// Act & assert
-		await userEvent.click(screen.getByText("button.nextName"))
-		expect(screen.getByText("Dolores")).toBeInTheDocument()
-		expect(screen.getByText("content.noMeaning")).toBeInTheDocument()
+		await userEvent.click(await screen.findByText("button.nextName"))
+		await waitFor(() => expect(screen.getByText("Dolores")).toBeInTheDocument())
+		await waitFor(() =>
+			expect(screen.getByText("content.noMeaning")).toBeInTheDocument(),
+		)
 	})
 
 	test("can close card", async () => {
@@ -65,11 +77,13 @@ describe("Name cards", () => {
 		await arrange()
 
 		// Act & assert
-		await userEvent.click(screen.getByText("Hodei"))
-		expect(screen.getByText("Nube")).toBeInTheDocument()
+		await userEvent.click(await screen.findByText("Hodei"))
+		await waitFor(() => expect(screen.getByText("Nube")).toBeInTheDocument())
 
 		// Act & assert
-		await userEvent.click(screen.getByText("button.close"))
-		expect(screen.queryByText("Nube")).not.toBeInTheDocument()
+		await userEvent.click(await screen.findByText("button.close"))
+		await waitFor(() =>
+			expect(screen.queryByText("Nube")).not.toBeInTheDocument(),
+		)
 	})
 })

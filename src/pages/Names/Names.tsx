@@ -49,7 +49,7 @@ export function Names({ gender }: IzenakProps) {
 	const [loadingMore, setLoadingMore] = useState(false)
 	const [showMoreButton, setShowMoreButton] = useState(false)
 	const [openedNameCard, setOpenedNameCard] = useState<Name | undefined>(
-		undefined
+		undefined,
 	)
 
 	const nameFinder = useService(NameFinder)

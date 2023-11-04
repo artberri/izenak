@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen } from "test-utils"
+import { render, screen, waitFor } from "test-utils"
 
 describe("About info page", () => {
 	test("can be navigated from home page and displays congratulations message", async () => {
@@ -10,6 +10,8 @@ describe("About info page", () => {
 		await userEvent.click(screen.getByText("link.aboutUs"))
 
 		// Assert
-		expect(screen.getByText("title.aboutUs")).toBeInTheDocument()
+		await waitFor(() =>
+			expect(screen.getByText("title.aboutUs")).toBeInTheDocument(),
+		)
 	})
 })

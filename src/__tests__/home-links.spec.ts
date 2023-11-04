@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event"
-import { render, screen, setNamesForTest } from "test-utils"
-import { JsonName } from "../infrastructure/name-getter"
+import { render, screen, setNamesForTest, waitFor } from "test-utils"
 import { NameBuilder } from "../__test-utils__/name-builder"
+import { JsonName } from "../infrastructure/name-getter"
 
 const unique =
 	(base: number) =>
@@ -17,13 +17,13 @@ describe("Home links", () => {
 
 	beforeEach(() => {
 		maleNames = Array.from({ length: 3 }, () =>
-			NameBuilder.aMaleName().build()
+			NameBuilder.aMaleName().build(),
 		).map(unique(0))
 		femaleNames = Array.from({ length: 3 }, () =>
-			NameBuilder.aFemaleName().build()
+			NameBuilder.aFemaleName().build(),
 		).map(unique(3))
 		neutralNames = Array.from({ length: 3 }, () =>
-			NameBuilder.aNeutralName().build()
+			NameBuilder.aNeutralName().build(),
 		).map(unique(6))
 
 		setNamesForTest([...maleNames, ...femaleNames, ...neutralNames])
@@ -39,10 +39,14 @@ describe("Home links", () => {
 		// Assert
 		expect(screen.getByText("title.femaleNames")).toBeInTheDocument()
 		for (const name of [...femaleNames, ...neutralNames]) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 		for (const name of maleNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 	})
 
@@ -56,10 +60,14 @@ describe("Home links", () => {
 		// Assert
 		expect(screen.getByText("title.maleNames")).toBeInTheDocument()
 		for (const name of [...maleNames, ...neutralNames]) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 		for (const name of femaleNames) {
-			expect(screen.queryByText(name.name)).not.toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.queryByText(name.name)).not.toBeInTheDocument(),
+			)
 		}
 	})
 
@@ -73,7 +81,9 @@ describe("Home links", () => {
 		// Assert
 		expect(screen.getByText("title.allNames")).toBeInTheDocument()
 		for (const name of [...maleNames, ...neutralNames, ...femaleNames]) {
-			expect(screen.getByText(name.name)).toBeInTheDocument()
+			await waitFor(() =>
+				expect(screen.getByText(name.name)).toBeInTheDocument(),
+			)
 		}
 	})
 })

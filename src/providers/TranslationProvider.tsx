@@ -37,13 +37,13 @@ export const useTranslation = () => {
 			for (const placeholderTuple of Object.entries(placeholders)) {
 				translation = translation.replaceAll(
 					`{{${placeholderTuple[0]}}}`,
-					placeholderTuple[1]
+					placeholderTuple[1],
 				)
 			}
 
 			return translation
 		},
-		[translations]
+		[translations],
 	)
 
 	return {
