@@ -12,7 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
-scraper/env
+.venv
 __pycache__
 coverage/
 

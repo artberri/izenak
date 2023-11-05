@@ -1,9 +1,9 @@
 # izenak.eus
 
-[![qa](https://github.com/artberri/izenak/actions/workflows/qa.yml/badge.svg)](https://github.com/artberri/izenak/actions/workflows/qa.yml)
-[![Coverage Status](https://coveralls.io/repos/github/artberri/izenak/badge.svg?branch=main)](https://coveralls.io/github/artberri/izenak?branch=main)
+[![Build status](https://github.com/artberri/izenak/actions/workflows/qa.yml/badge.svg)](https://github.com/artberri/izenak/actions/workflows/qa.yml)
+[![Coverage Status](https://codecov.io/gh/artberri/izenak/graph/badge.svg?token=Y6GYAQJNQ5)](https://codecov.io/gh/artberri/izenak)
 
-Web Application to find Basque names. Deployed at [https://izenak.eus/](https://izenak.eus/).
+Web Application to find Basque baby names. Deployed at [https://izenak.eus/](https://izenak.eus/).
 
 ## Project setup
 
@@ -34,21 +34,20 @@ pnpm run qa
 Create Python virtual env
 
 ```bash
-cd scraper
-python3 -m venv env
-source env/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Install dependencies
 
 ```bash
-python3 -m pip install -r requirements.txt
+python3 -m pip install -r scraper/requirements.txt
 ```
 
 Run the scraper
 
 ```bash
-scrapy runspider euskaltzaindia.py -o ../public/izenak.json
+scrapy runspider scraper/euskaltzaindia.py -o ./public/izenak.json
 ```
 
 Deactivate virtual env
