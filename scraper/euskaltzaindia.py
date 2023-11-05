@@ -14,7 +14,7 @@ class EuskaltzaindisSpider(scrapy.Spider):
     name = 'euskaltzaindiaspider'
     start_urls = start_urls
     custom_settings = {
-        'DOWNLOAD_DELAY': 1,
+        'DOWNLOAD_DELAY': 2,
     }
 
     def parse(self, response):
@@ -27,7 +27,7 @@ class EuskaltzaindisSpider(scrapy.Spider):
         name = content.css('h3 ::text').get()
         row = content.css('.row')
         translations = row.css(':nth-child(1) ::text').get().strip().replace('\t', '')
-        metadata = row.css(':nth-child(2) ul')
+        metadata = row.css(':nth-child(2) .row')
         gender = metadata.css(':nth-child(2) ::text').get().strip().replace('\t', '').lower()
         hipocoristic = metadata.css(':nth-child(4) ::text').get().strip().replace('\t', '').lower()
         meaningTag = row.css('.col-md-12:nth-child(3) p').get()
