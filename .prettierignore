@@ -1,0 +1,7 @@
+# Ignore JavaScript and TypeScript files (using oxf for these)
+*.js
+*.jsx
+*.ts
+*.tsx
+*.mjs
+*.cjs
