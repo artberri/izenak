@@ -1,19 +1,19 @@
-# Welcome to your Expo app 👋
+# izenak
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform Basque Names Finder mobile application built with Expo and React Native.
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   npm install
+   bun install
    ```
 
 2. Start the app
 
    ```bash
-   npx expo start
+   bun start
    ```
 
 In the output, you'll find options to open the app in a
@@ -48,3 +48,27 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Scraper
+
+The `scraper/` directory contains a Python script to scrape Basque names from [Euskaltzaindia](https://www.euskaltzaindia.eus).
+
+### Requirements
+
+- Python 3.10+
+
+### Setup
+
+```bash
+bun run scraper:setup
+```
+
+This creates a virtual environment and installs dependencies.
+
+### Run
+
+```bash
+bun run scraper
+```
+
+This scrapes all names and outputs them to `scraper/names.json`. The scraper has a 2-second delay between requests to be respectful to the server.
