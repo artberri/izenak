@@ -18,3 +18,6 @@ __pycache__
 
 expo-env.d.ts
 # @end expo-cli
+
+# Scraped data
+scraper/names.json
