@@ -84,3 +84,19 @@ bun run scraper
 ```
 
 This scrapes all names and outputs them to `scraper/names.json`. The scraper has a 2-second delay between requests to be respectful to the server.
+
+### Data Curation
+
+After scraping, check for duplicate entries:
+
+```bash
+bun run scraper:check
+```
+
+This script identifies:
+
+- **Exact duplicates** - identical entries that should be removed
+- **Same gender duplicates** - same name/gender with different meanings (review needed)
+- **Different gender entries** - same name for different genders (usually intentional)
+
+Manually edit `scraper/names.json` to remove duplicates until the script reports no issues.

@@ -13,7 +13,8 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "scraper:setup": "python3 -m venv scraper/.venv && scraper/.venv/bin/pip install -r scraper/requirements.txt",
-    "scraper": "scraper/.venv/bin/scrapy runspider scraper/euskaltzaindia.py -o scraper/names.json"
+    "scraper": "scraper/.venv/bin/scrapy runspider scraper/euskaltzaindia.py -o scraper/names.json",
+    "scraper:check": "bun scripts/check-duplicates.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
