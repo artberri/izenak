@@ -14,7 +14,8 @@
     "fmt:check": "oxfmt --check",
     "scraper:setup": "python3 -m venv scraper/.venv && scraper/.venv/bin/pip install -r scraper/requirements.txt",
     "scraper": "scraper/.venv/bin/scrapy runspider scraper/euskaltzaindia.py -o scraper/names.json",
-    "scraper:check": "bun scripts/check-duplicates.js"
+		"db:generate": "bun --env-file=.env.local ./node_modules/.bin/drizzle-kit generate",
+		"db:migrate": "bun --env-file=.env.local ./node_modules/.bin/drizzle-kit migrate"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.1.0",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~10.0.0",
     "oxfmt": "^0.26.0",

@@ -23,3 +23,6 @@ expo-env.d.ts
 
 # Scraped data
 scraper/names.json
+
+# Environment variables
+.env*.local
