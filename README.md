@@ -25,6 +25,18 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+## iOS Setup
+
+For iOS development, you need to install CocoaPods dependencies:
+
+```bash
+cd ios
+bundle
+bundle exec pod install --repo-update --ansi
+```
+
+This will install the required Ruby gems (via Bundler) and then install all iOS dependencies using CocoaPods.
+
 ## Get a fresh project
 
 When you're ready, run:

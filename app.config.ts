@@ -11,9 +11,11 @@ const config: ExpoConfig = {
   "userInterfaceStyle": "automatic",
   "newArchEnabled": true,
   "ios": {
-    "supportsTablet": true
+    "supportsTablet": true,
+    "bundleIdentifier": "eus.izenak.app"
   },
   "android": {
+    "package": "eus.izenak.app",
     "adaptiveIcon": {
       "backgroundColor": "#E6F4FE",
       "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -39,6 +41,12 @@ const config: ExpoConfig = {
         "dark": {
           "backgroundColor": "#000000"
         }
+      }
+    ],
+    [
+      "expo-sqlite",
+      {
+        "useLibSQL": true
       }
     ]
   ],
