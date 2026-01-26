@@ -12,7 +12,9 @@
 - **TypeScript** 5.9 - Strict type-checking enabled
 - **Expo Router** ~6 - File-based routing
 - **oxlint** - High-performance linter
-- **oxfmt** - Code formatter
+- **prettier** - Code formatter
+- **Drizzle ORM** - Database ORM
+- **Turso** - Remote database
 
 ## Directory Structure
 
@@ -21,9 +23,10 @@ app/          # Routes (file-based via Expo Router)
   (tabs)/     # Tab navigation
 components/   # Reusable UI components
 constants/    # Theme configuration
+db/           # Database schema (drizzle)
 hooks/        # Custom React hooks
 assets/       # Images and static files
-scripts/      # Build/setup scripts
+scripts/      # Build/setup/scrape scripts
 ```
 
 ## Scripts
@@ -42,7 +45,7 @@ Using **bun** as the package manager:
 - `app.config.ts` - Expo app configuration
 - `tsconfig.json` - TypeScript config with path aliases (`@/*`)
 - `.oxlintrc.json` - Linter rules
-- `.oxfmtrc.json` - Formatter settings
+- `drizzle.config.json` - Drizzle ORM configuration
 
 ## Common workflow
 
@@ -52,3 +55,18 @@ Using **bun** as the package manager:
 4. Commit using conventional commit messages
 5. Update the plan if applicable
 6. Start next step
+
+## Database
+
+The app uses [Turso](https://turso.tech/) as the remote database with [Drizzle ORM](https://orm.drizzle.team/).
+
+**IMPORTANT**: Never edit files in the `drizzle` folder manually. They are generated with Drizzle migrations.
+
+### Migrations
+
+Generate and apply database migrations:
+
+```bash
+bun run db:generate --name=migration_name
+bun run db:migrate
+```

@@ -1,0 +1,1 @@
+ALTER TABLE `names` ALTER COLUMN "data" TO "data" text NOT NULL;

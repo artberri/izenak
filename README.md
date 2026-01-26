@@ -25,41 +25,12 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## iOS Setup
-
-For iOS development, you need to install CocoaPods dependencies:
-
-```bash
-cd ios
-bundle
-bundle exec pod install --repo-update --ansi
-```
-
-This will install the required Ruby gems (via Bundler) and then install all iOS dependencies using CocoaPods.
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
 ## Learn more
 
 To learn more about developing your project with Expo, look at the following resources:
 
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 
 ## Scraper
 
@@ -100,3 +71,30 @@ This script identifies:
 - **Different gender entries** - same name for different genders (usually intentional)
 
 Manually edit `scraper/names.json` to remove duplicates until the script reports no issues.
+
+## Database
+
+The app uses [Turso](https://turso.tech/) as the remote database with [Drizzle ORM](https://orm.drizzle.team/).
+
+### Setup
+
+Create a `.env.local` based on the `.env.example` file.
+
+### Migrations
+
+Generate and apply database migrations:
+
+```bash
+bun run db:generate --name=migration_name
+bun run db:migrate
+```
+
+### Seeding
+
+After scraping names and running migrations, seed the database:
+
+```bash
+bun run db:seed
+```
+
+This reads `scraper/names.json`, transforms the data, and upserts all names into the Turso database.

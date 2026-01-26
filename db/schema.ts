@@ -11,7 +11,9 @@ export const namesTable = sqliteTable("names", {
 		enum: ["gizonezkoa", "epizenoa", "emakumezkoa"],
 	}).notNull(),
 	meaning: text("meaning"),
-	translations: text("data", { mode: "json" }).$type<NameTranslation[]>(),
+	translations: text("data", { mode: "json" })
+		.$type<NameTranslation[]>()
+		.notNull(),
 	hipocoristic: integer("hipocoristic", { mode: "boolean" }).notNull(),
 });
 
