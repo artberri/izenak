@@ -26,3 +26,7 @@ scraper/names.json
 
 # Environment variables
 .env*.local
+
+# typescript
+*.tsbuildinfo
+.tamagui/tamagui.config.json
